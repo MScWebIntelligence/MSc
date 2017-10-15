@@ -9,7 +9,7 @@ require_once 'config.php';
 $sql    = " SELECT * 
             FROM users u 
             WHERE u.id = 1";
-$data   = getRecords($sql);
+$data   = Db::getRecords($sql);
 
 print_r($data);
 echo 'Welcome Team!!';

@@ -52,6 +52,3 @@ define('SALT2', '^&@#_-=+Afda$#%');
 
 require_once 'autoloader.php';
 spl_autoload_register('autoload');
-
-//Objects
-$DB = new Db();

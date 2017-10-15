@@ -19,14 +19,19 @@ class Db
     private $db_password;
     private $db_name;
 
+    /**
+     * Db constructor.
+     */
     public function __construct()
     {
 
     }
 
-
-
-    //Connect to db function
+    /**
+     * Connect to db function
+     *
+     * @return bool
+     */
     private function connect()
     {
 
@@ -57,6 +62,11 @@ class Db
 
 
     //=============================Standard query functions=================================//
+
+    /**
+     * @param $query
+     * @return bool|mysqli_result
+     */
     private function query($query)
     {
 
@@ -70,6 +80,10 @@ class Db
     }
 
 
+    /**
+     * @param $query
+     * @return mysqli
+     */
     private function insert_query($query)
     {
 
@@ -83,6 +97,10 @@ class Db
     }
 
 
+    /**
+     * @param $dirty_string
+     * @return string
+     */
     public function clear_string($dirty_string)
     {
         $this->connect();
@@ -91,6 +109,11 @@ class Db
     }
 
     //==========================Get results functions======================================//
+
+    /**
+     * @param $sql
+     * @return bool|object|stdClass
+     */
     public function get_record($sql)
     {
         $exec_query     = $this->query($sql);
@@ -104,6 +127,10 @@ class Db
     }
 
 
+    /**
+     * @param $sql
+     * @return array
+     */
     public function get_records($sql)
     {
         $result     = array();
@@ -119,6 +146,10 @@ class Db
     }
 
 
+    /**
+     * @param $sql
+     * @return bool
+     */
     public function execute_record($sql)
     {
         $exec_query = $this->query($sql);
@@ -131,6 +162,10 @@ class Db
     }
 
 
+    /**
+     * @param $sql
+     * @return bool|mixed
+     */
     public function insert_record($sql)
     {
         $exec_query = $this->insert_query($sql);
@@ -141,5 +176,60 @@ class Db
         } else {
             return false;
         }
+    }
+
+    /**
+     * @param $string
+     * @return string
+     */
+    public static function clearString($string)
+    {
+        $db             = new Db();
+        $string_safe    = $db->clear_string($string);
+        return $string_safe;
+    }
+
+    /**
+     * @param $sql
+     * @return bool|object|stdClass
+     */
+    public static function getRecord($sql)
+    {
+        $db     = new Db();
+        $row    = $db->get_record($sql);
+        return $row;
+    }
+
+    /**
+     * @param $sql
+     * @return array
+     */
+    public static function getRecords($sql)
+    {
+        $db     = new Db();
+        $row    = $db->get_records($sql);
+        return $row;
+    }
+
+    /**
+     * @param $sql
+     * @return bool
+     */
+    public static function executeRecord($sql)
+    {
+        $db     = new Db();
+        $row    = $db->execute_record($sql);
+        return $row;
+    }
+
+    /**
+     * @param $sql
+     * @return int
+     */
+    public static function insertRecord($sql)
+    {
+        $db         = new Db();
+        $insert_id  = $db->insert_record($sql);
+        return (int) $insert_id;
     }
 }

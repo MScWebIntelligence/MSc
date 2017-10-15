@@ -3,54 +3,28 @@
  * User: Vaggelis Kotrotsios
  * Date: 3/19/2016
  * Time: 11:42 PM
- * @param $sql
- * @return bool|object|stdClass
  */
-function getRecord($sql)
-{
-    $db     = new Db();
-    $row    = $db->get_record($sql);
-    return $row;
-}
 
-function getRecords($sql)
-{
-    $db     = new Db();
-    $row    = $db->get_records($sql);
-    return $row;
-}
-
-function executeRecord($sql)
-{
-    $db     = new Db();
-    $row    = $db->execute_record($sql);
-    return $row;
-}
-
-function insertRecord($sql)
-{
-    $db         = new Db();
-    $insert_id  = $db->insert_record($sql);
-    return $insert_id;
-}
-
-function clearString($string)
-{
-    $db             = new Db();
-    $string_safe    = $db->clear_string($string);
-    return $string_safe;
-}
-
+/**
+ * @param $url
+ */
 function redirect($url)
 {
     header('Location: ' . $url);
 }
 
+/**
+ * @param $path
+ */
 function addJsFile($path)
 {
     echo '<script src="' . $path . '"></script>';
 }
 
+/**
+ * @param $path
+ * @param bool $media
+ */
 function addCssFile($path, $media = false)
 {
     switch ($media) {
@@ -67,6 +41,12 @@ function addCssFile($path, $media = false)
     echo '<link href="' . $path . '" rel="stylesheet" ' . $media_html . ' />';
 }
 
+/**
+ * @param $param_name
+ * @param bool $required
+ * @param bool $param_type
+ * @return bool|float|int|string
+ */
 function getParam($param_name, $required = false, $param_type = false)
 {
     $value = false;
@@ -105,7 +85,9 @@ function getParam($param_name, $required = false, $param_type = false)
 
 }
 
-
+/**
+ * @param int $error
+ */
 function errorPage($error = 404)
 {
     global $CFG;
