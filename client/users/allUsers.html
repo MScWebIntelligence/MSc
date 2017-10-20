@@ -2,6 +2,7 @@
 <html>
 <head lang="en">
     <title>All users</title>
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="../assets/js/app.js"></script>
 </head>
 <body ng-app="mscApp" ng-cloak>
@@ -11,11 +12,11 @@
 <div ng-controller="usersController">
     <h2>All users</h2>
 
-    <ul>
-        <li ng-repeat="user in users">
+    <div class="row">
+        <div ng-repeat="user in users" class="col-4">
             {{ user.firstname }} {{ user.lastname }}
-        </li>
-    </ul>
+        </div>
+    </div>
 
 </div>
 
