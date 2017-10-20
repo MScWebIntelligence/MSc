@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head lang="en">
+    <title>All users</title>
+    <script src="../assets/js/app.js"></script>
+</head>
+<body ng-app="mscApp" ng-cloak>
+
+<h1>The form</h1>
+
+<div ng-controller="usersController">
+    <h2>All users</h2>
+
+    <ul>
+        <li ng-repeat="user in users">
+            {{ user.firstname }} {{ user.lastname }}
+        </li>
+    </ul>
+
+</div>
+
+<script src="../libraries/angular-1.4.9.min.js"></script>
+<script src="../assets/js/app.js"></script>
+
+</body>
+</html>
