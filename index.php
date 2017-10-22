@@ -20,6 +20,6 @@ global $CFG, $USER;
 
 echo $CFG->www_root . "<br>";
 
-echo "<h1>Hello World! 1</h1>";
+echo "<h1>Hello World! 2</h1>";
 
 ?>
