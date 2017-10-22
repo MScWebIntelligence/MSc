@@ -7,9 +7,11 @@
  */
 require_once 'config.php';
 
+global $CFG;
+
 $users  = new Users();
 $user   = $users->getUserById(1);
 
-print_r($user->getFirstname());
+//print_r($user->getFirstname());
 
-echo 'Welcome Team!!';
+echo $CFG->www_root;
