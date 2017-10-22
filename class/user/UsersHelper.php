@@ -98,6 +98,7 @@ class UsersHelper
     public static function logout()
     {
         global $CFG;
+
         $users = new Users();
         $users->logout();
 
