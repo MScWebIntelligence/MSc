@@ -2,34 +2,18 @@
 require_once 'various/functions.php';
 unset($CFG);
 
-if ('127.0.0.1' == $_SERVER["REMOTE_ADDR"]) {
+// Switch off error at production
+error_reporting(0);
 
-    $CFG = (object)array(
-        'www_root'      => 'http://localhost/MSc/',
-        'real_path'     => 'C:/Program Files (x86)/EasyPHP-DevServer-14.1VC11/data/localweb/Msc/',
-        'environment'   => 'local',
-        'db_host'       => 'localhost',
-        'db_user'       => 'root',
-        'db_password'   => '',
-        'db_name'       => 'msc',
-    );
-
-} else {
-
-    // Switch off error at production
-    error_reporting(0);
-
-    $CFG  = (object)array(
-        'www_root'      => 'https://www.msc.com/',
-        'real_path'     => '',
-        'environment'   => 'production',
-        'db_host'       => 'localhost',
-        'db_user'       => 'msc_user',
-        'db_password'   => '',
-        'db_name'       => 'msc'
-    );
-
-}
+$CFG  = (object)array(
+    'www_root'      => 'https://www.msc.com/',
+    'real_path'     => '',
+    'environment'   => 'production',
+    'db_host'       => 'localhost',
+    'db_user'       => 'msc_user',
+    'db_password'   => '',
+    'db_name'       => 'msc'
+);
 
 //Font Awesome cdn
 $CFG->font_awesome      = '//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css';
@@ -51,4 +35,5 @@ define('SALT1', '24859f@#$#@$');
 define('SALT2', '^&@#_-=+Afda$#%');
 
 require_once 'autoloader.php';
+require_once 'config_local.php';
 spl_autoload_register('autoload');

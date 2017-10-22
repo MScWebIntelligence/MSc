@@ -3,7 +3,10 @@
     function autoload($class)
     {
         $classes = array(
-            'Db' => 'class/various/Db.php',
+            'Db'        => 'class/various/Db.php',
+            'User'      => 'class/user/User.php',
+            'Users'     => 'class/user/Users.php',
+            'UsersDAL'  => 'class/user/UsersDAL.php',
         );
 
         if (array_key_exists($class, $classes)) {
