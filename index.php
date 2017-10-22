@@ -20,3 +20,5 @@ $users  = new Users();
 echo $CFG->www_root . "<br>";
 
 echo "<h1>Hello World!</h1>";
+
+?>
