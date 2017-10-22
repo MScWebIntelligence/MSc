@@ -9,10 +9,10 @@ require_once 'config.php';
 
 global $CFG, $USER;
 
-$users  = new Users();
+//$users  = new Users();
 //$users->logout();
 
-$login  = $users->login('vako88@gmail.com', '123456');
+//$login  = $users->login('vako88@gmail.com', '123456');
 
 //$users->signup('Giannis', 'Kostopoulos', 'vako88fr@gmail.com', '123456',  'Greece', 'Thessaloniki');
 //$user   = $users->getUserById(13);
@@ -20,6 +20,6 @@ $login  = $users->login('vako88@gmail.com', '123456');
 
 echo $CFG->www_root . "<br>";
 
-echo "<h1>Hello World!</h1>";
+echo "<h1>Hello World! 1</h1>";
 
 ?>
