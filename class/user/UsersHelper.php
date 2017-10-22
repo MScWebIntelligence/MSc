@@ -17,6 +17,38 @@ class UsersHelper
     }
 
     /**
+     * @return bool|User
+     */
+    public static function getLoggedInUser()
+    {
+        if(!isset($_SESSION['user_id'])) {
+            session_start();
+        }
+
+        //If session is empty go to logout
+        if (empty($_SESSION['user_id'])) {
+            return false;
+
+        } else {
+
+            //If user's time expired go to logout
+            if ($_SESSION['user_timeout'] < time()) {
+                $users = new Users();
+                $users->logout();
+                return false;
+
+            } elseif (isset($_SESSION['user_id']) && isset($_SESSION['user_timeout'])) {
+                $_SESSION['user_timeout']   = time() + SESSION_TIMEOUT_SECS;
+                $users                      = new Users();
+                return $users->getUserById($_SESSION['user_id']);
+
+            } else {
+                return false;
+            }
+        }
+    }
+
+    /**
      * @param $email
      * @param $password
      */

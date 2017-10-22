@@ -22,9 +22,11 @@ class UsersDAL
     public function getUserById($id)
     {
         $id     = (int) $id;
+
         $sql    = " SELECT u.id, u.firstname, u.lastname, u.email
                     FROM users u
                     WHERE u.id = {$id}";
+
         return Db::getRecord($sql);
     }
 
@@ -76,9 +78,11 @@ class UsersDAL
     public function checkEmailIfExists($email)
     {
         $email  = Db::clearString(trim($email));
+
         $sql    = " SELECT u.id
                     FROM users u
                     WHERE u.email = '{$email}'";
+
         return Db::getRecord($sql) ? true : false;
     }
 

@@ -18,8 +18,4 @@ global $CFG, $USER;
 //$user   = $users->getUserById(13);
 //echo $user->getFirstname() . "<br>";
 
-echo $CFG->www_root . "<br>";
-
-echo "<h1>Hello World! 2</h1>";
-
-?>
+print_r($USER);
