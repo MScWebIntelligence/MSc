@@ -27,4 +27,34 @@ class Users
         return new User($data);
     }
 
+    /**
+     * @param $email
+     * @param $password
+     */
+    public function login($email, $password)
+    {
+
+    }
+
+    /**
+     * @param $firstname
+     * @param $lastname
+     * @param $email
+     * @param $password
+     * @param $country
+     * @param $city
+     */
+    public function signup($firstname, $lastname, $email, $password, $country, $city)
+    {
+
+    }
+
+    /**
+     *
+     */
+    public function logout()
+    {
+
+    }
+
 }
