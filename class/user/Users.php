@@ -34,14 +34,13 @@ class Users
      */
     public function login($email, $password)
     {
-        $id = $this->db->login($email, $this->hashPassword($password));
+        $userId = $this->db->login($email, $this->hashPassword($password));
 
-        if ($id > 0) {
-            $_SESSION['user_id']        = $id;
-            $_SESSION['user_timeout']   = time() + SESSION_TIMEOUT_SECS;
+        if ($userId > 0) {
+            $this->setSession($userId);
         }
 
-        return $id > 0 ? $id : false;
+        return $userId > 0 ? $userId : false;
     }
 
     /**
@@ -55,18 +54,17 @@ class Users
      */
     public function signup($firstname, $lastname, $email, $password, $country, $city)
     {
-        $id = false;
+        $userId = false;
 
-        if (!$this->db->checkEmailIfExists($email)) {
-            $id = $this->db->signup($firstname, $lastname, $email, $this->hashPassword($password), $country, $city);
+        if (!$this->db->checkEmailIfExists($email) && $this->isDataValid($firstname, $lastname, $email, $password, $country, $city)) {
+            $userId = $this->db->signup($firstname, $lastname, $email, $this->hashPassword($password), $country, $city);
         }
 
-        if ($id > 0) {
-            $_SESSION['user_id']        = $id;
-            $_SESSION['user_timeout']   = time() + SESSION_TIMEOUT_SECS;
+        if ($userId > 0) {
+            $this->setSession($userId);
         }
 
-        return $id > 0 ? $id : false;
+        return $userId > 0 ? $userId : false;
     }
 
     /**
@@ -97,4 +95,30 @@ class Users
         return sha1(md5(SALT2 . $password . SALT1));
     }
 
+    /**
+     * @param $firstname
+     * @param $lastname
+     * @param $email
+     * @param $password
+     * @param $country
+     * @param $city
+     * @return bool
+     */
+    private function isDataValid($firstname, $lastname, $email, $password, $country, $city)
+    {
+        if ($firstname && $lastname && $email && $password && $country && $city) {
+            return true;
+        }
+
+         return false;
+    }
+
+    /**
+     * @param $userId
+     */
+    private function setSession($userId)
+    {
+        $_SESSION['user_id']        = (int) $userId;
+        $_SESSION['user_timeout']   = time() + SESSION_TIMEOUT_SECS;
+    }
 }

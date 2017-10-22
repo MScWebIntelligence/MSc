@@ -10,8 +10,8 @@ require_once '../config.php';
 global $CFG, $USER;
 
 $action     = getParam('action', true);
-$email      = getParam('email', true);
-$password   = getParam('password', true);
+$email      = getParam('email', false);
+$password   = getParam('password', false);
 $firstname  = getParam('firstname', false);
 $lastname   = getParam('lastname', false);
 $country    = getParam('country', false);
