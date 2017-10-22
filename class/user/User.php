@@ -16,6 +16,7 @@ class User
 
     /**
      * User constructor.
+     * @param $data
      */
     public function __construct($data)
     {
