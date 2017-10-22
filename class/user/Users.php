@@ -35,7 +35,7 @@ class Users
     public function login($email, $password)
     {
         $response   = false;
-        $id         = $this->db->login($email, $password);
+        $id         = $this->db->login($email, $this->hashPassword($password));
 
         if ($id > 0) {
             $_SESSION['user_id']        = $id;
@@ -58,7 +58,7 @@ class Users
     public function signup($firstname, $lastname, $email, $password, $country, $city)
     {
         $response   = false;
-        $id         = $this->db->signup($firstname, $lastname, $email, $password, $country, $city);
+        $id         = $this->db->signup($firstname, $lastname, $email, $this->hashPassword($password), $country, $city);
 
         if ($id > 0) {
             $_SESSION['user_id']        = $id;
@@ -74,6 +74,8 @@ class Users
      */
     public function logout()
     {
+        global $USER;
+
         if(!isset($_SESSION)) {
             session_start();
         }
@@ -82,7 +84,17 @@ class Users
             return true;
         }
 
+        unset($USER);
         return false;
+    }
+
+    /**
+     * @param $password
+     * @return string
+     */
+    private function hashPassword($password)
+    {
+        return sha1(md5(SALT2 . $password . SALT1));
     }
 
 }
