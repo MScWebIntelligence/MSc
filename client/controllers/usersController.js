@@ -3,7 +3,8 @@ angular.module('mscApp').controller('usersController',function($scope, $routePar
         $http({
 
             method: 'GET',
-            url: '/MSc/api/users/getAllUsers.php'
+            url: '/MSc/api/usersController.php',
+            params: { "action" : "getAll" }
 
         }).then(function (response) {
 
@@ -24,8 +25,8 @@ angular.module('mscApp').controller('usersController',function($scope, $routePar
         $http({
 
             method: 'GET',
-            url: '/MSc/api/users/getUserById.php',
-            params: { "id" : $routeParams.id }
+            url: '/MSc/api/usersController.php',
+            params: { "action" : "getById" , "id" : $routeParams.id }
 
         }).then(function (response) {
 
