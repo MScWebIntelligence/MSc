@@ -7,12 +7,15 @@
  */
 require_once 'config.php';
 
-global $CFG;
+global $CFG, $USER;
 
 $users  = new Users();
-$user   = $users->getUserById(1);
+//$users->logout();
+//$login  = $users->login('vako88@gmail.comm', '123456');
 
-echo $user->getFirstname() . "<br>";
+//$users->signup('Giannis', 'Kostopoulos', 'vako88@gmail.comm', '123456',  'Greece', 'Thessaloniki');
+//$user   = $users->getUserById(13);
+//echo $user->getFirstname() . "<br>";
 
 echo $CFG->www_root . "<br>";
 

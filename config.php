@@ -37,3 +37,5 @@ define('SALT2', '^&@#_-=+Afda$#%');
 require_once 'autoloader.php';
 require_once 'config_local.php';
 spl_autoload_register('autoload');
+
+$USER = getUser();
