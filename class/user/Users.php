@@ -34,16 +34,14 @@ class Users
      */
     public function login($email, $password)
     {
-        $response   = false;
-        $id         = $this->db->login($email, $this->hashPassword($password));
+        $id = $this->db->login($email, $this->hashPassword($password));
 
         if ($id > 0) {
             $_SESSION['user_id']        = $id;
             $_SESSION['user_timeout']   = time() + SESSION_TIMEOUT_SECS;
-            $response                   = true;
         }
 
-        return $response;
+        return $id > 0 ? $id : false;
     }
 
     /**
@@ -57,8 +55,7 @@ class Users
      */
     public function signup($firstname, $lastname, $email, $password, $country, $city)
     {
-        $response   = false;
-        $id         = 0;
+        $id = false;
 
         if (!$this->db->checkEmailIfExists($email)) {
             $id = $this->db->signup($firstname, $lastname, $email, $this->hashPassword($password), $country, $city);
@@ -67,10 +64,9 @@ class Users
         if ($id > 0) {
             $_SESSION['user_id']        = $id;
             $_SESSION['user_timeout']   = time() + SESSION_TIMEOUT_SECS;
-            $response                   = true;
         }
 
-        return $response;
+        return $id > 0 ? $id : false;
     }
 
     /**
