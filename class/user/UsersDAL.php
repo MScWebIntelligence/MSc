@@ -69,4 +69,17 @@ class UsersDAL
         return  (int) Db::insertRecord($sql);
     }
 
+    /**
+     * @param $email
+     * @return int
+     */
+    public function checkEmailIfExists($email)
+    {
+        $email  = Db::clearString(trim($email));
+        $sql    = " SELECT u.id
+                    FROM users u
+                    WHERE u.email = '{$email}'";
+        return Db::getRecord($sql) ? true : false;
+    }
+
 }
