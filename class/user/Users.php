@@ -58,7 +58,11 @@ class Users
     public function signup($firstname, $lastname, $email, $password, $country, $city)
     {
         $response   = false;
-        $id         = $this->db->signup($firstname, $lastname, $email, $this->hashPassword($password), $country, $city);
+        $id         = 0;
+
+        if (!$this->db->checkEmailIfExists($email)) {
+            $id = $this->db->signup($firstname, $lastname, $email, $this->hashPassword($password), $country, $city);
+        }
 
         if ($id > 0) {
             $_SESSION['user_id']        = $id;
