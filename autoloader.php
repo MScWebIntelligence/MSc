@@ -8,6 +8,7 @@
             'Users'         => 'class/user/Users.php',
             'UsersDAL'      => 'class/user/UsersDAL.php',
             'UsersHelper'   => 'class/user/UsersHelper.php',
+            'Book'          => 'class/book/Book.php',
         );
 
         if (array_key_exists($class, $classes)) {
