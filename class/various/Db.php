@@ -58,9 +58,7 @@ class Db
         return true;
     }
 
-
     //=============================Standard query functions=================================//
-
     /**
      * @param $query
      * @return bool|mysqli_result
@@ -91,7 +89,6 @@ class Db
 
         return self::$connection;
     }
-
 
     /**
      * @param $dirty_string
@@ -124,7 +121,6 @@ class Db
         return $result;
     }
 
-
     /**
      * @param $sql
      * @return array
@@ -143,7 +139,6 @@ class Db
         return $result;
     }
 
-
     /**
      * @param $sql
      * @return bool
@@ -153,7 +148,6 @@ class Db
         $exec_query = $this->query($sql);
         return $exec_query ? true : false;
     }
-
 
     /**
      * @param $sql
