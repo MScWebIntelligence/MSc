@@ -24,7 +24,6 @@ class Db
      */
     public function __construct()
     {
-
     }
 
     /**
@@ -34,7 +33,6 @@ class Db
      */
     private function connect()
     {
-
         // Try and connect to the database
         if (!isset(self::$connection)) {
             global $CFG;
@@ -69,7 +67,6 @@ class Db
      */
     private function query($query)
     {
-
         // Connect to the database
         $this->connect();
 
@@ -86,7 +83,6 @@ class Db
      */
     private function insert_query($query)
     {
-
         // Connect to the database
         $this->connect();
 
@@ -101,7 +97,7 @@ class Db
      * @param $dirty_string
      * @return string
      */
-    public function clear_string($dirty_string)
+    public function clearString($dirty_string)
     {
         $this->connect();
         $clear_string = self::$connection->real_escape_string($dirty_string);
@@ -114,8 +110,9 @@ class Db
      * @param $sql
      * @return bool|object|stdClass
      */
-    public function get_record($sql)
+    public function getRecord($sql)
     {
+        $sql            = strpos($sql, "LIMIT 1") === false && strpos($sql, "limit 1") === false ? "{$sql} LIMIT 1" : $sql;
         $exec_query     = $this->query($sql);
         $result         = $exec_query->fetch_object();
         $check_empty    = (array)$result;
@@ -123,6 +120,7 @@ class Db
         if (empty($check_empty)) {
             return false;
         }
+
         return $result;
     }
 
@@ -131,15 +129,15 @@ class Db
      * @param $sql
      * @return array
      */
-    public function get_records($sql)
+    public function getRecords($sql)
     {
         $result     = array();
         $exec_query = $this->query($sql);
         $i          = 0;
 
         while ($array_result = $exec_query->fetch_object()) {
-            $result[] = $array_result;
-            $i = $i + 1;
+            $result[]   = $array_result;
+            $i          = $i + 1;
         }
 
         return $result;
@@ -150,15 +148,10 @@ class Db
      * @param $sql
      * @return bool
      */
-    public function execute_record($sql)
+    public function executeRecord($sql)
     {
         $exec_query = $this->query($sql);
-
-        if ($exec_query) {
-            return true;
-        } else {
-            return false;
-        }
+        return $exec_query ? true : false;
     }
 
 
@@ -166,70 +159,10 @@ class Db
      * @param $sql
      * @return bool|mixed
      */
-    public function insert_record($sql)
+    public function insertRecord($sql)
     {
         $exec_query = $this->insert_query($sql);
-        $insert_id = $exec_query->insert_id;
-
-        if ($exec_query) {
-            return $insert_id;
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * @param $string
-     * @return string
-     */
-    public static function clearString($string)
-    {
-        $db             = new Db();
-        $string_safe    = $db->clear_string($string);
-        return $string_safe;
-    }
-
-    /**
-     * @param $sql
-     * @return bool|object|stdClass
-     */
-    public static function getRecord($sql)
-    {
-        $db     = new Db();
-        $row    = $db->get_record($sql);
-        return $row;
-    }
-
-    /**
-     * @param $sql
-     * @return array
-     */
-    public static function getRecords($sql)
-    {
-        $db     = new Db();
-        $row    = $db->get_records($sql);
-        return $row;
-    }
-
-    /**
-     * @param $sql
-     * @return bool
-     */
-    public static function executeRecord($sql)
-    {
-        $db     = new Db();
-        $row    = $db->execute_record($sql);
-        return $row;
-    }
-
-    /**
-     * @param $sql
-     * @return int
-     */
-    public static function insertRecord($sql)
-    {
-        $db         = new Db();
-        $insert_id  = $db->insert_record($sql);
-        return (int) $insert_id;
+        $insert_id  = $exec_query->insert_id;
+        return $exec_query ? $insert_id : false;
     }
 }
