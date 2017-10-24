@@ -6,7 +6,7 @@
  * Time: 6:27 PM
  */
 header('Content-Type: application/json');
-require_once '../config.php';
+require_once '../../config.php';
 global $CFG, $USER;
 
 $action     = getParam('action', true);
