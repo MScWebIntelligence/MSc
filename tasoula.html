@@ -3,8 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <title> my first title </title>
+    <style>
+        header {
+            padding: 1em;
+            color: white;
+            background-color: LIGHTBLUE;
+            clear: left;
+            text-align: center;
+        }
+        body {
+            color: darkslateblue;
+        }
+
+    </style>
 </head>
 <body>
-    <h1 style="color: red"> My first header</h1>
+<header><h2>Insert your Personal Data</h2></header>
+<hr>
+<form>
+    <table>
+        <tr><th align="left">First name:</th>
+            <td><input type="text" name="firstname"></td></tr>
+        <tr><th align="left">Last name:</th>
+            <td><input type="text" name="lastname" maxlength="20"></td></tr>
+        <tr><th align="left">sex:</th>
+            <td><select name="sex" size="1">
+                <option selected>male
+                <option>female</option>
+                </select></td></tr>
+        <tr><th align="left">address:</th>
+            <td><input type="text" name="address" size="30"></td></tr>
+        <tr><th align="left">email:</th>
+            <td><input type="email"></td></tr>
+    </table>
+</form><hr>
+    <input type="submit" value="SUBMIT">
+    <input type="reset" value="CANCEL">
 </body>
+
 </html>

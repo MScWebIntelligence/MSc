@@ -21,11 +21,13 @@ class UsersDAL
      */
     public function getUserById($id)
     {
+        global $db;
+
         $id     = (int) $id;
         $sql    = " SELECT u.id, u.firstname, u.lastname, u.email
                     FROM users u
                     WHERE u.id = {$id}";
-        return Db::getRecord($sql);
+        return $db->getRecord($sql);
     }
 
     /**
@@ -35,14 +37,16 @@ class UsersDAL
      */
     public function login($email, $password)
     {
-        $email      = Db::clearString(trim($email));
-        $password   = Db::clearString($password);
+        global $db;
+
+        $email      = $db->clearString(trim($email));
+        $password   = $db->clearString($password);
 
         $sql        = " SELECT u.id
                         FROM users u
                         WHERE u.email = '{$email}' AND u.password = '{$password}'";
 
-        return (int) Db::getRecord($sql)->id;
+        return (int) $db->getRecord($sql)->id;
     }
 
     /**
@@ -56,17 +60,19 @@ class UsersDAL
      */
     public function signup($firstname, $lastname, $email, $password, $country, $city)
     {
-        $firstname  = Db::clearString(trim($firstname));
-        $lastname   = Db::clearString(trim($lastname));
-        $email      = Db::clearString(trim($email));
-        $password   = Db::clearString($password);
-        $country    = Db::clearString(trim($email));
-        $city       = Db::clearString(trim($email));
+        global $db;
+
+        $firstname  = $db->clearString(trim($firstname));
+        $lastname   = $db->clearString(trim($lastname));
+        $email      = $db->clearString(trim($email));
+        $password   = $db->clearString($password);
+        $country    = $db->clearString(trim($email));
+        $city       = $db->clearString(trim($email));
 
         $sql = "INSERT INTO msc.users (firstname,lastname,email,password)
                 VALUES ('{$firstname}', '{$lastname}', '{$email}', '{$password}')";
 
-        return  (int) Db::insertRecord($sql);
+        return  (int) $db->insertRecord($sql);
     }
 
     /**
@@ -75,11 +81,13 @@ class UsersDAL
      */
     public function checkEmailIfExists($email)
     {
-        $email  = Db::clearString(trim($email));
+        global $db;
+
+        $email  = $db->clearString(trim($email));
         $sql    = " SELECT u.id
                     FROM users u
                     WHERE u.email = '{$email}'";
-        return Db::getRecord($sql) ? true : false;
+        return $db->getRecord($sql) ? true : false;
     }
 
 }
