@@ -109,4 +109,41 @@ class UsersHelper
         ));
     }
 
+    /**
+     * Use case:
+     *  1. Check if relation exists END
+     *  2. Check if book exists
+     *      2.1 If book exists add relation END
+     *      2.2 If book doesnt exist add book
+     *          2.2.1 Add Relation END
+     *
+     * @param $userId
+     * @param $bookId
+     * @param $relation
+     */
+    public static function addBookRelation($userId, $bookId, $relation)
+    {
+        global $CFG;
+
+        $users  = new Users();
+        $books  = new Books();
+
+        if (!$users->hasBookRelation($userId, $bookId, $relation)){
+
+            if ($books->getBookById($bookId, 'local')) {
+                $users->addBookRelation($userId, $bookId, $relation);
+            } else {
+                $book       = $books->getBookById($bookId, 'google');
+                $response   = $books->addBook($book);
+                if ($response) $users->addBookRelation($userId, $bookId, $relation);
+            }
+        }
+
+        echo json_encode(array(
+            'success'   => true,
+            'url'       => "{$CFG->www_root}",
+            'message'   => false
+        ));
+    }
+
 }

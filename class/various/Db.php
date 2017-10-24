@@ -109,7 +109,7 @@ class Db
      */
     public function getRecord($sql)
     {
-        $sql            = strpos($sql, "LIMIT 1") === false && strpos($sql, "limit 1") === false ? "{$sql} LIMIT 1" : $sql;
+        $sql            = strpos($sql, "LIMIT") === false && strpos($sql, "limit") === false ? "{$sql} LIMIT 1" : $sql;
         $exec_query     = $this->query($sql);
         $result         = $exec_query->fetch_object();
         $check_empty    = (array)$result;
@@ -158,5 +158,14 @@ class Db
         $exec_query = $this->insert_query($sql);
         $insert_id  = $exec_query->insert_id;
         return $exec_query ? $insert_id : false;
+    }
+
+    /**
+     * @param $sql
+     * @return bool
+     */
+    public function existsRecord($sql)
+    {
+        return $this->getRecord($sql) ? true : false;
     }
 }

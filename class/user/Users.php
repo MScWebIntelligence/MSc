@@ -19,12 +19,12 @@ class Users
 
     /**
      * @param $id
-     * @return User()
+     * @return bool | User
      */
     public function getUserById($id)
     {
         $data = $this->db->getUserById($id);
-        return new User($data);
+        return $data ? new User($data) : false;
     }
 
     /**
@@ -84,6 +84,28 @@ class Users
 
         unset($USER);
         return false;
+    }
+
+    /**
+     * @param $userId
+     * @param $bookId
+     * @param $relation
+     * @return bool
+     */
+    public function hasBookRelation($userId, $bookId, $relation)
+    {
+        return $this->db->hasBookRelation($userId, $bookId, $relation);
+    }
+
+    /**
+     * @param $userId
+     * @param $bookId
+     * @param $relation
+     * @return bool
+     */
+    public function addBookRelation($userId, $bookId, $relation)
+    {
+        return $this->db->addBookRelation($userId, $bookId, $relation);
     }
 
     /**

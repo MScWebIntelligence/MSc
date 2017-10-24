@@ -17,6 +17,7 @@ $lastname   = getParam('lastname', false);
 $country    = getParam('country', false);
 $city       = getParam('city', false);
 $address    = getParam('address', false);
+$bookId     = getParam('bookId', true);
 
 switch ($action) {
 
@@ -31,4 +32,11 @@ switch ($action) {
     case 'logout':
         UsersHelper::logout();
         break;
+
+    case 'read':
+    case 'rent':
+    case 'want':
+        UsersHelper::addBookRelation($USER->getId(), $bookId, $action);
+        break;
+
 }

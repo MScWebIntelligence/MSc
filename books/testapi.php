@@ -7,10 +7,17 @@
  */
 require_once "../config.php";
 
-$sql = "select * from users where users.id = 1";
-$row = $db->getRecord($sql);
 
-print_r($row);
+$books = new Books();
+$book = $books->getBookById('j5jFmAEACAAJ', 'google');
+$books->addBook($book);
+
+print_r($book);
+
+//$sql = "select * from users where users.id = 3";
+//$row = $db->existsRecord($sql);
+//
+//print_r($row);
 //$page = file_get_contents("https://www.googleapis.com/books/v1/volumes?q=isbn:9789381141977");
 //
 //$data = json_decode($page, true);
