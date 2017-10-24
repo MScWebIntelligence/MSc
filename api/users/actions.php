@@ -17,7 +17,7 @@ $lastname   = getParam('lastname', false);
 $country    = getParam('country', false);
 $city       = getParam('city', false);
 $address    = getParam('address', false);
-$bookId     = getParam('bookId', true);
+$bookId     = getParam('bookId', false);
 
 switch ($action) {
 
