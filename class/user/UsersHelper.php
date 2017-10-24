@@ -58,7 +58,7 @@ class UsersHelper
 
         $users      = new Users();
         $id         = $users->login($email, $password);
-        $url        = $id ? "{$CFG->www_root}/user/{$id}" : false;
+        $url        = $id ? "{$CFG->www_root}#user/{$id}" : false;
         $message    = $id ? false : "Authentication failed. Please try again.";
 
         echo json_encode(array(
@@ -82,7 +82,7 @@ class UsersHelper
 
         $users      = new Users();
         $id         = $users->signup($firstname, $lastname, $email, $password, $country, $city);
-        $url        = $id ? "{$CFG->www_root}user/{$id}" : false;
+        $url        = $id ? "{$CFG->www_root}#user/{$id}" : false;
         $message    = $id ? false : "Failed to sign up. Please try again.";
 
         echo json_encode(array(

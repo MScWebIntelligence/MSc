@@ -11,9 +11,7 @@ global $CFG, $USER;
 
 //$users  = new Users();
 //$users->logout();
-
 //$login  = $users->login('vako88@gmail.com', '123456');
-
 //$users->signup('Giannis', 'Kostopoulos', 'vako88fr@gmail.com', '123456',  'Greece', 'Thessaloniki');
 //$user   = $users->getUserById(13);
 //echo $user->getFirstname() . "<br>";
