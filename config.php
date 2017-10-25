@@ -33,8 +33,10 @@ define('ROOT', $_SERVER["DOCUMENT_ROOT"].'/');
 define('SESSION_TIMEOUT_SECS', 1800);
 define('SALT1', '24859f@#$#@$');
 define('SALT2', '^&@#_-=+Afda$#%');
+define('JWT_ΚΕΥ', 'CBCB55CA8463DDA41F1447B4B644C');
 
-require_once 'autoloader.php';
+require_once __DIR__ . '/vendor/autoload.php';  // Composer & Namespaces
+require_once __DIR__ . '/autoloader.php';
 require_once 'config_local.php';
 spl_autoload_register('autoload');
 

@@ -1,0 +1,10 @@
+{
+    "autoload": {
+        "psr-4": {
+            "MSc\\": "classes/src/"
+        }
+    },
+    "require": {
+        "firebase/php-jwt" : "*"
+    }
+}
