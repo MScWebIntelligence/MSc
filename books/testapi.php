@@ -9,13 +9,24 @@ require_once "../config.php";
 
 use \Firebase\JWT\JWT;
 
+
 $key = "example_key";
-$token = array(
-    "iss" => "http://example.org",
-    "aud" => "http://example.com",
-    "iat" => 1356999524,
-    "nbf" => 1357000000
-);
+
+$tokenId    = base64_encode(mcrypt_create_iv(32));
+$issuedAt   = time();
+$notBefore  = $issuedAt + 2;             //Adding 10 seconds
+$expire     = $notBefore + 5;            // Adding 60 seconds
+
+$token = [
+    'iat'  => $issuedAt,         // Issued at: time when the token was generated
+    'jti'  => $tokenId,          // Json Token Id: an unique identifier for the token
+    'nbf'  => $notBefore,        // Not before
+    'exp'  => $expire,           // Expire
+    'data' => [                  // Data related to the signer user
+        'userId'   => 1, // userid from the users table
+        'userName' => "Vaggelis Kotrotsios" // User name
+    ]
+];
 
 /**
  * IMPORTANT:
@@ -23,11 +34,21 @@ $token = array(
  * https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40
  * for a list of spec-compliant algorithms.
  */
-$jwt = JWT::encode($token, $key);
-$decoded = JWT::decode($jwt, $key, array('HS256'));
+//$jwt = JWT::encode($token, $key);
+//die($jwt);
+
+try {
+    $decoded = JWT::decode("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MDg5NTkwNDMsImp0aSI6InM4YklsOVZ6SDA4T3hIeXpjWmtuT0R0TDFQMVdrZEhnaVR1U3Y4dHpKM3M9IiwibmJmIjoxNTA4OTU5MDQ1LCJleHAiOjE1MDg5NTkwNTAsImRhdGEiOnsidXNlcklkIjoxLCJ1c2VyTmFtZSI6IlZhZ2dlbGlzIEtvdHJvdHNpb3MifX0.kVM8hxtQV5EwgyBKHaNAaYCFkEM4L99luSORhEeJVT0", $key, array('HS256'));
+} catch (Exception $ex) {
+    /*
+     * the token was not able to be decoded.
+     * this is likely because the signature was not able to be verified (tampered token)
+     */
+    header('HTTP/1.0 401 Unauthorized');
+}
 
 print_r($decoded);
-
+die();
 /*
  NOTE: This will now be an object instead of an associative array. To get
  an associative array, you will need to cast it as such:

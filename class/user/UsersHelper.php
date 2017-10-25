@@ -6,6 +6,8 @@
  * Time: 6:36 PM
  */
 
+use Firebase\JWT\JWT;
+
 class UsersHelper
 {
 
@@ -19,34 +21,34 @@ class UsersHelper
     /**
      * @return bool|User
      */
-    public static function getLoggedInUser()
-    {
-        if(!isset($_SESSION['user_id'])) {
-            session_start();
-        }
-
-        //If session is empty go to logout
-        if (empty($_SESSION['user_id'])) {
-            return false;
-
-        } else {
-
-            //If user's time expired go to logout
-            if ($_SESSION['user_timeout'] < time()) {
-                $users = new Users();
-                $users->logout();
-                return false;
-
-            } elseif (isset($_SESSION['user_id']) && isset($_SESSION['user_timeout'])) {
-                $_SESSION['user_timeout']   = time() + SESSION_TIMEOUT_SECS;
-                $users                      = new Users();
-                return $users->getUserById($_SESSION['user_id']);
-
-            } else {
-                return false;
-            }
-        }
-    }
+//    public static function getLoggedInUser()
+//    {
+//        if(!isset($_SESSION['user_id'])) {
+//            session_start();
+//        }
+//
+//        //If session is empty go to logout
+//        if (empty($_SESSION['user_id'])) {
+//            return false;
+//
+//        } else {
+//
+//            //If user's time expired go to logout
+//            if ($_SESSION['user_timeout'] < time()) {
+//                $users = new Users();
+//                $users->logout();
+//                return false;
+//
+//            } elseif (isset($_SESSION['user_id']) && isset($_SESSION['user_timeout'])) {
+//                $_SESSION['user_timeout']   = time() + SESSION_TIMEOUT_SECS;
+//                $users                      = new Users();
+//                return $users->getUserById($_SESSION['user_id']);
+//
+//            } else {
+//                return false;
+//            }
+//        }
+//    }
 
     /**
      * @param $email
@@ -57,12 +59,14 @@ class UsersHelper
         global $CFG;
 
         $users      = new Users();
-        $id         = $users->login($email, $password);
-        $url        = $id ? "{$CFG->www_root}#user/{$id}" : false;
-        $message    = $id ? false : "Authentication failed. Please try again.";
+        $jwt        = $users->login($email, $password);
+        $userId     = self::getLoggedInUserId($jwt);
+        $url        = $userId ? "{$CFG->www_root}#user/{$userId}" : false;
+        $message    = $userId ? false : "Authentication failed. Please try again.";
 
         echo json_encode(array(
-            'success'   => $id != false,
+            'success'   => $userId != false,
+            'jwt'       => $jwt,
             'url'       => $url,
             'message'   => $message
         ));
@@ -144,6 +148,25 @@ class UsersHelper
             'url'       => "{$CFG->www_root}",
             'message'   => false
         ));
+    }
+
+    /**
+     * @param $jwt
+     * @return bool|object
+     */
+    public static function getLoggedInUserId($jwt)
+    {
+        try {
+            $decoded = JWT::decode($jwt, JWT_ΚΕΥ, array('HS256'));
+        } catch (Exception $ex) {
+            /*
+             * the token was not able to be decoded.
+             * this is likely because the signature was not able to be verified (tampered token)
+             */
+            $decoded = false;
+        }
+
+        return $decoded;
     }
 
 }

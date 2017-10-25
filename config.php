@@ -41,4 +41,4 @@ require_once 'config_local.php';
 spl_autoload_register('autoload');
 
 $db     = new Db();
-$USER   = UsersHelper::getLoggedInUser();
+//$USER   = UsersHelper::getLoggedInUser();

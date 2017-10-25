@@ -5,6 +5,9 @@
  * Date: 10/22/2017
  * Time: 11:57 AM
  */
+
+use Firebase\JWT\JWT;
+
 class Users
 {
     private $db;
@@ -34,13 +37,17 @@ class Users
      */
     public function login($email, $password)
     {
+        $jwt    = false;
         $userId = $this->db->login($email, $this->hashPassword($password));
 
         if ($userId > 0) {
-            $this->setSession($userId);
+            // $this->setSession($userId);
+            $jwt = $this->getJWT($userId);
         }
 
-        return $userId > 0 ? $userId : false;
+        setcookie('jwt', $jwt, time() + (86400 * 30), "/");
+
+        return $jwt;
     }
 
     /**
@@ -54,6 +61,7 @@ class Users
      */
     public function signup($firstname, $lastname, $email, $password, $country, $city)
     {
+        $jwt    = false;
         $userId = false;
 
         if (!$this->db->checkEmailIfExists($email) && $this->isDataValid($firstname, $lastname, $email, $password, $country, $city)) {
@@ -61,17 +69,21 @@ class Users
         }
 
         if ($userId > 0) {
-            $this->setSession($userId);
+            // $this->setSession($userId);
+            $jwt = $this->getJWT($userId);
         }
 
-        return $userId > 0 ? $userId : false;
+        return $jwt;
     }
 
     /**
-     * @return bool
+     *
      */
     public function logout()
     {
+        unset($_COOKIE['jwt']);
+
+        /*        
         global $USER;
 
         if(!isset($_SESSION)) {
@@ -84,6 +96,7 @@ class Users
 
         unset($USER);
         return false;
+        */
     }
 
     /**
@@ -138,9 +151,33 @@ class Users
     /**
      * @param $userId
      */
-    private function setSession($userId)
+//    private function setSession($userId)
+//    {
+//        $_SESSION['user_id']        = (int) $userId;
+//        $_SESSION['user_timeout']   = time() + SESSION_TIMEOUT_SECS;
+//    }
+
+    /**
+     * @param $userId
+     * @return string
+     */
+    private function getJWT($userId)
     {
-        $_SESSION['user_id']        = (int) $userId;
-        $_SESSION['user_timeout']   = time() + SESSION_TIMEOUT_SECS;
+        $tokenId    = base64_encode(mcrypt_create_iv(32));
+        $issuedAt   = time();
+        $notBefore  = $issuedAt + 10;             //Adding 10 seconds
+        $expire     = $notBefore + 20;            // Adding 60 seconds
+
+        $token = array(
+            'iat'  => $issuedAt,         // Issued at: time when the token was generated
+            'jti'  => $tokenId,          // Json Token Id: an unique identifier for the token
+            'nbf'  => $notBefore,        // Not before
+            'exp'  => $expire,           // Expire
+            'data' => array(                  // Data related to the signer user
+                'userId'   => (int) $userId // userid from the users table
+            )
+        );
+
+        return JWT::encode($token, JWT_ΚΕΥ);
     }
 }
