@@ -34,7 +34,6 @@ class UsersHelper
 
         echo json_encode(array(
             'success'   => $userId != false,
-            'jwt'       => $jwt,
             'url'       => $url,
             'message'   => $message
         ));
