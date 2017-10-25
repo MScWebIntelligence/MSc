@@ -36,7 +36,7 @@ define('SALT2', '^&@#_-=+Afda$#%');
 define('JWT_ΚΕΥ', 'CBCB55CA8463DDA41F1447B4B644C');
 define('JWT_EXP', 1800);
 
-require_once __DIR__ . '/vendor/autoload.php';  // Composer & Namespaces
+require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/autoloader.php';
 require_once 'config_local.php';
 spl_autoload_register('autoload');
