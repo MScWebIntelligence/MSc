@@ -41,11 +41,9 @@ class Users
         $userId = $this->db->login($email, $this->hashPassword($password));
 
         if ($userId > 0) {
-            // $this->setSession($userId);
             $jwt = $this->getJWT($userId);
+            setcookie('jwt', $jwt, time() + (86400 * 30), "/");
         }
-
-        setcookie('jwt', $jwt, time() + (86400 * 30), "/");
 
         return $jwt;
     }
@@ -69,7 +67,6 @@ class Users
         }
 
         if ($userId > 0) {
-            // $this->setSession($userId);
             $jwt = $this->getJWT($userId);
         }
 
@@ -82,21 +79,7 @@ class Users
     public function logout()
     {
         unset($_COOKIE['jwt']);
-
-        /*        
-        global $USER;
-
-        if(!isset($_SESSION)) {
-            session_start();
-        }
-
-        if (session_destroy()) {
-            return true;
-        }
-
-        unset($USER);
-        return false;
-        */
+        setcookie('jwt', '', time() + (86400 * 30), "/");
     }
 
     /**
@@ -150,31 +133,22 @@ class Users
 
     /**
      * @param $userId
-     */
-//    private function setSession($userId)
-//    {
-//        $_SESSION['user_id']        = (int) $userId;
-//        $_SESSION['user_timeout']   = time() + SESSION_TIMEOUT_SECS;
-//    }
-
-    /**
-     * @param $userId
      * @return string
      */
     private function getJWT($userId)
     {
         $tokenId    = base64_encode(mcrypt_create_iv(32));
         $issuedAt   = time();
-        $notBefore  = $issuedAt + 10;             //Adding 10 seconds
-        $expire     = $notBefore + 20;            // Adding 60 seconds
+        $notBefore  = $issuedAt;
+        $expire     = $notBefore + JWT_EXP;
 
         $token = array(
-            'iat'  => $issuedAt,         // Issued at: time when the token was generated
-            'jti'  => $tokenId,          // Json Token Id: an unique identifier for the token
-            'nbf'  => $notBefore,        // Not before
-            'exp'  => $expire,           // Expire
-            'data' => array(                  // Data related to the signer user
-                'userId'   => (int) $userId // userid from the users table
+            'iat'  => $issuedAt,
+            'jti'  => $tokenId,
+            'nbf'  => $notBefore,
+            'exp'  => $expire,
+            'data' => array(
+                'userId'   => (int) $userId
             )
         );
 

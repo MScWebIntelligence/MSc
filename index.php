@@ -7,7 +7,7 @@
  */
 require_once 'config.php';
 
-global $CFG, $USER;
+global $CFG;
 
 //$users  = new Users();
 //$users->logout();
@@ -15,5 +15,3 @@ global $CFG, $USER;
 //$users->signup('Giannis', 'Kostopoulos', 'vako88fr@gmail.com', '123456',  'Greece', 'Thessaloniki');
 //$user   = $users->getUserById(13);
 //echo $user->getFirstname() . "<br>";
-
-print_r($USER);

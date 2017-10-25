@@ -30,15 +30,15 @@ $CFG->bootstrap_js      = 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bo
 $CFG->form_validator    = 'https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js';
 
 define('ROOT', $_SERVER["DOCUMENT_ROOT"].'/');
-define('SESSION_TIMEOUT_SECS', 1800);
+//define('SESSION_TIMEOUT_SECS', 1800);
 define('SALT1', '24859f@#$#@$');
 define('SALT2', '^&@#_-=+Afda$#%');
 define('JWT_ΚΕΥ', 'CBCB55CA8463DDA41F1447B4B644C');
+define('JWT_EXP', 1800);
 
 require_once __DIR__ . '/vendor/autoload.php';  // Composer & Namespaces
 require_once __DIR__ . '/autoloader.php';
 require_once 'config_local.php';
 spl_autoload_register('autoload');
 
-$db     = new Db();
-//$USER   = UsersHelper::getLoggedInUser();
+$db = new Db();

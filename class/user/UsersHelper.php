@@ -19,38 +19,6 @@ class UsersHelper
     }
 
     /**
-     * @return bool|User
-     */
-//    public static function getLoggedInUser()
-//    {
-//        if(!isset($_SESSION['user_id'])) {
-//            session_start();
-//        }
-//
-//        //If session is empty go to logout
-//        if (empty($_SESSION['user_id'])) {
-//            return false;
-//
-//        } else {
-//
-//            //If user's time expired go to logout
-//            if ($_SESSION['user_timeout'] < time()) {
-//                $users = new Users();
-//                $users->logout();
-//                return false;
-//
-//            } elseif (isset($_SESSION['user_id']) && isset($_SESSION['user_timeout'])) {
-//                $_SESSION['user_timeout']   = time() + SESSION_TIMEOUT_SECS;
-//                $users                      = new Users();
-//                return $users->getUserById($_SESSION['user_id']);
-//
-//            } else {
-//                return false;
-//            }
-//        }
-//    }
-
-    /**
      * @param $email
      * @param $password
      */
@@ -60,7 +28,7 @@ class UsersHelper
 
         $users      = new Users();
         $jwt        = $users->login($email, $password);
-        $userId     = self::getLoggedInUserId($jwt);
+        $userId     = self::getLoggedInUserId();
         $url        = $userId ? "{$CFG->www_root}#user/{$userId}" : false;
         $message    = $userId ? false : "Authentication failed. Please try again.";
 
@@ -121,18 +89,18 @@ class UsersHelper
      *      2.2 If book doesnt exist add book
      *          2.2.1 Add Relation END
      *
-     * @param $userId
      * @param $bookId
      * @param $relation
      */
-    public static function addBookRelation($userId, $bookId, $relation)
+    public static function addBookRelation($bookId, $relation)
     {
         global $CFG;
 
         $users  = new Users();
         $books  = new Books();
+        $userId = self::getLoggedInUserId();
 
-        if (!$users->hasBookRelation($userId, $bookId, $relation)){
+        if ($userId && (!$users->hasBookRelation($userId, $bookId, $relation))){
 
             if ($books->getBookById($bookId, 'local')) {
                 $users->addBookRelation($userId, $bookId, $relation);
@@ -151,22 +119,33 @@ class UsersHelper
     }
 
     /**
-     * @param $jwt
+     */
+    public static function authenticate()
+    {
+        $jwt = $_COOKIE['jwt'];
+
+        try {
+            JWT::decode($jwt, JWT_ΚΕΥ, array('HS256'));
+        } catch (Exception $ex) {
+            header('HTTP/1.0 401 Unauthorized');
+            die();
+        }
+    }
+
+    /**
      * @return bool|object
      */
-    public static function getLoggedInUserId($jwt)
+    public static function getLoggedInUserId()
     {
+        $jwt = $_COOKIE['jwt'];
+
         try {
             $decoded = JWT::decode($jwt, JWT_ΚΕΥ, array('HS256'));
         } catch (Exception $ex) {
-            /*
-             * the token was not able to be decoded.
-             * this is likely because the signature was not able to be verified (tampered token)
-             */
-            $decoded = false;
+            $decoded = 0;
         }
 
-        return $decoded;
+        return $decoded > 0 ? (int) $decoded->data->userId : 0;
     }
 
 }

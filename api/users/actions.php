@@ -7,7 +7,7 @@
  */
 header('Content-Type: application/json');
 require_once '../../config.php';
-global $CFG, $USER;
+global $CFG;
 
 $action     = getParam('action', true);
 $email      = getParam('email', false);
@@ -36,7 +36,6 @@ switch ($action) {
     case 'read':
     case 'rent':
     case 'want':
-        UsersHelper::addBookRelation($USER->getId(), $bookId, $action);
+        UsersHelper::addBookRelation($bookId, $action);
         break;
-
 }
