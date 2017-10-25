@@ -37,15 +37,13 @@ class Users
      */
     public function login($email, $password)
     {
-        $jwt    = false;
         $userId = $this->db->login($email, $this->hashPassword($password));
 
         if ($userId > 0) {
-            $jwt = $this->getJWT($userId);
-            setcookie('jwt', $jwt, time() + (86400 * 30), "/");
+            $this->setJWTCookie($userId);
         }
 
-        return $jwt;
+        return $userId;
     }
 
     /**
@@ -59,7 +57,6 @@ class Users
      */
     public function signup($firstname, $lastname, $email, $password, $country, $city)
     {
-        $jwt    = false;
         $userId = false;
 
         if (!$this->db->checkEmailIfExists($email) && $this->isDataValid($firstname, $lastname, $email, $password, $country, $city)) {
@@ -67,10 +64,10 @@ class Users
         }
 
         if ($userId > 0) {
-            $jwt = $this->getJWT($userId);
+            $this->setJWTCookie($userId);
         }
 
-        return $jwt;
+        return $userId;
     }
 
     /**
@@ -129,6 +126,15 @@ class Users
         }
 
          return false;
+    }
+
+    /**
+     * @param $userId
+     */
+    private function setJWTCookie($userId)
+    {
+        $jwt = $this->getJWT($userId);
+        setcookie('jwt', $jwt, time() + (86400 * 30), "/");
     }
 
     /**

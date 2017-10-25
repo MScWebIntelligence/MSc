@@ -27,8 +27,7 @@ class UsersHelper
         global $CFG;
 
         $users      = new Users();
-        $jwt        = $users->login($email, $password);
-        $userId     = self::getLoggedInUserId();
+        $userId     = $users->login($email, $password);
         $url        = $userId ? "{$CFG->www_root}#user/{$userId}" : false;
         $message    = $userId ? false : "Authentication failed. Please try again.";
 
@@ -52,19 +51,19 @@ class UsersHelper
         global $CFG;
 
         $users      = new Users();
-        $id         = $users->signup($firstname, $lastname, $email, $password, $country, $city);
-        $url        = $id ? "{$CFG->www_root}#user/{$id}" : false;
-        $message    = $id ? false : "Failed to sign up. Please try again.";
+        $userId     = $users->signup($firstname, $lastname, $email, $password, $country, $city);
+        $url        = $userId ? "{$CFG->www_root}#user/{$userId}" : false;
+        $message    = $userId ? false : "Failed to sign up. Please try again.";
 
         echo json_encode(array(
-            'success'   => $id != false,
+            'success'   => $userId != false,
             'url'       => $url,
             'message'   => $message
         ));
     }
 
     /**
-     *
+     * Remove cookie with JWT
      */
     public static function logout()
     {
@@ -118,30 +117,23 @@ class UsersHelper
     }
 
     /**
-     */
-    public static function authenticate()
-    {
-        $jwt = $_COOKIE['jwt'];
-
-        try {
-            JWT::decode($jwt, JWT_ΚΕΥ, array('HS256'));
-        } catch (Exception $ex) {
-            header('HTTP/1.0 401 Unauthorized');
-            die();
-        }
-    }
-
-    /**
+     * @param bool $required
      * @return bool|object
      */
-    public static function getLoggedInUserId()
+    private static function getLoggedInUserId($required = true)
     {
         $jwt = $_COOKIE['jwt'];
 
         try {
             $decoded = JWT::decode($jwt, JWT_ΚΕΥ, array('HS256'));
         } catch (Exception $ex) {
-            $decoded = 0;
+
+            if ($required) {
+                header('HTTP/1.0 401 Unauthorized');
+                die();
+            } else {
+                $decoded = 0;
+            }
         }
 
         return $decoded > 0 ? (int) $decoded->data->userId : 0;
