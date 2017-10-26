@@ -5,6 +5,7 @@
  * Date: 10/23/2017
  * Time: 8:28 PM
  */
+namespace Classes\Book;
 
 class Book
 {
@@ -18,7 +19,8 @@ class Book
             $rate,
             $ratesCount,
             $publisher,
-            $publishedDate;
+            $publishedDate,
+            $case;
 
     /**
      * Book constructor.
@@ -56,6 +58,7 @@ class Book
         $this->ratesCount       = (int) $data->ratesCount;
         $this->publisher        = $data->publisher;
         $this->publishedDate    = $data->publishedDate;
+        $this->case             = $data->case;
     }
 
     /**
@@ -74,6 +77,7 @@ class Book
         $this->ratesCount       = (int) $data->volumeInfo->ratingsCount;
         $this->publisher        = $data->volumeInfo->publisher;
         $this->publishedDate    = $data->volumeInfo->publishedDate;
+        $this->case             = null;
     }
 
     /**
@@ -162,5 +166,13 @@ class Book
     public function getPublishedDate()
     {
         return $this->publishedDate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCase()
+    {
+        return $this->case;
     }
 }

@@ -6,10 +6,15 @@
  * Time: 6:27 PM
  */
 header('Content-Type: application/json');
-require_once '../../config.php';
+require_once '../config.php';
 global $CFG;
 
+use Classes\User;
+$polls = new User\Users();
+die();
+
 $action     = getParam('action', true);
+$userId     = getParam('userId', false);
 $email      = getParam('email', false);
 $password   = getParam('password', false);
 $firstname  = getParam('firstname', false);
@@ -37,5 +42,9 @@ switch ($action) {
     case 'rent':
     case 'want':
         UsersHelper::addBookRelation($bookId, $action);
+        break;
+
+    case 'bookcase':
+        UsersHelper::getBookcase(1);
         break;
 }

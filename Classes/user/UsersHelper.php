@@ -5,6 +5,7 @@
  * Date: 10/22/2017
  * Time: 6:36 PM
  */
+namespace Classes\User;
 
 use Firebase\JWT\JWT;
 
@@ -117,6 +118,31 @@ class UsersHelper
     }
 
     /**
+     * @param $userId
+     */
+    public static function getBookcase($userId)
+    {
+        $users      = new Users();
+        $books      = $users->getBookcase($userId);
+        $response   = array();
+
+        /** @var Book $book */
+        foreach ($books as $book) {
+            $response[] = array(
+                'id'    => $book->getId(),
+                'title' => $book->getTitle(),
+                'case'  => $book->getCase()
+            );
+        }
+
+        echo json_encode(array(
+            'success'   => true,
+            'data'      => $response,
+            'message'   => false
+        ));
+    }
+
+    /**
      * @param bool $required
      * @return bool|object
      */
@@ -143,5 +169,4 @@ class UsersHelper
 
         return $decoded ? (int) $decoded->data->userId : 0;
     }
-
 }

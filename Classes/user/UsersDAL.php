@@ -5,6 +5,7 @@
  * Date: 10/22/2017
  * Time: 11:58 AM
  */
+namespace Classes\User;
 
 class UsersDAL
 {
@@ -129,6 +130,25 @@ class UsersDAL
                         VALUES ({$userId}, '{$bookId}', '{$relation}');";
 
         return $db->insertRecord($sql);
+    }
+
+    /**
+     * @param $userId
+     * @return array
+     */
+    public function getBookcase($userId)
+    {
+        global $db;
+
+        $userId = (int) $userId;
+
+        $sql = "SELECT b.id, urb.case, b.title, b.description, b.thumbnail, b.author, b.pages, b.language, b.rate, b.rates_count, b.publisher, b.published_date
+                FROM users_rel_books urb
+                INNER JOIN books b
+                ON urb.book_id = b.id
+                WHERE urb.user_id = {$userId} AND (urb.case = 'read' OR urb.case = 'rent')";
+
+        return $db->getRecords($sql);
     }
 
 }

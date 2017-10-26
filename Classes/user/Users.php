@@ -5,6 +5,7 @@
  * Date: 10/22/2017
  * Time: 11:57 AM
  */
+namespace Classes\User;
 
 use Firebase\JWT\JWT;
 
@@ -99,6 +100,22 @@ class Users
     public function addBookRelation($userId, $bookId, $relation)
     {
         return $this->db->addBookRelation($userId, $bookId, $relation);
+    }
+
+    /**
+     * @param $userId
+     * @return Book[]
+     */
+    public function getBookcase($userId)
+    {
+        $booksDb    = $this->db->getBookcase($userId);
+        $books      = array();
+
+        foreach ($booksDb as $bookDb) {
+            $books[] = new Book($bookDb);
+        }
+
+        return $books;
     }
 
     /**

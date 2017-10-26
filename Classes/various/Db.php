@@ -6,12 +6,13 @@
  * Date: 5/5/2017
  * Time: 8:23 PM
  */
+namespace Classes\Db;
 
 class Db
 {
     /**
      * The database connection.
-     * @var mysqli()
+     * @var \mysqli()
      */
     protected static $connection;
     private $db_host;
@@ -44,7 +45,7 @@ class Db
 
             // Load configuration as an array. Use the actual location of your configuration file
             //$config = parse_ini_file('./config.ini');
-            self::$connection = new mysqli($this->db_host, $this->db_user, $this->db_password, $this->db_name);
+            self::$connection = new \mysqli($this->db_host, $this->db_user, $this->db_password, $this->db_name);
             mysqli_set_charset(self::$connection, "utf8");
             return true;
         }
@@ -61,7 +62,7 @@ class Db
     //=============================Standard query functions=================================//
     /**
      * @param $query
-     * @return bool|mysqli_result
+     * @return bool|\mysqli_result
      */
     private function query($query)
     {
@@ -77,7 +78,7 @@ class Db
 
     /**
      * @param $query
-     * @return mysqli
+     * @return \mysqli
      */
     private function insert_query($query)
     {
@@ -105,7 +106,7 @@ class Db
 
     /**
      * @param $sql
-     * @return bool|object|stdClass
+     * @return bool|object|\stdClass
      */
     public function getRecord($sql)
     {

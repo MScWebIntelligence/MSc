@@ -9,11 +9,7 @@
             'User'          => 'class/user/User.php',
             'Users'         => 'class/user/Users.php',
             'UsersDAL'      => 'class/user/UsersDAL.php',
-            'UsersHelper'   => 'class/user/UsersHelper.php',
-            'Book'          => 'class/book/Book.php',
-            'Books'         => 'class/book/Books.php',
-            'BooksDAL'      => 'class/book/BooksDAL.php',
-            'BooksHelper'   => 'class/book/BooksHelper.php'
+            'UsersHelper'   => 'class/user/UsersHelper.php'
         );
 
         if (array_key_exists($class, $classes)) {
