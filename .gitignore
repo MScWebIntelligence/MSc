@@ -1,4 +1,5 @@
 .idea/
 .vendor/
+/vendor
 config_local.php
 composer.lock
