@@ -7,6 +7,8 @@
  */
 namespace Classes\User;
 
+use Classes\Book\Book;
+use Classes\Book\Books;
 use Firebase\JWT\JWT;
 
 class UsersHelper
@@ -152,7 +154,7 @@ class UsersHelper
 
         try {
             $decoded = JWT::decode($jwt, JWT_ΚΕΥ, array('HS256'));
-        } catch (Exception $ex) {
+        } catch (\Exception $ex) {
 
             if ($required) {
                 header('HTTP/1.0 401 Unauthorized');

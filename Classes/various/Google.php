@@ -5,7 +5,7 @@
  * Date: 10/26/2017
  * Time: 4:59 PM
  */
-namespace Classes\Google;
+namespace Classes\Various;
 
 class Google
 {

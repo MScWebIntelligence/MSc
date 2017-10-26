@@ -5,7 +5,7 @@
  * Date: 10/24/2017
  * Time: 7:06 PM
  */
-namespace Classes\International;
+namespace Classes\Various;
 
 class International
 {

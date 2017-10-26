@@ -9,9 +9,7 @@ header('Content-Type: application/json');
 require_once '../config.php';
 global $CFG;
 
-use Classes\User;
-$polls = new User\Users();
-die();
+use Classes\User\UsersHelper;
 
 $action     = getParam('action', true);
 $userId     = getParam('userId', false);

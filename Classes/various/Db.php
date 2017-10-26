@@ -6,7 +6,7 @@
  * Date: 5/5/2017
  * Time: 8:23 PM
  */
-namespace Classes\Db;
+namespace Classes\Various;
 
 class Db
 {

@@ -8,6 +8,7 @@
 namespace Classes\User;
 
 use Firebase\JWT\JWT;
+use Classes\Book\Book;
 
 class Users
 {
@@ -34,7 +35,7 @@ class Users
     /**
      * @param $email
      * @param $password
-     * @return bool|object|stdClass
+     * @return bool|object|\stdClass
      */
     public function login($email, $password)
     {
