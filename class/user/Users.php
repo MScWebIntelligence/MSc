@@ -131,7 +131,7 @@ class Users
     /**
      * @param $userId
      */
-    private function setJWTCookie($userId)
+    public function setJWTCookie($userId)
     {
         $jwt = $this->getJWT($userId);
         setcookie('jwt', $jwt, time() + (86400 * 30), "/");

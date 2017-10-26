@@ -120,7 +120,7 @@ class UsersHelper
      * @param bool $required
      * @return bool|object
      */
-    private static function getLoggedInUserId($required = true)
+    public static function getLoggedInUserId($required = true)
     {
         $jwt = $_COOKIE['jwt'];
 
@@ -136,7 +136,12 @@ class UsersHelper
             }
         }
 
-        return $decoded > 0 ? (int) $decoded->data->userId : 0;
+        if ($decoded && ($decoded->exp - time() < 15)) {
+            $users = new Users();
+            $users->setJWTCookie((int) $decoded->data->userId);
+        }
+
+        return $decoded ? (int) $decoded->data->userId : 0;
     }
 
 }
