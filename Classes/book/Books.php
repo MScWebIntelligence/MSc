@@ -7,6 +7,8 @@
  */
 namespace Classes\Book;
 
+use Classes\Various\GoogleApi;
+
 class Books
 {
     private $db;
@@ -33,7 +35,8 @@ class Books
                 break;
 
             case 'google':
-                $data = $this->getBookByApiCall($bookId);
+                $googleApi  = new GoogleApi();
+                $data       = $googleApi->getBookById($bookId);
                 break;
 
             default:
@@ -51,15 +54,5 @@ class Books
     public function addBook($book)
     {
         return $this->db->addBook($book->getId(), $book->getTitle(), $book->getDescription(), $book->getThumbnail(), $book->getAuthor(), $book->getPages(), $book->getLanguage(), $book->getRate(), $book->getRatesCount(), $book->getPublisher(), $book->getPublishedDate());
-    }
-
-    /**
-     * @param $bookId
-     * @return bool|string
-     */
-    private function getBookByApiCall($bookId)
-    {
-        $data = file_get_contents("https://www.googleapis.com/books/v1/volumes/{$bookId}");
-        return json_decode($data);
     }
 }

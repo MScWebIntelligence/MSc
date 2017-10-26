@@ -7,10 +7,10 @@
  */
 namespace Classes\Various;
 
-class Google
+class GoogleApi
 {
-
-    const apiUrl = "";
+    const apiKey = "";
+    const apiUrl = "https://www.googleapis.com/books/v1/volumes?key=" . self::apiKey;
 
     /**
      * Google constructor.
@@ -19,8 +19,15 @@ class Google
     {
     }
 
-    public function search()
+    public function search($search)
     {
+        $search = urlencode("&q={$search}");
+        return file_get_contents(self::apiUrl . $search);
+    }
 
+    public function getBookById($bookId)
+    {
+        $data = file_get_contents("https://www.googleapis.com/books/v1/volumes/{$bookId}");
+        return json_decode($data);
     }
 }

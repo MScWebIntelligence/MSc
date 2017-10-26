@@ -7,11 +7,7 @@
  */
 require_once 'config.php';
 
-global $CFG;
-
-//$users  = new Users();
-//$users->logout();
-//$login  = $users->login('vako88@gmail.com', '123456');
-//$users->signup('Giannis', 'Kostopoulos', 'vako88fr@gmail.com', '123456',  'Greece', 'Thessaloniki');
-//$user   = $users->getUserById(13);
-//echo $user->getFirstname() . "<br>";
+$books  = new \Classes\Book\Books();
+$book   = $books->getBookById("-8DhHgAACAAJ", 'google');
+$books->addBook($book);
+die();

@@ -18,7 +18,7 @@ class UsersDAL
 
     /**
      * @param $id
-     * @return bool|object|stdClass
+     * @return bool|object|\stdClass
      */
     public function getUserById($id)
     {
