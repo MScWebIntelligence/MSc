@@ -10,7 +10,7 @@ require_once 'config.php';
 
 
 use Classes\Book\BooksHelper;
-BooksHelper::search("Δίκτυα αισθητήρων", 0);
+BooksHelper::search("Ασύρματα δίκτυα αισθητήρων", 0);
 die();
 
 //$book   = $books->getBookById("-8DhHgAACAAJ", 'google');

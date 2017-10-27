@@ -7,7 +7,6 @@
  */
 namespace Classes\Book;
 
-use Classes\Book\Books;
 use Classes\Various\Google;
 
 class BooksHelper
@@ -35,7 +34,7 @@ class BooksHelper
             $books[] = array(
                 'id'        => $book->getId(),
                 'title'     => $book->getTitle(),
-//                'thumbnail' => $book->getThumbnail()
+                'thumbnail' => $book->getThumbnail()
             );
         }
 
@@ -43,6 +42,6 @@ class BooksHelper
             'total' => $data['total'],
             'more'  => $data['total'] > $offset + Google::$limit,
             'books' => $books
-        ));
+        ), JSON_UNESCAPED_UNICODE);
     }
 }

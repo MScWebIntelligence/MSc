@@ -25,9 +25,16 @@ class Google
      *      lccn:           Returns results where the text following this keyword is the Library of Congress Control Number.
      *      oclc:           Returns results where the text following this keyword is the Online Computer Library Center number.
      *
+     *
      * Pagination
      *      startIndex - The position in the collection at which to start. The index of the first item is 0.
      *      maxResults - The maximum number of results to return. The default is 10, and the maximum allowable value is 40.
+     *
+     *
+     * You can use the projection parameter with one of the following values to specify a predefined set of Volume fields to return:
+     *      full - Returns all Volume fields.
+     *      lite - Returns only certain fields. See field descriptions marked with double asterisks in the Volume reference to find out which fields are included.
+     *
      *
      * Example:
      * https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key=yourAPIKey
