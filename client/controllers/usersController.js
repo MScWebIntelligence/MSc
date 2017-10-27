@@ -50,7 +50,7 @@ angular.module('mscApp').controller('usersController',function($scope, $window, 
                 }
             })
             .error(function (data, status, header, config) {
-                alert('Errorrrrrrr');
+                alert('Redirect to login');
                 $scope.ResponseDetails = "Data: " + data +
                     "<hr />status: " + status +
                     "<hr />headers: " + header +
