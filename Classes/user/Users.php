@@ -83,21 +83,59 @@ class Users
      * @param $password
      * @param $country
      * @param $city
-     * @return bool
+     * @return array
      */
     public function signup($firstname, $lastname, $email, $password, $country, $city)
     {
-        $userId = false;
+        $userId     = 0;
+        $message    = false;
 
-        if (!$this->db->checkEmailIfExists($email) && $this->isDataValid($firstname, $lastname, $email, $password, $country, $city)) {
-            $userId = $this->db->signup($firstname, $lastname, $email, $this->hashPassword($password), $country, $city);
+        $validator  = new Validator(array(
+            'firstname' => $firstname,
+            'lastname'  => $lastname,
+            'email'     => $email,
+            'password'  => $password,
+            'country'   => $country,
+            'city'      => $city
+        ));
+
+        $validator->labels(array(
+            'firstname' => 'Firstname',
+            'lastname'  => 'Lastname',
+            'email'     => 'Email',
+            'password'  => 'Password',
+            'country'   => 'Country',
+            'city'      => 'City'
+        ));
+
+        $validator->rule('required', array('firstname', 'lastname', 'email', 'password', 'country', 'city'))->message('{field} is required');
+        $validator->rule('lengthBetween', array('firstname', 'lastname', 'country', 'city'), 1, 20)->message('{field}\'s length must be between 1 to 20 characters');
+        $validator->rule('email', 'email')->message('{field} has not the right format');
+        $validator->rule('lengthBetween', 'password', 6, 8)->message('{field}\'s length must be between 6 to 8 characters');
+
+        if ($validator->validate()) {
+
+            if (!$this->db->checkEmailIfExists($email)) {
+                $userId = $this->db->signup($firstname, $lastname, $email, $this->hashPassword($password), $country, $city);
+            } else {
+                $message = 'Email existed. Choose another email';
+            }
+
+            if ($userId > 0) {
+                $this->setJWTCookie($userId);
+            } else {
+                $message = 'Sign up failed. Try again';
+            }
+
+        } else {
+            $message = array_values($validator->errors())[0][0];
         }
 
-        if ($userId > 0) {
-            $this->setJWTCookie($userId);
-        }
+        return array(
+            'userId'    => $userId,
+            'message'   => $message
+        );
 
-        return $userId;
     }
 
     /**
@@ -154,24 +192,6 @@ class Users
     private function hashPassword($password)
     {
         return sha1(md5(SALT2 . $password . SALT1));
-    }
-
-    /**
-     * @param $firstname
-     * @param $lastname
-     * @param $email
-     * @param $password
-     * @param $country
-     * @param $city
-     * @return bool
-     */
-    private function isDataValid($firstname, $lastname, $email, $password, $country, $city)
-    {
-        if ($firstname && $lastname && $email && $password && $country && $city) {
-            return true;
-        }
-
-         return false;
     }
 
     /**

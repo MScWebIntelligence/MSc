@@ -53,14 +53,13 @@ class UsersHelper
         global $CFG;
 
         $users      = new Users();
-        $userId     = $users->signup($firstname, $lastname, $email, $password, $country, $city);
-        $url        = $userId ? "{$CFG->www_root}#user/{$userId}" : false;
-        $message    = $userId ? false : "Failed to sign up. Please try again.";
+        $response   = $users->signup($firstname, $lastname, $email, $password, $country, $city);
+        $url        = $response['userId'] ? "{$CFG->www_root}#user/{$response['userId']}" : false;
 
         echo json_encode(array(
-            'success'   => $userId != false,
+            'success'   => $response['userId'] != false,
             'url'       => $url,
-            'message'   => $message
+            'message'   => $response['message']
         ));
     }
 
