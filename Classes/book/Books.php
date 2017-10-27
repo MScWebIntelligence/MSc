@@ -7,7 +7,7 @@
  */
 namespace Classes\Book;
 
-use Classes\Various\GoogleApi;
+use Classes\Various\Google;
 
 class Books
 {
@@ -35,7 +35,7 @@ class Books
                 break;
 
             case 'google':
-                $googleApi  = new GoogleApi();
+                $googleApi  = new Google();
                 $data       = $googleApi->getBookById($bookId);
                 break;
 
@@ -54,5 +54,27 @@ class Books
     public function addBook($book)
     {
         return $this->db->addBook($book->getId(), $book->getTitle(), $book->getDescription(), $book->getThumbnail(), $book->getAuthor(), $book->getPages(), $book->getLanguage(), $book->getRate(), $book->getRatesCount(), $book->getPublisher(), $book->getPublishedDate());
+    }
+
+    /**
+     * @param $search
+     * @param int $offset
+     * @return array
+     */
+    public function search($search, $offset = 0)
+    {
+        $google     = new Google();
+        $booksData  = $google->search($search, $offset);
+        $books      = array();
+        $total      = $booksData->totalItems;
+
+        foreach ($booksData->items as $bookData) {
+            $books[] = new Book($bookData, 'google');
+        }
+
+        return array(
+            'total' => $total,
+            'books' => $books
+        );
     }
 }
