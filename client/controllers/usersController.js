@@ -16,7 +16,7 @@ angular.module('mscApp').controller('usersController',function($scope, $window, 
             }
         }
 
-        $http.post('/MSc/api/users/actions.php', data, config)
+        $http.post('/MSc/api/users.php', data, config)
             .success(function (data, status, headers, config) {
                 $scope.PostDataResponse = data;
                 $window.location.href = data.url;
@@ -42,12 +42,15 @@ angular.module('mscApp').controller('usersController',function($scope, $window, 
             }
         }
 
-        $http.post('/MSc/api/users/actions.php', data, config)
+        $http.post('/MSc/api/users.php', data, config)
             .success(function (data, status, headers, config) {
                 $scope.PostDataResponse = data;
-                $window.location.href = data.url;
+                if (data.success) {
+                    $window.location.href = data.url;
+                }
             })
             .error(function (data, status, header, config) {
+                alert('Errorrrrrrr');
                 $scope.ResponseDetails = "Data: " + data +
                     "<hr />status: " + status +
                     "<hr />headers: " + header +

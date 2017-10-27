@@ -9,8 +9,8 @@ namespace Classes\Various;
 
 class GoogleApi
 {
-    const apiKey = "";
-    const apiUrl = "https://www.googleapis.com/books/v1/volumes?key=" . self::apiKey;
+    const apiKey = "AIzaSyDSF7-xGwuz6exkXAoUpfeTRewzSs855fA";
+    const apiUrl = "https://www.googleapis.com/books/v1/volumes/?key=" . self::apiKey;
 
     /**
      * Google constructor.

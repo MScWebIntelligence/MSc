@@ -5,6 +5,7 @@
         }
     },
     "require": {
-        "firebase/php-jwt" : "*"
+        "firebase/php-jwt" : "*",
+        "google/apiclient":"^2.0"
     }
 }
