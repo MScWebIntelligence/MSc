@@ -67,7 +67,7 @@ class BooksDAL
         $sql = "INSERT INTO msc.books (id, title, description, thumbnail, author, pages, language, rate, rates_count, publisher, published_date)
                 VALUES ('{$id}', '{$title}', {$description}, {$thumbnail}, {$author}, {$pages}, {$language}, {$rate}, {$ratesCount}, {$publisher}, {$publishedDate})";
 
-        return $db->insertRecord($sql);
+        return $db->executeRecord($sql);
     }
 
 }

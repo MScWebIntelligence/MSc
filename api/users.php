@@ -22,6 +22,10 @@ $bookId     = getParam('bookId', false);
 
 switch ($action) {
 
+    case 'user':
+        UsersHelper::getLoggedInUser();
+        break;
+
     case 'login':
         UsersHelper::login($email, $password);
         break;

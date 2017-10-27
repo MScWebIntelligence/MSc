@@ -81,6 +81,22 @@ class UsersHelper
     }
 
     /**
+     * Returns logged in user if exists as JSON
+     */
+    public static function getLoggedInUser()
+    {
+        $users  = new Users();
+        $user   = $users->getLoggedInUser(false);
+
+        echo json_encode(array(
+            'logged'    => $user ? $user->getId() > 0 : false,
+            'id'        => $user ? $user->getId() : false,
+            'firstname' => $user ? $user->getFirstname() : false,
+            'lastname'  => $user ? $user->getLastname() : false
+        ));
+    }
+
+    /**
      * Use case:
      *  1. Check if relation exists END
      *  2. Check if book exists
@@ -97,16 +113,20 @@ class UsersHelper
 
         $users  = new Users();
         $books  = new Books();
-        $userId = self::getLoggedInUserId();
+        $user   = $users->getLoggedInUser(false);
 
-        if ($userId && (!$users->hasBookRelation($userId, $bookId, $relation))){
+        if ($user && (!$users->hasBookRelation($user->getId(), $bookId, $relation))){
 
             if ($books->getBookById($bookId, 'local')) {
-                $users->addBookRelation($userId, $bookId, $relation);
+                $users->addBookRelation($user->getId(), $bookId, $relation);
+
             } else {
                 $book       = $books->getBookById($bookId, 'google');
                 $response   = $books->addBook($book);
-                if ($response) $users->addBookRelation($userId, $bookId, $relation);
+
+                if ($response) {
+                    $users->addBookRelation($user->getId(), $bookId, $relation);
+                }
             }
         }
 
@@ -140,33 +160,5 @@ class UsersHelper
             'data'      => $response,
             'message'   => false
         ));
-    }
-
-    /**
-     * @param bool $required
-     * @return bool|object
-     */
-    public static function getLoggedInUserId($required = true)
-    {
-        $jwt = $_COOKIE['jwt'];
-
-        try {
-            $decoded = JWT::decode($jwt, JWT_ΚΕΥ, array('HS256'));
-        } catch (\Exception $ex) {
-
-            if ($required) {
-                header('HTTP/1.0 401 Unauthorized');
-                die();
-            } else {
-                $decoded = 0;
-            }
-        }
-
-        if ($decoded && ($decoded->exp - time() < 15)) {
-            $users = new Users();
-            $users->setJWTCookie((int) $decoded->data->userId);
-        }
-
-        return $decoded ? (int) $decoded->data->userId : 0;
     }
 }

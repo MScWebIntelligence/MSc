@@ -10,6 +10,7 @@ namespace Classes\User;
 use Firebase\JWT\JWT;
 use Valitron\Validator;
 use Classes\Book\Book;
+use Exception;
 
 class Users
 {
@@ -31,6 +32,37 @@ class Users
     {
         $data = $this->db->getUserById($id);
         return $data ? new User($data) : false;
+    }
+
+    /**
+     * @param bool $required
+     * @return User|int
+     */
+    public function getLoggedInUser($required = true)
+    {
+        $jwt = $_COOKIE['jwt'];
+
+        try {
+            $decoded = JWT::decode($jwt, JWT_ΚΕΥ, array('HS256'));
+        } catch (Exception $ex) {
+
+            if ($required) {
+                header('HTTP/1.0 401 Unauthorized');
+                die();
+            } else {
+                $decoded = false;
+            }
+        }
+
+        if ($decoded && ($decoded->exp - time() < 15)) {
+            $this->setJWTCookie((int) $decoded->user->userId);
+        }
+
+        if ($decoded) {
+            return new User($decoded->user);
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -139,7 +171,7 @@ class Users
     }
 
     /**
-     *
+     * Clean cookies
      */
     public function logout()
     {
@@ -209,6 +241,7 @@ class Users
      */
     private function getJWT($userId)
     {
+        $user       = $this->getUserById($userId);
         $tokenId    = base64_encode(mcrypt_create_iv(32));
         $issuedAt   = time();
         $notBefore  = $issuedAt;
@@ -219,8 +252,10 @@ class Users
             'jti'  => $tokenId,
             'nbf'  => $notBefore,
             'exp'  => $expire,
-            'data' => array(
-                'userId'   => (int) $userId
+            'user' => array(
+                'id'        => (int) $userId,
+                'firstname' => $user->getFirstname(),
+                'lastname'  => $user->getLastname()
             )
         );
 

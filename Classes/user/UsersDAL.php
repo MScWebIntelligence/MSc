@@ -107,7 +107,7 @@ class UsersDAL
 
         $sql = "SELECT urb.user_id
                 FROM users_rel_books urb
-                WHERE urb.user_id = {$userId} AND urb.book_id = {$bookId} AND urb.case = {$relation}";
+                WHERE urb.user_id = {$userId} AND urb.book_id = '{$bookId}' AND urb.case = '{$relation}'";
 
         return $db->existsRecord($sql);
     }
@@ -126,10 +126,10 @@ class UsersDAL
         $bookId     = $db->clearString($bookId);
         $relation   = $db->clearString($relation);
 
-        $sql        = " INSERT INTO msc.users_rel_books (user_id, book_id, case)
-                        VALUES ({$userId}, '{$bookId}', '{$relation}');";
+        $sql        = " INSERT INTO msc.users_rel_books (user_id, book_id, `case`)
+                        VALUES ({$userId}, '{$bookId}', '{$relation}')";
 
-        return $db->insertRecord($sql);
+        return $db->executeRecord($sql);
     }
 
     /**
