@@ -9,7 +9,6 @@ namespace Classes\User;
 
 use Classes\Book\Book;
 use Classes\Book\Books;
-use Firebase\JWT\JWT;
 
 class UsersHelper
 {
@@ -64,7 +63,7 @@ class UsersHelper
     }
 
     /**
-     * Remove cookie with JWT
+     * Logout user and clear cookie
      */
     public static function logout()
     {
