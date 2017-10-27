@@ -1,10 +1,8 @@
 <!doctype html>
 <html ng-app="mscApp">
 <head lang="en">
-    <title>All users</title>
     <!-- CSS -->
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
-    <link rel="stylesheet" href="client/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="client/assets/font-awesome/css/font-awesome.min.css">
 
     <!-- Javascript -->
@@ -16,12 +14,13 @@
     <script src="client/assets/js/app.js"></script>
     <script src="client/assets/js/angular-dynamic-css.js"></script>
     <script src="client/controllers/usersController.js"></script>
+    <script src="client/controllers/headerFooterController.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
 </head>
 <body ng-cloak>
-
+<div ng-include="'header.html'" ng-controller="headerFooterController" ng-show={{headerfooter}}></div>
 <div ng-view></div>
-
+<div ng-include="'footer.html'" ng-controller="headerFooterController" ng-show={{headerfooter}}></div>
 </body>
 </html>
 

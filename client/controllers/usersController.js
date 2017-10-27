@@ -1,4 +1,6 @@
 angular.module('mscApp').controller('usersController',function($scope, $window,  $routeParams, $http) {
+
+    // Register
     $scope.signup = function () {
         var data = $.param({
             firstname: $scope.firstname,
@@ -16,6 +18,7 @@ angular.module('mscApp').controller('usersController',function($scope, $window, 
             }
         }
 
+        // Sign In
         $http.post('/MSc/api/users.php', data, config)
             .success(function (data, status, headers, config) {
                 $scope.PostDataResponse = data;
@@ -50,7 +53,6 @@ angular.module('mscApp').controller('usersController',function($scope, $window, 
                 }
             })
             .error(function (data, status, header, config) {
-                alert('Redirect to login');
                 $scope.ResponseDetails = "Data: " + data +
                     "<hr />status: " + status +
                     "<hr />headers: " + header +
@@ -58,10 +60,11 @@ angular.module('mscApp').controller('usersController',function($scope, $window, 
             });
     };
 
+    // Get by Id
     $scope.getUserById = function() {
         $http({
             method: 'GET',
-            url: '/MSc/api/actions.php',
+            url: '/MSc/api/users.php',
             params: { "action" : "getById" , "id" : $routeParams.id }
 
         }).then(function (response) {
