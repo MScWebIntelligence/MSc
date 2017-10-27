@@ -7,8 +7,6 @@
  */
 header('Content-Type: application/json');
 require_once '../config.php';
-global $CFG;
-
 use Classes\User\UsersHelper;
 
 $action     = getParam('action', true);
@@ -25,7 +23,6 @@ $bookId     = getParam('bookId', false);
 switch ($action) {
 
     case 'login':
-//        UsersHelper::getLoggedInUserId(true);
         UsersHelper::login($email, $password);
         break;
 
