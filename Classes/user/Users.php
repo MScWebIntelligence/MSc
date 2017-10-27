@@ -8,6 +8,7 @@
 namespace Classes\User;
 
 use Firebase\JWT\JWT;
+use Valitron\Validator;
 use Classes\Book\Book;
 
 class Users
@@ -35,17 +36,44 @@ class Users
     /**
      * @param $email
      * @param $password
-     * @return bool|object|\stdClass
+     * @return array
      */
     public function login($email, $password)
     {
-        $userId = $this->db->login($email, $this->hashPassword($password));
+        $userId     = 0;
+        $message    = false;
 
-        if ($userId > 0) {
-            $this->setJWTCookie($userId);
+        $validator  = new Validator(array(
+            'email'     => $email,
+            'password'  => $password
+        ));
+
+        $validator->labels(array(
+            'email'     => 'Email',
+            'password'  => 'Password'
+        ));
+
+        $validator->rule('required', array('email', 'password'))->message('{field} is required');
+        $validator->rule('email', 'email')->message('{field} has not the right format');
+        $validator->rule('lengthBetween', 'password', 6, 8)->message('{field}\'s length must be between 6 to 8 characters');
+
+        if ($validator->validate()) {
+            $userId = $this->db->login($email, $this->hashPassword($password));
+
+            if ($userId > 0) {
+                $this->setJWTCookie($userId);
+            } else {
+                $message = "Authentication failed. Please try again";
+            }
+
+        } else {
+            $message = array_values($validator->errors())[0][0];
         }
 
-        return $userId;
+        return array(
+            'userId'    => $userId,
+            'message'   => $message
+        );
     }
 
     /**

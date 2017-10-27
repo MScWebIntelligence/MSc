@@ -30,14 +30,13 @@ class UsersHelper
         global $CFG;
 
         $users      = new Users();
-        $userId     = $users->login($email, $password);
-        $url        = $userId ? "{$CFG->www_root}#user/{$userId}" : false;
-        $message    = $userId ? false : "Authentication failed. Please try again.";
+        $response   = $users->login($email, $password);
+        $url        = $response['userId'] ? "{$CFG->www_root}#user/{$response['userId']}" : false;
 
         echo json_encode(array(
-            'success'   => $userId != false,
+            'success'   => $response['userId'] != false,
             'url'       => $url,
-            'message'   => $message
+            'message'   => $response['message']
         ));
     }
 

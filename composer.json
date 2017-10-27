@@ -5,6 +5,7 @@
         }
     },
     "require": {
-        "firebase/php-jwt" : "*"
+        "firebase/php-jwt"  : "*",
+        "vlucas/valitron"   : "*"
     }
 }
