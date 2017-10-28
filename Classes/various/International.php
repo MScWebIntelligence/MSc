@@ -393,14 +393,16 @@ class International
             55 => "Ρεθύμνης"
 
         );
+        $combined = array();
+        $array2=array(6 => "Θεσσαλονίκηs",7 => "Χαλκιδική" ,8 => "Αγιο Όρος",9 => "Ημαθία",5 => "Καβάλα");
 
-        $array2 = array(6 => "Θεσσαλονίκη",7 => "Χαλκιδική" ,8 => "Αγιο Όρος",9 => "Ημαθίας",5 => "Καβάλας");
-        $array3 = array();
+        foreach($array1 as $key => $value){
+            if(array_key_exists($key,$array2)){
+                $combined=array_values($array2);
+            }
+        }
 
-//        foreach(array_keys($array1) as array_keys($array2){
-//            $outputarray1[] = array_values($array2)
-//        }
-
+        print_r($combined);
         return $response;
 
     }
