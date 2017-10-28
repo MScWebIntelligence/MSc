@@ -6,13 +6,8 @@
  * Time: 9:41 PM
  */
 require_once 'config.php';
+use Classes\Various\International;
 
+// Εδω Τασούλα μπορείς να τεσταρης αυτα που κάνεις
 
-
-use Classes\Book\BooksHelper;
-BooksHelper::search("Ασύρματα δίκτυα αισθητήρων", 0);
-die();
-
-//$book   = $books->getBookById("-8DhHgAACAAJ", 'google');
-//$books->addBook($book);
-//die();
+print_r(International::get_values_for_key(5));
