@@ -5,6 +5,9 @@
  * Date: 10/24/2017
  * Time: 8:18 PM
  */
+namespace Classes\Book;
+
+use stdClass;
 
 class BooksDAL
 {
@@ -53,20 +56,20 @@ class BooksDAL
 
         $id             = $db->clearString($id);
         $title          = $db->clearString($title);
-        $description    = $db->clearString($description);
-        $thumbnail      = $db->clearString($thumbnail);
-        $author         = $db->clearString($author);
+        $description    = $db->clearString($description) ? "'{$db->clearString($description)}'" : "NULL";
+        $thumbnail      = $db->clearString($thumbnail) ? "'{$db->clearString($thumbnail)}'" : "NULL";
+        $author         = $db->clearString($author) ? "'{$db->clearString($author)}'" : "NULL";
         $pages          = (int) $pages;
-        $language       = $db->clearString($language);
+        $language       = $db->clearString($language) ? "'{$db->clearString($language)}'" : "NULL";
         $rate           = round($rate, 2);
         $ratesCount     = (int) $ratesCount;
-        $publisher      = $db->clearString($publisher);
-        $publishedDate  = $db->clearString($publishedDate);
+        $publisher      = $db->clearString($publisher) ? "'{$db->clearString($publisher)}'" : "NULL";
+        $publishedDate  = $db->clearString($publishedDate) ? "'{$db->clearString($publishedDate)}'" : "NULL";
 
         $sql = "INSERT INTO msc.books (id, title, description, thumbnail, author, pages, language, rate, rates_count, publisher, published_date)
-                VALUES ('{$id}', '{$title}', '{$description}', '{$thumbnail}', '{$author}', {$pages}, '{$language}', {$rate}, {$ratesCount}, '{$publisher}', '{$publishedDate}')";
+                VALUES ('{$id}', '{$title}', {$description}, {$thumbnail}, {$author}, {$pages}, {$language}, {$rate}, {$ratesCount}, {$publisher}, {$publishedDate})";
 
-        return $db->insertRecord($sql);
+        return $db->executeRecord($sql);
     }
 
 }

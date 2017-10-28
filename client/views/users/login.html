@@ -23,6 +23,11 @@
                                     <label class="sr-only" for="form-password">Password</label>
                                     <input type="password" placeholder="Password..." class="form-control" id="form-password" ng-model="password">
                                 </div>
+
+                                <div class="alert alert-danger" ng-if="PostDataResponse.success == false">
+                                    <strong>Error.</strong> {{PostDataResponse.message}}
+                                </div>
+
                                 <button ng-click="signin()" class="btn">Sign me in!</button>
                                 <a ng-href="#register" id="signup" class="btn-link float-sm-right" style="cursor: pointer;">Sign Up!</a>
                             </div>

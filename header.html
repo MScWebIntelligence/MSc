@@ -1,0 +1,16 @@
+ <div class="container">
+        <div class="row" ng-controller="usersController" ng-init="getUser()">
+            <div class="col-lg-4">
+                    {{ user.firstname }} {{ user.lastname }}
+                </div>
+            <div class="col-lg-3">
+                <a href="#searchbooks">Find Book</a>
+                </div>
+            <div class="col-lg-3">
+                <a href= "#user/ {{ user.id }}">My Profile</a>
+            </div>
+            <div class="col-lg-2">
+                <a ng-click="logout()" class="btn-link float-sm-right" style="cursor: pointer;">Log Out!</a>
+            </div>
+        </div>
+ </div>

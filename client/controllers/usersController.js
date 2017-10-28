@@ -1,4 +1,6 @@
 angular.module('mscApp').controller('usersController',function($scope, $window,  $routeParams, $http) {
+
+    // Register
     $scope.signup = function () {
         var data = $.param({
             firstname: $scope.firstname,
@@ -16,7 +18,8 @@ angular.module('mscApp').controller('usersController',function($scope, $window, 
             }
         }
 
-        $http.post('/MSc/api/users/actions.php', data, config)
+        // Sign In
+        $http.post('/MSc/api/users.php', data, config)
             .success(function (data, status, headers, config) {
                 $scope.PostDataResponse = data;
                 $window.location.href = data.url;
@@ -42,10 +45,12 @@ angular.module('mscApp').controller('usersController',function($scope, $window, 
             }
         }
 
-        $http.post('/MSc/api/users/actions.php', data, config)
+        $http.post('/MSc/api/users.php', data, config)
             .success(function (data, status, headers, config) {
                 $scope.PostDataResponse = data;
-                $window.location.href = data.url;
+                if (data.success) {
+                    $window.location.href = data.url;
+                }
             })
             .error(function (data, status, header, config) {
                 $scope.ResponseDetails = "Data: " + data +
@@ -55,18 +60,42 @@ angular.module('mscApp').controller('usersController',function($scope, $window, 
             });
     };
 
-    $scope.getUserById = function() {
+    // Get the logged in user
+    $scope.getUser = function() {
         $http({
             method: 'GET',
-            url: '/MSc/api/actions.php',
-            params: { "action" : "getById" , "id" : $routeParams.id }
+            url: '/MSc/api/users.php',
+            params: { "action" : "user" }
 
         }).then(function (response) {
 
             // on success
-            $scope.user = response.data[0];
+            $scope.user = response.data;
 
-            console.log($scope.user)
+            if (!response.data.logged && $scope.headerfooter) {
+                $window.location.href = "/MSc/";
+            }
+
+        }, function (response) {
+
+            // on error
+            console.log(response.data,response.status);
+
+        });
+    };
+
+    // logout user
+    $scope.logout = function() {
+        $http({
+            method: 'GET',
+            url: '/MSc/api/users.php',
+            params: { "action" : "logout" }
+
+        }).then(function (response) {
+
+            // on success
+            $scope.user = response.data;
+            $window.location.href = "/MSc/";
 
         }, function (response) {
 

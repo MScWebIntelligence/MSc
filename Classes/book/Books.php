@@ -5,6 +5,9 @@
  * Date: 10/24/2017
  * Time: 8:18 PM
  */
+namespace Classes\Book;
+
+use Classes\Various\Google;
 
 class Books
 {
@@ -32,7 +35,8 @@ class Books
                 break;
 
             case 'google':
-                $data = $this->getBookByApiCall($bookId);
+                $googleApi  = new Google();
+                $data       = $googleApi->getBookById($bookId);
                 break;
 
             default:
@@ -53,12 +57,24 @@ class Books
     }
 
     /**
-     * @param $bookId
-     * @return bool|string
+     * @param $search
+     * @param int $offset
+     * @return array
      */
-    private function getBookByApiCall($bookId)
+    public function search($search, $offset = 0)
     {
-        $data = file_get_contents("https://www.googleapis.com/books/v1/volumes/{$bookId}");
-        return json_decode($data);
+        $google     = new Google();
+        $booksData  = $google->search($search, $offset);
+        $books      = array();
+        $total      = $booksData->totalItems;
+
+        foreach ($booksData->items as $bookData) {
+            $books[] = new Book($bookData, 'google');
+        }
+
+        return array(
+            'total' => $total,
+            'books' => $books
+        );
     }
 }

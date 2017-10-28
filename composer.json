@@ -1,10 +1,11 @@
 {
     "autoload": {
         "psr-4": {
-            "MSc\\": "classes/src/"
+            "Classes\\": "Classes/"
         }
     },
     "require": {
-        "firebase/php-jwt" : "*"
+        "firebase/php-jwt"  : "*",
+        "vlucas/valitron"   : "*"
     }
 }

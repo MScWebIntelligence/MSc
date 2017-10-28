@@ -272,9 +272,9 @@ class International
     public static function getStates()
     {
         return array(
-         '1' => "Έβρου",
-         '2' => "Ροδόπης",
-         ''   "Ξάνθης",
+            "Έβρου",
+            "Ροδόπης",
+            "Ξάνθης",
             "Δράμας",
             "Καβάλας",
             "Θεσσαλονίκης",

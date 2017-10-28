@@ -6,10 +6,11 @@
  * Time: 6:27 PM
  */
 header('Content-Type: application/json');
-require_once '../../config.php';
-global $CFG;
+require_once '../config.php';
+use Classes\User\UsersHelper;
 
 $action     = getParam('action', true);
+$userId     = getParam('userId', false);
 $email      = getParam('email', false);
 $password   = getParam('password', false);
 $firstname  = getParam('firstname', false);
@@ -20,6 +21,10 @@ $address    = getParam('address', false);
 $bookId     = getParam('bookId', false);
 
 switch ($action) {
+
+    case 'user':
+        UsersHelper::getLoggedInUser();
+        break;
 
     case 'login':
         UsersHelper::login($email, $password);
@@ -37,5 +42,9 @@ switch ($action) {
     case 'rent':
     case 'want':
         UsersHelper::addBookRelation($bookId, $action);
+        break;
+
+    case 'profile':
+        UsersHelper::getProfile($userId);
         break;
 }

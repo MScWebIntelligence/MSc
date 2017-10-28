@@ -5,6 +5,7 @@
  * Date: 10/22/2017
  * Time: 11:58 AM
  */
+namespace Classes\User;
 
 class UsersDAL
 {
@@ -17,7 +18,7 @@ class UsersDAL
 
     /**
      * @param $id
-     * @return bool|object|stdClass
+     * @return bool|object|\stdClass
      */
     public function getUserById($id)
     {
@@ -106,7 +107,7 @@ class UsersDAL
 
         $sql = "SELECT urb.user_id
                 FROM users_rel_books urb
-                WHERE urb.user_id = {$userId} AND urb.book_id = {$bookId} AND urb.case = {$relation}";
+                WHERE urb.user_id = {$userId} AND urb.book_id = '{$bookId}' AND urb.case = '{$relation}'";
 
         return $db->existsRecord($sql);
     }
@@ -125,10 +126,29 @@ class UsersDAL
         $bookId     = $db->clearString($bookId);
         $relation   = $db->clearString($relation);
 
-        $sql        = " INSERT INTO msc.users_rel_books (user_id, book_id, case)
-                        VALUES ({$userId}, '{$bookId}', '{$relation}');";
+        $sql        = " INSERT INTO msc.users_rel_books (user_id, book_id, `case`)
+                        VALUES ({$userId}, '{$bookId}', '{$relation}')";
 
-        return $db->insertRecord($sql);
+        return $db->executeRecord($sql);
+    }
+
+    /**
+     * @param $userId
+     * @return array
+     */
+    public function getBookcase($userId)
+    {
+        global $db;
+
+        $userId = (int) $userId;
+
+        $sql = "SELECT b.id, urb.case, b.title, b.description, b.thumbnail, b.author, b.pages, b.language, b.rate, b.rates_count, b.publisher, b.published_date
+                FROM users_rel_books urb
+                INNER JOIN books b
+                ON urb.book_id = b.id
+                WHERE urb.user_id = {$userId} AND (urb.case = 'read' OR urb.case = 'rent')";
+
+        return $db->getRecords($sql);
     }
 
 }

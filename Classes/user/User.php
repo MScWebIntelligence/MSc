@@ -5,6 +5,7 @@
  * Date: 10/22/2017
  * Time: 11:57 AM
  */
+namespace Classes\User;
 
 class User
 {
