@@ -8,6 +8,6 @@
 require_once 'config.php';
 use Classes\Various\International;
 
-// Εδω Τασούλα μπορείς να τεσταρης αυτα που κάνεις
+// Εδω Τασούλα μπορείς να τεσταρεις αυτα που κάνεις
 
 print_r(International::get_values_for_key(5));
