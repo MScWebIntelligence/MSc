@@ -144,7 +144,8 @@ class UsersHelper
         $users      = new Users();
         $user       = $users->getUserById($userId);
         $profile    = array();
-        $bookcase   = array();
+        $read       = array();
+        $rent       = array();
 
         if ($user) {
             $books      = $users->getBookcase($userId);
@@ -157,11 +158,21 @@ class UsersHelper
 
             /** @var Book $book */
             foreach ($books as $book) {
-                $bookcase[] = array(
-                    'id'    => $book->getId(),
-                    'title' => $book->getTitle(),
-                    'case'  => $book->getCase()
-                );
+
+                if ($book->getCase() == 'read') {
+                    $read[] = array(
+                        'id'    => $book->getId(),
+                        'title' => $book->getTitle(),
+                        'case'  => $book->getCase()
+                    );
+                } elseif ($book->getCase() == 'rent') {
+                    $rent[] = array(
+                        'id'    => $book->getId(),
+                        'title' => $book->getTitle(),
+                        'case'  => $book->getCase()
+                    );
+                }
+
             }
         }
 
@@ -169,7 +180,10 @@ class UsersHelper
             'success'   => $user ? true : false,
             'data'      => array(
                 'profile'   => $profile,
-                'bookcase'  => $bookcase
+                'bookcase'  => array(
+                    'read'      => $read,
+                    'rent'      => $rent
+                ),
             ),
             'message'   => $user ? false : 'User does not exist.'
         ));
