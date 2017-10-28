@@ -3,40 +3,20 @@
         <div class="searchfield  center-block">
             <div class="inner-addon right-addon">
                 <i class="glyphicon glyphicon-search"></i>
-                <input type="text" class="form-control" placeholder="Search" />
+                <input type="text" ng-model="search" ng-change="getBooks()" ng-model-options='{ debounce: 1000 }' class="form-control" placeholder="Search your book" />
             </div>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-4" ng-repeat="book in searchResult.books">
             <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                <a class="book-image center-block" href="#book/{{book.id}}">
+                    <img class="card-img-top" src="{{book.thumbnail}}" alt="">
+                </a>
                 <div class="card-body">
                     <h4 class="card-title">
-                        <a href="#">Book One</a>
-                    </h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt, dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <a href="#">Book One</a>
-                    </h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt, dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <a href="#">Book One</a>
+                        <a href="#book/{{book.id}}">{{book.title}}</a>
                     </h4>
                     <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt, dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
                 </div>
