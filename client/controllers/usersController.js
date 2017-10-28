@@ -60,19 +60,42 @@ angular.module('mscApp').controller('usersController',function($scope, $window, 
             });
     };
 
-    // Get by Id
-    $scope.getUserById = function() {
+    // Get the logged in user
+    $scope.getUser = function() {
         $http({
             method: 'GET',
             url: '/MSc/api/users.php',
-            params: { "action" : "getById" , "id" : $routeParams.id }
+            params: { "action" : "user" }
 
         }).then(function (response) {
 
             // on success
-            $scope.user = response.data[0];
+            $scope.user = response.data;
 
-            console.log($scope.user)
+            if (!response.data.logged && $scope.headerfooter) {
+                $window.location.href = "/MSc/";
+            }
+
+        }, function (response) {
+
+            // on error
+            console.log(response.data,response.status);
+
+        });
+    };
+
+    // logout user
+    $scope.logout = function() {
+        $http({
+            method: 'GET',
+            url: '/MSc/api/users.php',
+            params: { "action" : "logout" }
+
+        }).then(function (response) {
+
+            // on success
+            $scope.user = response.data;
+            $window.location.href = "/MSc/";
 
         }, function (response) {
 

@@ -1,11 +1,5 @@
 
 jQuery(document).ready(function() {
-	
-    /*
-        Fullscreen background
-    */
-    $.backstretch("client/assets/img/backgrounds/register.jpg");
-    
     /*
         Login form validation
     */

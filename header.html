@@ -1,3 +1,12 @@
-<div>
-    test header
-</div>
+ <div class="container">
+        <div class="row" ng-controller="usersController" ng-init="getUser()">
+            <div class="col-lg-4">
+                    {{ user.firstname }} {{ user.lastname }}
+                </div>
+            <div class="col-lg-6">
+                </div>
+            <div class="col-lg-2">
+                <a ng-click="logout()" class="btn-link float-sm-right" style="cursor: pointer;">Log Out!</a>
+            </div>
+        </div>
+ </div>

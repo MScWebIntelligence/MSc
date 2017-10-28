@@ -209,6 +209,11 @@ footer a {
 footer a:hover, footer a:focus { color: #fff; border-bottom: 1px dotted #fff; }
 
 
+.center-block {
+	display: table;
+	margin: 0 auto;
+}
+
 /***** Media queries *****/
 
 @media (min-width: 992px) and (max-width: 1199px) {}

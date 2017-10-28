@@ -1,0 +1,44 @@
+/* enable absolute positioning */
+.inner-addon {
+  position: relative;
+}
+
+/* style glyph */
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+
+/* align glyph */
+.left-addon .glyphicon  { left:  0px;}
+.right-addon .glyphicon { right: 0px;}
+
+/* add padding  */
+.left-addon input  { padding-left:  30px; }
+.right-addon input { padding-right: 30px; }
+
+
+
+body {
+  margin: 10px;
+}
+
+.searchbox {
+  height: 200px;
+  background-image: url("../img/backgrounds/searchbox.jpg");
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 20px;
+}
+
+.searchfield {
+  padding-top: 80px;
+  opacity: 0.90;
+  width: 60%;
+}
+
+.center-block {
+  display: table;
+  margin: 0 auto;
+}
