@@ -34,7 +34,8 @@ class BooksHelper
             $books[] = array(
                 'id'        => $book->getId(),
                 'title'     => $book->getTitle(),
-                'thumbnail' => $book->getThumbnail()
+                'thumbnail' => $book->getThumbnail(),
+                'description' => $book->getDescription()
             );
         }
 
