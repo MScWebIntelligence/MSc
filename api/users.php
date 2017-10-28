@@ -44,7 +44,7 @@ switch ($action) {
         UsersHelper::addBookRelation($bookId, $action);
         break;
 
-    case 'bookcase':
-        UsersHelper::getBookcase(1);
+    case 'profile':
+        UsersHelper::getProfile($userId);
         break;
 }

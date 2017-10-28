@@ -139,25 +139,39 @@ class UsersHelper
     /**
      * @param $userId
      */
-    public static function getBookcase($userId)
+    public static function getProfile($userId)
     {
         $users      = new Users();
-        $books      = $users->getBookcase($userId);
-        $response   = array();
+        $user       = $users->getUserById($userId);
+        $profile    = array();
+        $bookcase   = array();
 
-        /** @var Book $book */
-        foreach ($books as $book) {
-            $response[] = array(
-                'id'    => $book->getId(),
-                'title' => $book->getTitle(),
-                'case'  => $book->getCase()
+        if ($user) {
+            $books      = $users->getBookcase($userId);
+            $profile    = array(
+                'id'        => $user->getId(),
+                'firstname' => $user->getFirstname(),
+                'lastname'  => $user->getLastname(),
+                'email'     => $user->getEmail()
             );
+
+            /** @var Book $book */
+            foreach ($books as $book) {
+                $bookcase[] = array(
+                    'id'    => $book->getId(),
+                    'title' => $book->getTitle(),
+                    'case'  => $book->getCase()
+                );
+            }
         }
 
         echo json_encode(array(
-            'success'   => true,
-            'data'      => $response,
-            'message'   => false
+            'success'   => $user ? true : false,
+            'data'      => array(
+                'profile'   => $profile,
+                'bookcase'  => $bookcase
+            ),
+            'message'   => $user ? false : 'User does not exist.'
         ));
     }
 }

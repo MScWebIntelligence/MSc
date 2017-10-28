@@ -7,6 +7,8 @@
  */
 namespace Classes\Book;
 
+use stdClass;
+
 class BooksDAL
 {
 
@@ -19,7 +21,7 @@ class BooksDAL
 
     /**
      * @param $bookId
-     * @return bool|object|\stdClass
+     * @return bool|object|stdClass
      */
     public function getBookById($bookId)
     {
