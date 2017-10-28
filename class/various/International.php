@@ -272,8 +272,8 @@ class International
     public static function getStates()
     {
         return array(
-            "Έβρου",
-            "Ροδόπης",
+         '1' => "Έβρου",
+         '2' => "Ροδόπης",
             "Ξάνθης",
             "Δράμας",
             "Καβάλας",
