@@ -70,7 +70,7 @@ class Book
         $this->title            = $data->volumeInfo->title;
         $this->description      = $data->volumeInfo->description;
         $this->thumbnail        = $data->volumeInfo->imageLinks->thumbnail;
-        $this->author           = $data->volumeInfo->authors[0];
+        $this->author           = implode(', ', $data->volumeInfo->authors);
         $this->pages            = (int) $data->volumeInfo->pageCount;
         $this->language         = $data->volumeInfo->language;
         $this->rate             = round($data->volumeInfo->averageRating, 2);

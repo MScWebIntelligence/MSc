@@ -44,4 +44,28 @@ class BooksHelper
             'books' => $books
         ));
     }
+
+    /**
+     * @param $bookId
+     */
+    public static function getBook($bookId)
+    {
+        $books  = new Books();
+        $book   = $books->getBookById($bookId, 'google');
+
+        echo json_encode(array(
+            'id'            => $book->getId(),
+            'title'         => $book->getTitle(),
+            'thumbnail'     => $book->getThumbnail(),
+            'description'   => $book->getDescription(),
+            'author'        => $book->getAuthor(),
+            'rate'          => $book->getRate(),
+            'rateCount'     => $book->getRatesCount(),
+            'published'     => $book->getPublishedDate(),
+            'publisher'     => $book->getPublisher(),
+            'pages'         => $book->getPages(),
+            'language'      => $book->getLanguage()
+        ));
+
+    }
 }

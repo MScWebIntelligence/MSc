@@ -10,13 +10,18 @@ require_once '../config.php';
 use Classes\Book\BooksHelper;
 
 $action = getParam('action', true);
-$search = getParam('search', true);
+$search = getParam('search', false);
 $offset = getParam('offset', false, 'int');
+$bookId = getParam('bookId', false);
 
 switch ($action) {
 
     case 'search':
         BooksHelper::search($search, $offset);
+        break;
+
+    case 'book':
+        BooksHelper::getBook($bookId);
         break;
 
     case 'related':
