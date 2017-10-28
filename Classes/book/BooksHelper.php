@@ -53,19 +53,28 @@ class BooksHelper
     {
         $books  = new Books();
         $book   = $books->getBookById($bookId, 'google');
+        $data   = array();
+
+        if ($book) {
+            $data = array(
+                'id'            => $book->getId(),
+                'title'         => $book->getTitle(),
+                'thumbnail'     => $book->getThumbnail(),
+                'description'   => $book->getDescription(),
+                'author'        => $book->getAuthor(),
+                'rate'          => $book->getRate(),
+                'rateCount'     => $book->getRatesCount(),
+                'published'     => $book->getPublishedDate(),
+                'publisher'     => $book->getPublisher(),
+                'pages'         => $book->getPages(),
+                'language'      => $book->getLanguage()
+            );
+        }
 
         echo json_encode(array(
-            'id'            => $book->getId(),
-            'title'         => $book->getTitle(),
-            'thumbnail'     => $book->getThumbnail(),
-            'description'   => $book->getDescription(),
-            'author'        => $book->getAuthor(),
-            'rate'          => $book->getRate(),
-            'rateCount'     => $book->getRatesCount(),
-            'published'     => $book->getPublishedDate(),
-            'publisher'     => $book->getPublisher(),
-            'pages'         => $book->getPages(),
-            'language'      => $book->getLanguage()
+            'success'   => $book ? true : false,
+            'data'      => $data,
+            'message'   => $book ? false : "Book not found"
         ));
 
     }
