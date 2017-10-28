@@ -41,7 +41,7 @@ class Google
     private $apiKey,
             $apiUrl;
 
-    static $limit = 20;
+    static $limit = 12;
     /**
      * Google constructor.
      */
