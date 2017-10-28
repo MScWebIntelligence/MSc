@@ -3,7 +3,7 @@
         <div class="searchfield  center-block">
             <div class="inner-addon right-addon">
                 <i class="glyphicon glyphicon-search"></i>
-                <input type="text" ng-model="search" ng-change="getBooks()" ng-model-options='{ debounce: 1000 }' class="form-control" placeholder="Search your book" />
+                <input type="text" ng-model="search" ng-change="getBooks()"  my-enter="getBooks()" ng-model-options='{ debounce: 1000 }' class="form-control" placeholder="Search your book" />
             </div>
         </div>
     </div>
