@@ -32,10 +32,10 @@ class BooksHelper
         /** @var Book $book */
         foreach ($data['books'] as $book) {
             $books[] = array(
-                'id'        => $book->getId(),
-                'title'     => $book->getTitle(),
-                'thumbnail' => $book->getThumbnail(),
-                'description' => $book->getDescription()
+                'id'            => $book->getId(),
+                'title'         => $book->getTitle(),
+                'thumbnail'     => $book->getThumbnail(),
+                'description'   => $book->getDescription()
             );
         }
 
