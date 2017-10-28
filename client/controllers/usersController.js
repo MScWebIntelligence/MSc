@@ -65,12 +65,12 @@ angular.module('mscApp').controller('usersController',function($scope, $window, 
         $http({
             method: 'GET',
             url: '/MSc/api/users.php',
-            params: { "action" : "getById" , "id" : $routeParams.id }
+            params: { "action" : "user" }
 
         }).then(function (response) {
 
             // on success
-            $scope.user = response.data[0];
+            $scope.user = response.data;
 
             console.log($scope.user)
 
