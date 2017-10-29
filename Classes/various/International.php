@@ -398,10 +398,10 @@ class International
         $array3=array(1 => "Έβρου",2 => "Ροδόπης",3 => "Ξάνθης",);
         $array4=array(4 => "Κοζάνης",15 => "Φλώρινας",16 => "Γρεβενών",17 => "Καστοριάς",);
 
-        if(in_array($selectedValue,$array2)){
+        if(array_key_exists($selectedValue,$array2)){
             $response=array_merge($array2,$array3,$array4);
         }
-        else if(in_array($selectedValue,$array3)){
+        else if(array_key_exists($selectedValue,$array3)){
             $response=array_merge($array3,$array2,$array4);
 
 
