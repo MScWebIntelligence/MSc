@@ -337,14 +337,16 @@ class International
         $response = array();
         $array2=array(6 => "Θεσσαλονίκης",7 => "Χαλκιδικής" ,8 => "Αγιο Όρος",9 => "Ημαθίας",5 => "Καβάλας");
         $array3=array(1 => "Έβρου",2 => "Ροδόπης",3 => "Ξάνθης",);
-        $array4=array()
+        $array4=array(14 => "Κοζάνης",15 => "Φλώρινας",16 => "Γρεβενών",17 => "Καστοριάς",);
         if(in_array($selectedValue,$array2)){
                 $response=array_values($array2);
             }
         else if(in_array($selectedValue,$array3)){
                 $response=array_values($array3);
             }
-
+        else if(in_array($selectedValue,$array4)){
+            $response=array_values($array4);
+        }
         return $response;
 
     }
