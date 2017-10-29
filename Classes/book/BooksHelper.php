@@ -35,7 +35,7 @@ class BooksHelper
                 'id'            => $book->getId(),
                 'title'         => $book->getTitle(),
                 'thumbnail'     => $book->getThumbnail(),
-                'description'   => $book->getDescription(50),
+                'description'   => $book->getDescription(144),
                 'rate'          => $book->getRate(),
                 'author'        => $book->getAuthor()
             );
