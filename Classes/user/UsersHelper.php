@@ -163,13 +163,17 @@ class UsersHelper
                     $read[] = array(
                         'id'    => $book->getId(),
                         'title' => $book->getTitle(),
-                        'case'  => $book->getCase()
+                        'case'  => $book->getCase(),
+                        'description' => $book->getDescription(),
+                        'thumbnail' => $book->getThumbnail()
                     );
                 } elseif ($book->getCase() == 'rent') {
                     $rent[] = array(
                         'id'    => $book->getId(),
                         'title' => $book->getTitle(),
-                        'case'  => $book->getCase()
+                        'case'  => $book->getCase(),
+                        'description' => $book->getDescription(),
+                        'thumbnail' => $book->getThumbnail()
                     );
                 }
 

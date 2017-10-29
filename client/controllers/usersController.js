@@ -18,7 +18,6 @@ angular.module('mscApp').controller('usersController',function($scope, $window, 
             }
         }
 
-        // Sign In
         $http.post('/MSc/api/users.php', data, config)
             .success(function (data, status, headers, config) {
                 $scope.PostDataResponse = data;
@@ -32,6 +31,7 @@ angular.module('mscApp').controller('usersController',function($scope, $window, 
             })
     };
 
+    // Sign In
     $scope.signin = function () {
         var data = $.param({
             email: $scope.email,
@@ -75,6 +75,26 @@ angular.module('mscApp').controller('usersController',function($scope, $window, 
             if (!response.data.logged && $scope.headerfooter) {
                 $window.location.href = "/MSc/";
             }
+
+        }, function (response) {
+
+            // on error
+            console.log(response.data,response.status);
+
+        });
+    };
+
+    // Get the user profile
+    $scope.getProfile = function() {
+        $http({
+            method: 'GET',
+            url: '/MSc/api/users.php',
+            params: { "action" : "profile" , "userId" : $routeParams.id }
+
+        }).then(function (response) {
+
+            // on success
+            $scope.bookCase = response.data.data.bookcase;
 
         }, function (response) {
 
