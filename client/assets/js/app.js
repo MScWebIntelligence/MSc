@@ -1,4 +1,4 @@
-var mscApp = angular.module('mscApp', ['ngRoute']);
+var mscApp = angular.module('mscApp',['ngRoute' , 'infinite-scroll']);
 
 mscApp.config(['$routeProvider',
     function($routeProvider) {
@@ -31,7 +31,6 @@ mscApp.config(['$routeProvider',
             redirectTo: '/#login'
         });
     }]);
-
 
 mscApp.directive('myEnter', function () {
     return function (scope, element, attrs) {
