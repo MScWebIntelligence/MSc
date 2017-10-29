@@ -335,11 +335,16 @@ class International
     public static function get_values_for_key($selectedValue)
     {
         $response = array();
-        $combined = array();
         $array2=array(6 => "Θεσσαλονίκης",7 => "Χαλκιδικής" ,8 => "Αγιο Όρος",9 => "Ημαθίας",5 => "Καβάλας");
-            if(in_array($selectedValue,$array2)){
+        $array3=array(1 => "Έβρου",2 => "Ροδόπης",3 => "Ξάνθης",);
+        $array4=array()
+        if(in_array($selectedValue,$array2)){
                 $response=array_values($array2);
             }
+        else if(in_array($selectedValue,$array3)){
+                $response=array_values($array3);
+            }
+
         return $response;
 
     }
