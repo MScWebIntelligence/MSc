@@ -58,14 +58,14 @@ class Google
      */
     public function search($search, $offset = 0)
     {
-        $offset     = (int) $offset;
-        $search     = urlencode($search);
-        $search     = "&q={$search}";
-        $limit      = "&maxResults=" . self::$limit;
-        $offset     = "&startIndex={$offset}";
-        $projection = "&projection=lite";
-        $query      = $search . $limit . $offset . $projection;
-        return $this->fire(null, $query);
+        $offset         = (int) $offset;
+        $search         = urlencode(trim($search));
+        $searchParam    = "&q={$search}";
+        $limitParam     = "&maxResults=" . self::$limit;
+        $offsetParam    = "&startIndex={$offset}";
+        $projection     = "&projection=lite";
+        $query          = $searchParam . $limitParam . $offsetParam . $projection;
+        return $search ? $this->fire(null, $query) : array();
     }
 
     /**
