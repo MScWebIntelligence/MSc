@@ -13,6 +13,7 @@ class Book
             $title,
             $description,
             $thumbnail,
+            $defaultThumbnail,
             $author,
             $pages,
             $language,
@@ -29,6 +30,10 @@ class Book
      */
     public function __construct($data, $source = 'local')
     {
+        global $CFG;
+
+        $this->defaultThumbnail = "{$CFG->www_root}/client/assets/img/books/no-cover.jpg";
+
         switch ($source) {
 
             case 'local':
@@ -97,11 +102,12 @@ class Book
     }
 
     /**
+     * @param int $chars
      * @return mixed
      */
-    public function getDescription()
+    public function getDescription($chars = 0)
     {
-        return $this->description;
+        return $chars > 0 ? substr($this->description, 0, $chars) . "..." : $this->description;
     }
 
     /**
@@ -109,7 +115,7 @@ class Book
      */
     public function getThumbnail()
     {
-        return $this->thumbnail;
+        return $this->thumbnail ? $this->thumbnail : $this->defaultThumbnail;
     }
 
     /**
