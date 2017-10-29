@@ -22,6 +22,10 @@ mscApp.config(['$routeProvider',
             templateUrl: 'client/views/books/searchBooks.html',
             controller: 'booksController',
             css: ['client/assets/css/bookstore.css', 'client/assets/bootstrap/css/bootstrap.min.css']
+        }).when('/book/:id', {
+            templateUrl: 'client/views/books/showBook.html',
+            controller: 'booksController',
+            css: ['client/assets/css/bookstore.css', 'client/assets/bootstrap/css/bootstrap.min.css']
         }).when('page/:pages', {
             templateUrl: function (routeParams) {
                 return 'views/' + routeParams.pages + '.html';

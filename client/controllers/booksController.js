@@ -1,4 +1,24 @@
 angular.module('mscApp').controller('booksController',function($scope, $window,  $routeParams, $http) {
+    // get book by id
+    $scope.getBook = function() {
+        $http({
+            method: 'GET',
+            url: '/MSc/api/books.php',
+            params: { "action" : "book" , "bookId" : $routeParams.id }
+
+        }).then(function (response) {
+
+            // on success
+            $scope.book = response.data.data;
+
+        }, function (response) {
+
+            // on error
+            console.log(response.data,response.status);
+
+        });
+    };
+
     // get books
     $scope.getBooks = function() {
         $http({
