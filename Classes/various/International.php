@@ -392,11 +392,21 @@ class International
             55 => "Ρεθύμνης"
 
         );
-        $response = array();
-        $lenght=count($array1);
 
-        for($i=$selectedValue-2; $i<$lenght; $i++) {
-            $response = $array1[$i];}
+        $response = array();
+        $array2=array(6 => "Θεσσαλονίκης",7 => "Χαλκιδικής" ,8 => "Αγιο Όρος",9 => "Ημαθίας",5 => "Καβάλας");
+        $array3=array(1 => "Έβρου",2 => "Ροδόπης",3 => "Ξάνθης",);
+        $array4=array(4 => "Κοζάνης",15 => "Φλώρινας",16 => "Γρεβενών",17 => "Καστοριάς",);
+
+        if(in_array($selectedValue,$array2)){
+            $response=array_merge($array2,$array3,$array4);
+        }
+        else if(in_array($selectedValue,$array3)){
+            $response=array_merge($array3,$array2,$array4);
+
+
+        }
+
             return $response;
 
    }
