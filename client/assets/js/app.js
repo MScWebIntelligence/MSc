@@ -1,4 +1,4 @@
-var mscApp = angular.module('mscApp',['ngRoute' , 'infinite-scroll']);
+var mscApp = angular.module('mscApp',['ngRoute' , 'infinite-scroll' , 'ngSanitize']);
 
 mscApp.config(['$routeProvider',
     function($routeProvider) {
