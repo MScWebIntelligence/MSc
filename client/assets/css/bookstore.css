@@ -39,8 +39,9 @@ body {
 }
 
 .center-block {
-  display: table;
-  margin: 0 auto;
+  display: table!important;
+  margin: 0 auto!important;
+    padding: 10px;
 }
 
 h1 {

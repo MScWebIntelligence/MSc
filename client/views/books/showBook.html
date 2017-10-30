@@ -22,4 +22,15 @@
         <div class="col-lg-12" ng-bind-html="book.description">
         </div>
     </div>
+    <div class="row" style="margin-top: 40px">
+        <div class="col-lg-4">
+            <button type="button" style="cursor: hand" class="btn btn-primary center-block" ng-click="action('read')">I read it!</button>
+        </div>
+        <div class="col-lg-4">
+            <button type="button" style="cursor: hand" class="btn btn-success center-block" ng-click="action('rent')">I rent it!</button>
+        </div>
+        <div class="col-lg-4">
+            <button type="button" style="cursor: hand" class="btn btn-warning center-block" ng-click="action('want')">I want it!</button>
+        </div>
+    </div>
 </div>
