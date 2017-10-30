@@ -1,0 +1,11 @@
+<div class="card h-100">
+    <a class="book-image center-block" href="#book/{{book.id}}">
+        <img class="card-img-top" src="{{book.thumbnail}}" alt="">
+    </a>
+    <div class="card-body">
+        <h4 class="card-title">
+            <a href="#book/{{book.id}}">{{book.title}}</a>
+        </h4>
+        <p class="card-text" ng-bind-html="book.description.slice(0,144)"></p>
+    </div>
+</div>

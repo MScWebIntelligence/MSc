@@ -1,36 +1,13 @@
 <div class="container" ng-init="getProfile()">
     <h1>I have them!</h1>
     <div class="row">
-        <div class="col-lg-4" ng-repeat="book in bookCase.rent">
-            <div class="card h-100">
-                <a class="book-image center-block" href="#book/{{book.id}}">
-                    <img class="card-img-top" src="{{book.thumbnail}}" alt="">
-                </a>
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <a href="#book/{{book.id}}">{{book.title}}</a>
-                    </h4>
-                    <p class="card-text" ng-bind-html="book.description.slice(0,144)"></p>
-                </div>
-            </div>
+        <div class="col-lg-4" ng-repeat="book in bookCase.rent" ng-include="'client/views/books/book.html'">
         </div>
     </div>
 
     <h1>Books I have read!</h1>
-<div class="row">
-    <div class="col-lg-4" ng-repeat="book in bookCase.read">
-        <div class="card h-100">
-            <a class="book-image center-block" href="#book/{{book.id}}">
-                <img class="card-img-top" src="{{book.thumbnail}}" alt="">
-            </a>
-            <div class="card-body">
-                <h4 class="card-title">
-                    <a href="#book/{{book.id}}">{{book.title}}</a>
-                </h4>
-                <p class="card-text">{{book.description.slice(0,144)}}</p>
-            </div>
+    <div class="row">
+        <div class="col-lg-4" ng-repeat="book in bookCase.read" ng-include="'client/views/books/book.html'">
         </div>
-    </div>
-
     </div>
 </div>
