@@ -108,8 +108,6 @@ class UsersHelper
      */
     public static function addBookRelation($bookId, $relation)
     {
-        global $CFG;
-
         $users  = new Users();
         $books  = new Books();
         $user   = $users->getLoggedInUser(false);
@@ -131,7 +129,7 @@ class UsersHelper
 
         echo json_encode(array(
             'success'   => true,
-            'url'       => "{$CFG->www_root}",
+            'url'       => false,
             'message'   => false
         ));
     }
