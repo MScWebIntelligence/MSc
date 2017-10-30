@@ -13,7 +13,7 @@
         </div>
     </div>
     <div class="row" infinite-scroll="getBooksPaginated()" infinite-scroll-disabled='loadingBooks || offset >= searchResult.total' infinite-scroll-distance="1">
-        <div class="col-lg-4" ng-repeat="book in searchResult.books" ng-include="'client/views/books/book.html'">
+        <div class="col-lg-4" ng-repeat="book in searchResult.books" ng-include="'client/app/views/books/book.html'">
         </div>
     </div>
 </div>

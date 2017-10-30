@@ -3,27 +3,27 @@ var mscApp = angular.module('mscApp',['ngRoute' , 'infinite-scroll' , 'ngSanitiz
 mscApp.config(['$routeProvider',
     function($routeProvider) {
         $routeProvider.when('/register', {
-            templateUrl: 'client/views/users/register.html',
+            templateUrl: 'client/app/views/users/register.html',
             controller: 'usersController',
             css: ['client/assets/css/form-elements.css', 'client/assets/css/style.css', 'client/assets/bootstrap/css/bootstrap.min.css']
         }).when('/login', {
-            templateUrl: 'client/views/users/login.html',
+            templateUrl: 'client/app/views/users/login.html',
             controller: 'usersController',
             css: ['client/assets/css/form-elements.css', 'client/assets/css/style.css', 'client/assets/bootstrap/css/bootstrap.min.css']
         }).when('/', {
-            templateUrl: 'client/views/users/login.html',
+            templateUrl: 'client/app/views/users/login.html',
             controller: 'usersController',
             css: ['client/assets/css/form-elements.css', 'client/assets/css/style.css', 'client/assets/bootstrap/css/bootstrap.min.css']
         }).when('/user/:id', {
-            templateUrl: 'client/views/users/profile.html',
+            templateUrl: 'client/app/views/users/profile.html',
             controller: 'usersController',
             css: ['client/assets/css/bookstore.css', 'client/assets/bootstrap/css/bootstrap.min.css']
         }).when('/searchbooks', {
-            templateUrl: 'client/views/books/searchBooks.html',
+            templateUrl: 'client/app/views/books/searchBooks.html',
             controller: 'booksController',
             css: ['client/assets/css/bookstore.css', 'client/assets/bootstrap/css/bootstrap.min.css']
         }).when('/book/:id', {
-            templateUrl: 'client/views/books/showBook.html',
+            templateUrl: 'client/app/views/books/showBook.html',
             controller: 'booksController',
             css: ['client/assets/css/bookstore.css', 'client/assets/bootstrap/css/bootstrap.min.css']
         }).when('page/:pages', {
