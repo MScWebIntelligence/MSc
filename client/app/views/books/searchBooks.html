@@ -15,18 +15,31 @@
         </div>
     </div>
 
+    <div class="center-block" ng-show="books.length < 1 && !busy">
+        Please search a book...
+    </div>
+
     <div class="row" infinite-scroll="getData()" infinite-scroll-disabled='busy || !more' infinite-scroll-distance="0">
+        <div class="col-lg-4" ng-repeat="book in books" >
 
-        <div class="center-block" ng-show="books.length < 1 && !busy">
-                Please search a book...
-        </div>
+            <div class="card h-100">
+                <a class="book-image center-block" href="#book/{{book.id}}">
+                    <img class="card-img-top" src="{{book.thumbnail}}" alt="">
+                </a>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a href="#book/{{book.id}}">{{book.title}}</a>
+                    </h4>
+                    <p class="card-text" ng-bind-html="book.description.slice(0,144)"></p>
+                </div>
+            </div>
 
-        <div class="col-lg-4" ng-repeat="book in books" ng-include="'client/app/views/books/book.html'">
         </div>
+    </div>
 
-        <div class="center-block" ng-show="(more && total > 0) || busy">
-            <i class="fa fa-spinner fa-pulse fa-2x"></i>
-        </div>
+
+    <div class="center-block" ng-show="(more && total > 0) || busy">
+        <i class="fa fa-spinner fa-pulse fa-2x"></i>
     </div>
 
 </div>
