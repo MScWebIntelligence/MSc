@@ -107,7 +107,7 @@ class Book
      */
     public function getDescription($chars = 0)
     {
-        return $chars > 0 ? substr($this->description, 0, $chars) . "..." : $this->description;
+        return $chars > 0 ? mb_substr($this->description, 0, $chars, 'UTF-8') . "..." : $this->description;
     }
 
     /**

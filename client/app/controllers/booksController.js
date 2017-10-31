@@ -34,9 +34,9 @@ angular.module('mscApp').controller('booksController',function($scope, $window, 
             for (var i = 0; i < data.books.length; i++) {
                 $scope.books.push(data.books[i]);
             }
+
             $scope.busy = false;
             $scope.more = data.more;
-            // console.log("Busy: " + $scope.busy + " More: " + $scope.more + " Offset: " + $scope.books.length);
         });
 
     };
