@@ -16,15 +16,16 @@
     </div>
 
     <div class="row" infinite-scroll="getData()" infinite-scroll-disabled='busy || !more' infinite-scroll-distance="0">
-        <div ng-show="books.length < 1 && !busy" class="no-data text-center">
-                No books available...
+
+        <div class="center-block" ng-show="books.length < 1 && !busy">
+                Please search a book...
         </div>
 
         <div class="col-lg-4" ng-repeat="book in books" ng-include="'client/app/views/books/book.html'">
         </div>
 
-        <div class="loading center-block" ng-show="more">
-            <i class="fa fa-spinner fa-pulse fa-3x"></i>
+        <div class="center-block" ng-show="(more && total > 0) || busy">
+            <i class="fa fa-spinner fa-pulse fa-2x"></i>
         </div>
     </div>
 
