@@ -54,7 +54,7 @@ class Users
             }
         }
 
-        if ($decoded && ($decoded->exp - time() < 15)) {
+        if ($decoded && ($decoded->exp - time() < 120)) {
             $this->setJWTCookie((int) $decoded->user->userId);
         }
 

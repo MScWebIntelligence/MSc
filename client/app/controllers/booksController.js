@@ -3,6 +3,7 @@ angular.module('mscApp').controller('booksController',function($scope, $window, 
     $scope.books    = [];
     $scope.busy     = false;
     $scope.more     = true;
+    $scope.total    = 0;
 
     $scope.getData = function (clear) {
 
@@ -35,17 +36,11 @@ angular.module('mscApp').controller('booksController',function($scope, $window, 
                 $scope.books.push(data.books[i]);
             }
 
-            $scope.busy = false;
-            $scope.more = data.more;
+            $scope.busy     = false;
+            $scope.total    = data.total;
+            $scope.more     = data.more;
         });
-
     };
-
-
-
-
-
-
 
 
     // get book by id
@@ -69,25 +64,25 @@ angular.module('mscApp').controller('booksController',function($scope, $window, 
     };
 
     // get books
-    $scope.getBooks = function() {
-        $http({
-            method: 'GET',
-            url: '/MSc/api/books.php',
-            params: { "action" : "search" , "search" : $scope.search }
-
-        }).then(function (response) {
-
-            // on success
-            $scope.searchResult = response.data;
-            $scope.offset = 0;
-
-        }, function (response) {
-
-            // on error
-            console.log(response.data,response.status);
-
-        });
-    };
+    // $scope.getBooks = function() {
+    //     $http({
+    //         method: 'GET',
+    //         url: '/MSc/api/books.php',
+    //         params: { "action" : "search" , "search" : $scope.search }
+    //
+    //     }).then(function (response) {
+    //
+    //         // on success
+    //         $scope.searchResult = response.data;
+    //         $scope.offset = 0;
+    //
+    //     }, function (response) {
+    //
+    //         // on error
+    //         console.log(response.data,response.status);
+    //
+    //     });
+    // };
 
     // get books next pages
     // $scope.getBooksPaginated = function() {

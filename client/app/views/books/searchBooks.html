@@ -1,4 +1,5 @@
 <div class="container">
+
     <div id="searchBox" class="row searchbox">
         <div class="searchfield  center-block">
             <div class="inner-addon right-addon">
@@ -7,25 +8,24 @@
             </div>
         </div>
     </div>
+
     <div class="row">
         <div class="col-lg-4">
-            <h3 ng-if="searchResult.total>0">Total Results : {{searchResult.total}}</h3>
+            <h3 ng-if="total > 0">Total Results : {{total}}</h3>
         </div>
     </div>
 
     <div class="row" infinite-scroll="getData()" infinite-scroll-disabled='busy || !more' infinite-scroll-distance="0">
+        <div ng-show="books.length < 1 && !busy" class="no-data text-center">
+                No books available...
+        </div>
 
         <div class="col-lg-4" ng-repeat="book in books" ng-include="'client/app/views/books/book.html'">
         </div>
 
-        <div class="loading text-center" ng-show="more">
-            <div>Loading...</div>
+        <div class="loading center-block" ng-show="more">
+            <i class="fa fa-spinner fa-pulse fa-3x"></i>
         </div>
     </div>
 
-
-    <!--<div class="row" infinite-scroll="getBooksPaginated()" infinite-scroll-disabled='loadingBooks || offset >= searchResult.total' infinite-scroll-distance="1">-->
-        <!--<div class="col-lg-4" ng-repeat="book in searchResult.books" ng-include="'client/app/views/books/book.html'">-->
-        <!--</div>-->
-    <!--</div>-->
 </div>
