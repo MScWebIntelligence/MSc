@@ -1,7 +1,7 @@
 var mscApp = angular.module('mscApp',['ngRoute' , 'infinite-scroll' , 'ngSanitize']);
 
-mscApp.config(['$routeProvider',
-    function($routeProvider) {
+mscApp.config(['$routeProvider','$locationProvider',
+    function($routeProvider, $locationProvider) {
         $routeProvider.when('/register', {
             templateUrl: 'client/app/views/users/register.html',
             controller: 'usersController',
@@ -30,8 +30,9 @@ mscApp.config(['$routeProvider',
             templateUrl: function (routeParams) {
                 return 'views/' + routeParams.pages + '.html';
             }
-        }).
-        otherwise({
+        }).otherwise({
             redirectTo: '/#login'
         });
+
+        $locationProvider.html5Mode(true);
     }]);
