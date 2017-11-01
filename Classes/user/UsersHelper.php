@@ -159,19 +159,21 @@ class UsersHelper
 
                 if ($book->getCase() == 'read') {
                     $read[] = array(
-                        'id'    => $book->getId(),
-                        'title' => $book->getTitle(),
-                        'case'  => $book->getCase(),
-                        'description' => $book->getDescription(),
-                        'thumbnail' => $book->getThumbnail()
+                        'id'            => $book->getId(),
+                        'title'         => $book->getTitle(),
+                        'case'          => $book->getCase(),
+                        'description'   => $book->getDescription(),
+                        'thumbnail'     => $book->getThumbnail(),
+                        'url'           => $book->getUrl()
                     );
                 } elseif ($book->getCase() == 'rent') {
                     $rent[] = array(
-                        'id'    => $book->getId(),
-                        'title' => $book->getTitle(),
-                        'case'  => $book->getCase(),
-                        'description' => $book->getDescription(),
-                        'thumbnail' => $book->getThumbnail()
+                        'id'            => $book->getId(),
+                        'title'         => $book->getTitle(),
+                        'case'          => $book->getCase(),
+                        'description'   => $book->getDescription(),
+                        'thumbnail'     => $book->getThumbnail(),
+                        'url'           => $book->getUrl()
                     );
                 }
 
