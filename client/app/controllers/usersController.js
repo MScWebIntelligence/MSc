@@ -95,6 +95,7 @@ angular.module('mscApp').controller('usersController',function($scope, $window, 
 
             // on success
             $scope.bookCase = response.data.data.bookcase;
+            $scope.profile = response.data.data.profile;
 
         }, function (response) {
 
