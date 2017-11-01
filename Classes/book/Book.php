@@ -181,4 +181,13 @@ class Book
     {
         return $this->case;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getUrl()
+    {
+        global $CFG;
+        return "{$CFG->www_root}/book/{$this->id}";
+    }
 }
