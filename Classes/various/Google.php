@@ -61,7 +61,7 @@ class Google
         $offset         = (int) $offset;
         $search         = urlencode(trim($search));
         $searchParam    = "&q={$search}";
-        $limitParam     = "&maxResults=" . self::$limit;
+        $limitParam     = "&maxResults=" . (self::$limit + 1);
         $offsetParam    = "&startIndex={$offset}";
         $projection     = "&projection=lite";
         $query          = $searchParam . $limitParam . $offsetParam . $projection;

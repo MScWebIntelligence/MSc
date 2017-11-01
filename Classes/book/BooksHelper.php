@@ -43,7 +43,7 @@ class BooksHelper
 
         echo json_encode(array(
             'total' => $data['total'],
-            'more'  => $data['total'] > $offset + Google::$limit,
+            'more'  => $data['more'],
             'books' => $books
         ));
     }

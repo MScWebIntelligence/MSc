@@ -63,17 +63,22 @@ class Books
      */
     public function search($search, $offset = 0)
     {
+        $counter    = 0;
         $google     = new Google();
         $booksData  = $google->search($search, $offset);
         $books      = array();
         $total      = $booksData->totalItems;
 
         foreach ($booksData->items as $bookData) {
-            $books[] = new Book($bookData, 'google');
+            if ($counter < Google::$limit) {
+                $books[] = new Book($bookData, 'google');
+            }
+            $counter++;
         }
 
         return array(
             'total' => $total,
+            'more'  => $counter > Google::$limit,
             'books' => $books
         );
     }
