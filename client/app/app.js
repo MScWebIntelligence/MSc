@@ -11,7 +11,7 @@ mscApp.config(['$routeProvider','$locationProvider',
             controller: 'usersController',
             css: ['client/assets/css/form-elements.css', 'client/assets/css/style.css', 'client/assets/bootstrap/css/bootstrap.min.css']
         }).when('/', {
-            templateUrl: 'client/app/views/users/login.html',
+            templateUrl: 'client/app/views/users/home.html',
             controller: 'usersController',
             css: ['client/assets/css/form-elements.css', 'client/assets/css/style.css', 'client/assets/bootstrap/css/bootstrap.min.css']
         }).when('/user/:id', {
@@ -31,7 +31,7 @@ mscApp.config(['$routeProvider','$locationProvider',
                 return 'views/' + routeParams.pages + '.html';
             }
         }).otherwise({
-            redirectTo: '/#login'
+            redirectTo: '/#home'
         });
 
         $locationProvider.html5Mode(true);
