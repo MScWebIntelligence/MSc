@@ -13,7 +13,7 @@ mscApp.config(['$routeProvider','$locationProvider',
         }).when('/', {
             templateUrl: 'client/app/views/home.html',
             controller: 'usersController',
-            css: ['client/assets/css/form-elements.css', 'client/assets/css/style.css', 'client/assets/bootstrap/css/bootstrap.min.css']
+            css: ['client/assets/css/bookstore.css', 'client/assets/bootstrap/css/bootstrap.min.css']
         }).when('/user/:id', {
             templateUrl: 'client/app/views/users/profile.html',
             controller: 'usersController',
