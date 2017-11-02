@@ -11,7 +11,7 @@ mscApp.config(['$routeProvider','$locationProvider',
             controller: 'usersController',
             css: ['client/assets/css/form-elements.css', 'client/assets/css/style.css', 'client/assets/bootstrap/css/bootstrap.min.css']
         }).when('/', {
-            templateUrl: 'client/app/views/users/home.html',
+            templateUrl: 'client/app/views/home.html',
             controller: 'usersController',
             css: ['client/assets/css/form-elements.css', 'client/assets/css/style.css', 'client/assets/bootstrap/css/bootstrap.min.css']
         }).when('/user/:id', {
