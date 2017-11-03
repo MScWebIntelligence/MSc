@@ -339,7 +339,16 @@ class International
         $array2=array(6 => "Θεσσαλονίκης",7 => "Χαλκιδικής" ,8 => "Αγιο Όρος",9 => "Ημαθίας",5 => "Καβάλας");
         $array3=array(1 => "Έβρου",2 => "Ροδόπης",3 => "Ξάνθης",);
         $array4=array(4 => "Κοζάνης",15 => "Φλώρινας",16 => "Γρεβενών",17 => "Καστοριάς",);
-
+        $array5=array(15 => "Φλώρινας",17 => "Καστοριάς",14 => "Κοζάνης",16 => "Γρεβενών");
+        $array=array(18 => "Ιωαννίνων",21 => "Θεσπρωτίας",20 => "Πρέβεζας",19 =>"Άρτας",32 =>"Κέρκυρας")
+        $array6=array(22 =>"Λάρισα",5 => "Τρικάλων",22 => "Λάρισας",23 =>"Καρδίτσας");
+        $array7=array();
+        $array8=array();
+        $array9=array();
+        $array10=array();
+        $array11=array();
+        $array12=array();
+        $array13=array();
         if(array_key_exists($selectedValue,$array2)){
             $response=array_merge($array2,$array3,$array4);
         }
