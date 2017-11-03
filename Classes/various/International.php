@@ -355,14 +355,32 @@ class International
             $response=array_merge($array3,$array2,$array4,$array5,$array6,$array7,$array8,$array9,$array10,$array11,$array12);
         }
         if(array_key_exists($selectedValue,$array4)){
-            $response=array_merge($array4,$array2,$array6,$array7,$array8,$array3,$array9,$array10,$array11,$array12);
+            $response=array_merge($array4,$array2,$array5,$array6,$array7,$array8,$array3,$array9,$array10,$array11,$array12);
         }
         if(array_key_exists($selectedValue,$array5)){
-            $response=array_merge($array5,$array4,$array6,$array7,$array2,$array3,$array9,$array10,$array11,$array12);
+            $response=array_merge($array5,$array4,$array6,$array7,$array2,$array8,$array3,$array9,$array10,$array11,$array12);
         }
-            return $response;
-
+        if(array_key_exists($selectedValue,$array6)){
+            $response=array_merge($array6,$array7,$array5,$array4,$array2,$array8,$array9,$array10,$array3,$array11,$array12);
+        }
+        if(array_key_exists($selectedValue,$array7)){
+            $response=array_merge($array7,$array5,$array6,$array8,$array9,$array10,$array4,$array2,$array3,$array11,$array12);
+        }
+        if(array_key_exists($selectedValue,$array8)){
+            $response=array_merge($array8,$array9,$array10,$array7,$array6,$array12,$array11,$array5,$array4,$array2,$array3);
+        }
+        if(array_key_exists($selectedValue,$array9)){
+            $response=array_merge($array9,$array7,$array10,$array5,$array8,$array6,$array4,$array2,$array3,$array11,$array12);
+        }
+        if(array_key_exists($selectedValue,$array10)){
+            $response=array_merge($array10,$array9,$array8,$array7,$array12,$array5,$array6,$array4,$array2,$array3,$array11);
+        }
+        if(array_key_exists($selectedValue,$array11)){
+            $response = array_merge($array11,$array12,$array8,$array7,$array10,$array9,$array6,$array2,$array4,$array5,$array3);
+        }
+        if(array_key_exists($selectedValue,$array12)){
+                $response=array_merge($array12,$array11,$array8,$array7,$array10,$array9,$array6,$array2,$array4,$array5,$array3);
    }
-
-}
+            return $response;
+}}
 
