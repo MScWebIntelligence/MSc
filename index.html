@@ -22,7 +22,7 @@
     <base href="/MSc/">
 </head>
 <body ng-cloak>
-<div ng-include="'header.html'" class="header"></div>
+<div ng-include="'header.html'" ng-controller="usersController" ng-init="getUser()" class="header"></div>
 <div ng-view></div>
 <div ng-include="'footer.html'" class="footer"></div>
 </body>

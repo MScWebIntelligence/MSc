@@ -1,5 +1,10 @@
- <div class="container" style="background-color: blue">
-        <div class="row" ng-show="{{user.logged}}">
+ <div class="container" style="background-color:gold">
+     <div class="row" ng-hide="user.logged">
+         <div class="col-lg-4">
+             header
+         </div>
+     </div>
+        <div class="row" ng-show="user.logged">
             <div class="col-lg-4">
                     {{ user.firstname }} {{ user.lastname }}
                 </div>
@@ -13,9 +18,4 @@
                 <a ng-click="logout()" class="btn-link float-sm-right" style="cursor: pointer;">Log Out!</a>
             </div>
         </div>
-     <div class="row" ng-show="{{!user.logged}}">
-         <div class="col-lg-4">
-             header
-         </div>
-     </div>
  </div>
