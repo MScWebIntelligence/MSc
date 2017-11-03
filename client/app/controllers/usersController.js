@@ -1,4 +1,4 @@
-angular.module('mscApp').controller('usersController',function($scope, $window,  $routeParams, $http) {
+angular.module('mscApp').controller('usersController',function($scope, $window,  $routeParams, $http , $location) {
 
     // Register
     $scope.signup = function () {
@@ -71,10 +71,6 @@ angular.module('mscApp').controller('usersController',function($scope, $window, 
 
             // on success
             $scope.user = response.data;
-
-            if (!response.data.logged && $scope.headerfooter) {
-                $window.location.href = "/MSc/";
-            }
 
         }, function (response) {
 

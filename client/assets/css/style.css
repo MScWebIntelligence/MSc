@@ -214,6 +214,14 @@ footer a:hover, footer a:focus { color: #fff; border-bottom: 1px dotted #fff; }
 	margin: 0 auto;
 }
 
+.footer {
+	display:none;
+}
+
+.header {
+	display: none;
+}
+
 /***** Media queries *****/
 
 @media (min-width: 992px) and (max-width: 1199px) {}

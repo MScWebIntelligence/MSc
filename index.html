@@ -18,14 +18,13 @@
     <script src="/MSc/client/app/js/angular-dynamic-css.js"></script>
     <script src="/MSc/client/app/controllers/usersController.js"></script>
     <script src="/MSc/client/app/controllers/booksController.js"></script>
-    <script src="/MSc/client/app/controllers/headerFooterController.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
     <base href="/MSc/">
 </head>
 <body ng-cloak>
-<div ng-include="'header.html'" ng-controller="headerFooterController" ng-show={{headerfooter}}></div>
+<div ng-include="'header.html'" class="header"></div>
 <div ng-view></div>
-<div ng-include="'footer.html'" ng-controller="headerFooterController" ng-show={{headerfooter}}></div>
+<div ng-include="'footer.html'" class="footer"></div>
 </body>
 </html>
 
