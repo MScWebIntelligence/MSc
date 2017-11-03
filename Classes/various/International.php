@@ -340,20 +340,20 @@ class International
         $array3=array(1 => "Έβρου",2 => "Ροδόπης",3 => "Ξάνθης",);
         $array4=array(4 => "Κοζάνης",15 => "Φλώρινας",16 => "Γρεβενών",17 => "Καστοριάς",);
         $array5=array(15 => "Φλώρινας",17 => "Καστοριάς",14 => "Κοζάνης",16 => "Γρεβενών");
-        $array=array(18 => "Ιωαννίνων",21 => "Θεσπρωτίας",20 => "Πρέβεζας",19 =>"Άρτας",32 =>"Κέρκυρας")
-        $array6=array(22 =>"Λάρισα",5 => "Τρικάλων",22 => "Λάρισας",23 =>"Καρδίτσας");
-        $array7=array();
-        $array8=array();
-        $array9=array();
-        $array10=array();
-        $array11=array();
-        $array12=array();
-        $array13=array();
+        $array6=array(18 => "Ιωαννίνων",21 => "Θεσπρωτίας",20 => "Πρέβεζας",19 =>"Άρτας",32 =>"Κέρκυρας");
+        $array7=array(22 => "Λάρισας",5 => "Τρικάλων",23 =>"Καρδίτσας",24 => "Μαγνησίας");
+        $array8=array(37 => "Αιτωλοακαρνανίας",28 => "Ευρυτανίας",33 => "Λευκάδας",29 =>"Φωκίδας",30 => "Φθιώτιδας");
+        $array9=array(43 => "Αθηνών",44 => "Ανατολικής Αττικής",45 => "Πειραιώς",46 => "Δυτικής Αττικής",26 => "Βοιωτίας",27 => "Ευβοίας");
+        $array10=array(40 => "Κορινθίας",41 => "Λακωνίας",42 => "Μεσσηνίας",38 => "Αρκαδίας");
+        $array11=array(31 => "Κεφαλληνίας",34 => "Ζακύνθου",35 => "Αχαΐας",36 => "Ηλείας");
+        $array12=array(50 => "Κυκλάδων",51 => "Δωδεκανήσου",49 => "Σάμου",47 => "Χίου");
+        $array13=array(52 => "Ηρακλείου",53 => "Χανίων",54 => "Λασιθίου",55 => "Ρεθύμνης");
+
         if(array_key_exists($selectedValue,$array2)){
-            $response=array_merge($array2,$array3,$array4);
+            $response=array_merge($array2,$array3,$array4,$array5,$array6,$array7,$array8,$array9,$array10,$array11,$array12,$array13);
         }
         else if(array_key_exists($selectedValue,$array3)){
-            $response=array_merge($array3,$array2,$array4);
+            $response=array_merge($array3,$array2,$array4,$array5,$array6,$array7,$array8,$array9,$array10,$array11,$array12,$array13);
 
 
         }
