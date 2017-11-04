@@ -26,14 +26,14 @@ class UsersTest extends TestCase
      */
     public function testGetUser()
     {
-        $tmp = $this->users->getUserById(1);
-        $this->assertEquals($tmp->getFirstname(), 'Vaggelis');
+        $response = $this->users->getUserById(1);
+        $this->assertEquals($response->getFirstname(), 'Vaggelis');
 
-        $tmp = $this->users->getUserById(0);
-        $this->assertFalse($tmp);
+        $response = $this->users->getUserById(0);
+        $this->assertFalse($response);
 
-        $tmp = $this->users->getUserById("string");
-        $this->assertFalse($tmp);
+        $response = $this->users->getUserById("string");
+        $this->assertFalse($response);
     }
 
     /**
@@ -41,24 +41,24 @@ class UsersTest extends TestCase
      */
     public function testLogin()
     {
-        $tmp = $this->users->login('vako88@gmail.com', '123456');
-        $this->assertEquals($tmp['userId'], 1);
+        $response = $this->users->login('vako88@gmail.com', '123456');
+        $this->assertEquals($response['userId'], 1);
 
-        $tmp = $this->users->login('vako888@gmail.com', '123456');
-        $this->assertEquals($tmp['userId'], 0);
-        $this->assertEquals($tmp['message'], 'Authentication failed. Please try again');
+        $response = $this->users->login('vako888@gmail.com', '123456');
+        $this->assertEquals($response['userId'], 0);
+        $this->assertEquals($response['message'], 'Authentication failed. Please try again');
 
-        $tmp = $this->users->login('vako88@gmail.com', '1234567');
-        $this->assertEquals($tmp['userId'], 0);
-        $this->assertEquals($tmp['message'], 'Authentication failed. Please try again');
+        $response = $this->users->login('vako88@gmail.com', '1234567');
+        $this->assertEquals($response['userId'], 0);
+        $this->assertEquals($response['message'], 'Authentication failed. Please try again');
 
-        $tmp = $this->users->login('vako88@gmail', '123456');
-        $this->assertEquals($tmp['userId'], 0);
-        $this->assertEquals($tmp['message'], 'Email has not the right format');
+        $response = $this->users->login('vako88@gmail', '123456');
+        $this->assertEquals($response['userId'], 0);
+        $this->assertEquals($response['message'], 'Email has not the right format');
 
-        $tmp = $this->users->login('vako88@gmail.com', '123456789');
-        $this->assertEquals($tmp['userId'], 0);
-        $this->assertEquals($tmp['message'], 'Password\'s length must be between 6 to 8 characters');
+        $response = $this->users->login('vako88@gmail.com', '123456789');
+        $this->assertEquals($response['userId'], 0);
+        $this->assertEquals($response['message'], 'Password\'s length must be between 6 to 8 characters');
     }
 
     /**
