@@ -11,6 +11,7 @@ use Classes\Book\Books;
 class BooksTest extends TestCase
 {
     private $books;
+    const bookId = 'yl4dILkcqm4C';
 
     /**
      * UsersTest constructor.
@@ -28,11 +29,11 @@ class BooksTest extends TestCase
     {
         global $CFG;
 
-        $book = $this->books->getBookById('yl4dILkcqm4C', 'google');
+        $book = $this->books->getBookById(self::bookId, 'google');
         $this->assertEquals($book->getTitle(), 'The Lord of the Rings');
         $this->assertEquals($book->getUrl(), "{$CFG->www_root}/book/{$book->getId()}");
 
-        $book = $this->books->getBookById('yl4dILkcqm4C', 'local');
+        $book = $this->books->getBookById(self::bookId, 'local');
         $this->assertEquals($book->getTitle(), 'The Lord of the Rings');
         $this->assertEquals($book->getUrl(), "{$CFG->www_root}/book/{$book->getId()}");
 

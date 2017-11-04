@@ -11,6 +11,10 @@ use Classes\User\Users;
 class UsersTest extends TestCase
 {
     private $users;
+    const userId    = 1;
+    const bookId    = 'yvYMywAACAAJ';
+    const email     = 'vako88@gmail.com';
+    const password  = '123456';
 
     /**
      * UsersTest constructor.
@@ -26,7 +30,7 @@ class UsersTest extends TestCase
      */
     public function testGetUser()
     {
-        $response = $this->users->getUserById(1);
+        $response = $this->users->getUserById(self::userId);
         $this->assertEquals($response->getFirstname(), 'Vaggelis');
 
         $response = $this->users->getUserById(0);
@@ -41,22 +45,22 @@ class UsersTest extends TestCase
      */
     public function testLogin()
     {
-        $response = $this->users->login('vako88@gmail.com', '123456');
-        $this->assertEquals($response['userId'], 1);
+        $response = $this->users->login(self::email, self::password);
+        $this->assertEquals($response['userId'], self::userId);
 
-        $response = $this->users->login('vako888@gmail.com', '123456');
+        $response = $this->users->login('vako888@gmail.com', self::password);
         $this->assertEquals($response['userId'], 0);
         $this->assertEquals($response['message'], 'Authentication failed. Please try again');
 
-        $response = $this->users->login('vako88@gmail.com', '1234567');
+        $response = $this->users->login(self::email, '1234567');
         $this->assertEquals($response['userId'], 0);
         $this->assertEquals($response['message'], 'Authentication failed. Please try again');
 
-        $response = $this->users->login('vako88@gmail', '123456');
+        $response = $this->users->login('vako88@gmail', self::password);
         $this->assertEquals($response['userId'], 0);
         $this->assertEquals($response['message'], 'Email has not the right format');
 
-        $response = $this->users->login('vako88@gmail.com', '123456789');
+        $response = $this->users->login(self::email, '123456789');
         $this->assertEquals($response['userId'], 0);
         $this->assertEquals($response['message'], 'Password\'s length must be between 6 to 8 characters');
     }
@@ -66,31 +70,31 @@ class UsersTest extends TestCase
      */
     public function testAddBook()
     {
-        $response = $this->users->addBookRelation(1, 'yvYMywAACAAJ', 'read');
+        $response = $this->users->addBookRelation(self::userId, self::bookId, 'read');
         $this->assertTrue($response['success']);
         $this->assertFalse($response['message']);
 
-        $response = $this->users->addBookRelation(1, 'yvYMywAACAAJ', 'want');
+        $response = $this->users->addBookRelation(self::userId, self::bookId, 'want');
         $this->assertTrue($response['success']);
         $this->assertFalse($response['message']);
 
-        $response = $this->users->addBookRelation(1, 'yvYMywAACAAJ', 'rent');
+        $response = $this->users->addBookRelation(self::userId, self::bookId, 'rent');
         $this->assertTrue($response['success']);
         $this->assertFalse($response['message']);
 
-        $response = $this->users->addBookRelation(1, 'yvYMywAACAAJ', 'read');
+        $response = $this->users->addBookRelation(self::userId, self::bookId, 'read');
         $this->assertFalse($response['success']);
         $this->assertEquals($response['message'], 'You have already this relation');
 
-        $response = $this->users->addBookRelation(false, 'yvYMywAACAAJ', 'read');
+        $response = $this->users->addBookRelation(false, self::bookId, 'read');
         $this->assertFalse($response['success']);
         $this->assertEquals($response['message'], 'You must be logged in to complete this action');
 
-        $response = $this->users->addBookRelation(1, 'test', 'read');
+        $response = $this->users->addBookRelation(self::userId, 'test', 'read');
         $this->assertFalse($response['success']);
         $this->assertEquals($response['message'], 'Book is not existed');
 
-        $response = $this->users->addBookRelation(1, 'yvYMywAACAAJ', 'test');
+        $response = $this->users->addBookRelation(self::userId, self::bookId, 'test');
         $this->assertFalse($response['success']);
         $this->assertEquals($response['message'], 'Relation is not existed');
     }
@@ -104,13 +108,13 @@ class UsersTest extends TestCase
 
         $sql = "DELETE urb.*
                 FROM msc.users_rel_books urb
-                WHERE user_id = 1 AND book_id = 'yvYMywAACAAJ'";
+                WHERE user_id = " . self::userId . " AND book_id = '" . self::bookId . "'";
 
         $db->executeRecord($sql);
 
         $sql = "DELETE b.*
                 FROM msc.books b
-                WHERE b.id = 'yvYMywAACAAJ'";
+                WHERE b.id = '" . self::bookId . "'";
 
         $db->executeRecord($sql);
     }
