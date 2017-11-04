@@ -11,6 +11,7 @@ use Classes\User\Users;
 class UsersTest extends TestCase
 {
     private $users;
+
     /**
      * UsersTest constructor.
      */
