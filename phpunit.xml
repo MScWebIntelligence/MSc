@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Command at root: vendor\bin\phpunit -->
+<!--
+    Command at root: vendor\bin\phpunit
+    Test a specific suite: vendor\bin\phpunit - -testsuite books
+-->
 <phpunit bootstrap="config.php" colors="true" verbose="true" stopOnFailure="false">
     <testsuites>
-        <testsuite name="Test suite">
-            <directory>tests</directory>
+
+        <testsuite name="books">
+            <directory>tests/unit/BooksTest.php</directory>
         </testsuite>
+
+        <testsuite name="users">
+            <directory>tests/unit/UsersTest.php</directory>
+        </testsuite>
+
     </testsuites>
 </phpunit>
