@@ -2,6 +2,7 @@
 <!--
     Command at root: vendor\bin\phpunit
     Test a specific suite: vendor\bin\phpunit - -testsuite books
+    Test a specific case of a specific suite: vendor\bin\phpunit - -testsuite users - -filter testAddBook
 -->
 <phpunit bootstrap="config.php" colors="true" verbose="true" stopOnFailure="false">
     <testsuites>

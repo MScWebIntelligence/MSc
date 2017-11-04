@@ -61,4 +61,44 @@ class UsersTest extends TestCase
         $this->assertEquals($tmp['message'], 'Password\'s length must be between 6 to 8 characters');
     }
 
+    /**
+     * Test all login cases
+     */
+    public function testAddBook()
+    {
+        $response = $this->users->addBookRelation(1, 'yl4dILkcqm4C', 'read');
+        $this->assertTrue($response['success']);
+        $this->assertFalse($response['message']);
+
+        $response = $this->users->addBookRelation(1, 'yl4dILkcqm4C', 'read');
+        $this->assertFalse($response['success']);
+        $this->assertEquals($response['message'], 'You have already this relation');
+
+        $response = $this->users->addBookRelation(false, 'yl4dILkcqm4C', 'read');
+        $this->assertFalse($response['success']);
+        $this->assertEquals($response['message'], 'You must be logged in to complete this action');
+
+        $response = $this->users->addBookRelation(1, 'test', 'read');
+        $this->assertFalse($response['success']);
+        $this->assertEquals($response['message'], 'Book is not existed');
+
+        $response = $this->users->addBookRelation(1, 'yl4dILkcqm4C', 'test');
+        $this->assertFalse($response['success']);
+        $this->assertEquals($response['message'], 'Relation is not existed');
+    }
+
+    /**
+     * Delete user book relations
+     */
+    public static function tearDownAfterClass()
+    {
+        global $db;
+
+        $sql = "DELETE urb.*
+                FROM msc.users_rel_books urb
+                WHERE user_id = 1 AND book_id = 'yl4dILkcqm4C' AND urb.case = 'read'";
+
+        $db->executeRecord($sql);
+    }
+
 }

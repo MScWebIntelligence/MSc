@@ -108,32 +108,15 @@ class UsersHelper
      */
     public static function addBookRelation($bookId, $relation)
     {
+
         $users      = new Users();
-        $books      = new Books();
         $user       = $users->getLoggedInUser(false);
-        $relation   = $users->hasBookRelation($user->getId(), $bookId, $relation);
-        $message    = !$user ? 'You must be logged in to complete this action' : ($relation ? 'You have already this relation' : false);
-        $response   = true;
-
-        if ($user && !$relation){
-
-            if ($books->getBookById($bookId, 'local')) {
-                $users->addBookRelation($user->getId(), $bookId, $relation);
-
-            } else {
-                $book       = $books->getBookById($bookId, 'google');
-                $response   = $books->addBook($book);
-
-                if ($response) {
-                    $users->addBookRelation($user->getId(), $bookId, $relation);
-                }
-            }
-        }
+        $response   = $users->addBookRelation($user->getId(), $bookId, $relation);
 
         echo json_encode(array(
-            'success'   => $response,
+            'success'   => $response['success'],
             'url'       => false,
-            'message'   => $message
+            'message'   => $response['message']
         ));
     }
 

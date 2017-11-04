@@ -9,12 +9,14 @@ namespace Classes\User;
 
 use Firebase\JWT\JWT;
 use Valitron\Validator;
+use Classes\Book\Books;
 use Classes\Book\Book;
 use Exception;
 
 class Users
 {
     private $db;
+    private $relations = array('read', 'want', 'rent');
 
     /**
      * Users constructor.
@@ -194,11 +196,42 @@ class Users
      * @param $userId
      * @param $bookId
      * @param $relation
-     * @return bool
+     * @return array
      */
     public function addBookRelation($userId, $bookId, $relation)
     {
-        return $this->db->addBookRelation($userId, $bookId, $relation);
+        $books              = new Books();
+        $typeRelation       = in_array($relation, $this->relations);
+        $alreadyRelation    = $this->hasBookRelation($userId, $bookId, $relation);
+        $message            = !$userId ? 'You must be logged in to complete this action' : ($alreadyRelation ? 'You have already this relation' : (!$typeRelation ? 'Relation is not existed' : false));
+        $success            = $userId > 0 && !$alreadyRelation && $typeRelation;
+
+        if ($userId > 0 && !$alreadyRelation && $typeRelation){
+
+            if ($books->getBookById($bookId, 'local')) {
+                $success = $this->db->addBookRelation($userId, $bookId, $relation);
+
+            } else {
+                $book = $books->getBookById($bookId, 'google');
+
+                if ($book) {
+                    $success = $books->addBook($book);
+
+                    if ($success) {
+                        $success = $this->db->addBookRelation($userId, $bookId, $relation);
+                    }
+                } else {
+                    $success = false;
+                    $message = "Book is not existed";
+                }
+
+            }
+        }
+
+        return array(
+            'success'   => $success,
+            'message'   => $message
+        );
     }
 
     /**
