@@ -66,15 +66,23 @@ class UsersTest extends TestCase
      */
     public function testAddBook()
     {
-        $response = $this->users->addBookRelation(1, 'yl4dILkcqm4C', 'read');
+        $response = $this->users->addBookRelation(1, 'yvYMywAACAAJ', 'read');
         $this->assertTrue($response['success']);
         $this->assertFalse($response['message']);
 
-        $response = $this->users->addBookRelation(1, 'yl4dILkcqm4C', 'read');
+        $response = $this->users->addBookRelation(1, 'yvYMywAACAAJ', 'want');
+        $this->assertTrue($response['success']);
+        $this->assertFalse($response['message']);
+
+        $response = $this->users->addBookRelation(1, 'yvYMywAACAAJ', 'rent');
+        $this->assertTrue($response['success']);
+        $this->assertFalse($response['message']);
+
+        $response = $this->users->addBookRelation(1, 'yvYMywAACAAJ', 'read');
         $this->assertFalse($response['success']);
         $this->assertEquals($response['message'], 'You have already this relation');
 
-        $response = $this->users->addBookRelation(false, 'yl4dILkcqm4C', 'read');
+        $response = $this->users->addBookRelation(false, 'yvYMywAACAAJ', 'read');
         $this->assertFalse($response['success']);
         $this->assertEquals($response['message'], 'You must be logged in to complete this action');
 
@@ -82,7 +90,7 @@ class UsersTest extends TestCase
         $this->assertFalse($response['success']);
         $this->assertEquals($response['message'], 'Book is not existed');
 
-        $response = $this->users->addBookRelation(1, 'yl4dILkcqm4C', 'test');
+        $response = $this->users->addBookRelation(1, 'yvYMywAACAAJ', 'test');
         $this->assertFalse($response['success']);
         $this->assertEquals($response['message'], 'Relation is not existed');
     }
@@ -96,7 +104,13 @@ class UsersTest extends TestCase
 
         $sql = "DELETE urb.*
                 FROM msc.users_rel_books urb
-                WHERE user_id = 1 AND book_id = 'yl4dILkcqm4C' AND urb.case = 'read'";
+                WHERE user_id = 1 AND book_id = 'yvYMywAACAAJ'";
+
+        $db->executeRecord($sql);
+
+        $sql = "DELETE b.*
+                FROM msc.books b
+                WHERE b.id = 'yvYMywAACAAJ'";
 
         $db->executeRecord($sql);
     }
