@@ -4,15 +4,15 @@
     Test a specific suite: vendor\bin\phpunit - -testsuite books
     Test a specific case of a specific suite: vendor\bin\phpunit - -testsuite users - -filter testAddBook
 -->
-<phpunit bootstrap="config.php" colors="true" verbose="true" stopOnFailure="false">
+<phpunit bootstrap="config.php" colors="true" verbose="true" stopOnFailure="false" beStrictAboutOutputDuringTests="true" beStrictAboutTestSize="true">
     <testsuites>
 
         <testsuite name="books">
-            <directory>tests/unit/BooksTest.php</directory>
+            <file>tests/unit/BooksTest.php</file>
         </testsuite>
 
         <testsuite name="users">
-            <directory>tests/unit/UsersTest.php</directory>
+            <file>tests/unit/UsersTest.php</file>
         </testsuite>
 
     </testsuites>
