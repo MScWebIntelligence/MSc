@@ -151,13 +151,13 @@ class UsersTest extends TestCase
                 FROM msc.users_rel_books urb
                 WHERE user_id = " . self::userId . " AND book_id = '" . self::bookId . "'";
 
-        $db->executeRecord($sql);
+        self::assertTrue($db->executeRecord($sql));
 
         $sql = "DELETE b.*
                 FROM msc.books b
                 WHERE b.id = '" . self::bookId . "'";
 
-        $db->executeRecord($sql);
+        self::assertTrue($db->executeRecord($sql));
     }
 
 }
