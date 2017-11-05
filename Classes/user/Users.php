@@ -42,7 +42,8 @@ class Users
      */
     public function getLoggedInUser($required = true)
     {
-        $jwt = $_COOKIE['jwt'];
+        $jwt        = $_COOKIE['jwt'];
+        $decoded    = false;
 
         try {
             $decoded = JWT::decode($jwt, JWT_ΚΕΥ, array('HS256'));
@@ -50,9 +51,6 @@ class Users
 
             if ($required) {
                 header('HTTP/1.0 401 Unauthorized');
-                die();
-            } else {
-                $decoded = false;
             }
         }
 
@@ -60,11 +58,7 @@ class Users
             $this->setJWTCookie((int) $decoded->user->userId);
         }
 
-        if ($decoded) {
-            return new User($decoded->user);
-        } else {
-            return false;
-        }
+        return $decoded ? new User($decoded->user) : $decoded;
     }
 
     /**

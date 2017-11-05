@@ -101,10 +101,13 @@ class UsersTest extends TestCase
         $this->users->logout();
         $response = $this->users->getLoggedInUser(false);
         $this->assertFalse($response);
+
+        $response = $this->users->getLoggedInUser();
+        $this->assertFalse($response);
     }
 
     /**
-     * Test all login cases
+     * Test all AddBook cases
      */
     public function testAddBook()
     {
