@@ -48,6 +48,18 @@ class UsersTest extends TestCase
         $response = $this->users->login(self::email, self::password);
         $this->assertEquals($response['userId'], self::userId);
 
+        $response = $this->users->login('', '');
+        $this->assertEquals($response['userId'], 0);
+        $this->assertEquals($response['message'], 'Email is required');
+
+        $response = $this->users->login('', self::password);
+        $this->assertEquals($response['userId'], 0);
+        $this->assertEquals($response['message'], 'Email is required');
+
+        $response = $this->users->login(self::email, '');
+        $this->assertEquals($response['userId'], 0);
+        $this->assertEquals($response['message'], 'Password is required');
+
         $response = $this->users->login('vako888@gmail.com', self::password);
         $this->assertEquals($response['userId'], 0);
         $this->assertEquals($response['message'], 'Authentication failed. Please try again');
@@ -63,6 +75,32 @@ class UsersTest extends TestCase
         $response = $this->users->login(self::email, '123456789');
         $this->assertEquals($response['userId'], 0);
         $this->assertEquals($response['message'], 'Password\'s length must be between 6 to 8 characters');
+    }
+
+    /**
+     * Get Logged In User
+     */
+    public function testGetLoggedInUser()
+    {
+        global $_COOKIE;
+
+        $response = $this->users->getLoggedInUser(false);
+        $this->assertFalse($response);
+
+        $_COOKIE['jwt'] = "adummycookie";
+        $response       = $this->users->getLoggedInUser(false);
+        $this->assertFalse($response);
+
+        $_COOKIE['jwt'] = $this->users->getJWT(self::userId);
+        $response       = $this->users->getLoggedInUser(false);
+        $this->assertEquals($response->getId(), self::userId);
+        $this->assertEquals($response->getFirstname(), 'Vaggelis');
+        $this->assertEquals($response->getLastname(), 'Kotrotsios');
+        $this->assertNull($response->getEmail());
+
+        $this->users->logout();
+        $response = $this->users->getLoggedInUser(false);
+        $this->assertFalse($response);
     }
 
     /**

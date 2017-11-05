@@ -74,6 +74,8 @@ class Users
      */
     public function login($email, $password)
     {
+        $email      = trim($email) ? trim($email) : null;
+        $password   = trim($password) ? trim($password) : null;
         $userId     = 0;
         $message    = false;
 
@@ -272,7 +274,7 @@ class Users
      * @param $userId
      * @return string
      */
-    private function getJWT($userId)
+    public function getJWT($userId)
     {
         $user       = $this->getUserById($userId);
         $tokenId    = base64_encode(mcrypt_create_iv(32));
