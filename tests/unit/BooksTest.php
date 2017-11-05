@@ -53,6 +53,12 @@ class BooksTest extends TestCase
         $this->assertCount(12, $response['books'], 'Error number of books');
         $this->assertTrue($response['more'], 'Error number of books');
         $this->assertGreaterThan(12, $response['total'], 'Error total books');
+
+        $response = $this->books->search('');
+        $this->assertEmpty($response['books']);
+        $this->assertFalse($response['more']);
+        $this->assertEquals(0, $response['total']);
+
     }
 
 }

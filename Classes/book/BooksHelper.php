@@ -7,8 +7,6 @@
  */
 namespace Classes\Book;
 
-use Classes\Various\Google;
-
 class BooksHelper
 {
 
