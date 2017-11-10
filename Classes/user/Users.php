@@ -9,12 +9,14 @@ namespace Classes\User;
 
 use Firebase\JWT\JWT;
 use Valitron\Validator;
+use Classes\Book\Books;
 use Classes\Book\Book;
 use Exception;
 
 class Users
 {
     private $db;
+    private $relations = array('read', 'want', 'rent');
 
     /**
      * Users constructor.
@@ -40,7 +42,8 @@ class Users
      */
     public function getLoggedInUser($required = true)
     {
-        $jwt = $_COOKIE['jwt'];
+        $jwt        = $_COOKIE['jwt'];
+        $decoded    = false;
 
         try {
             $decoded = JWT::decode($jwt, JWT_ΚΕΥ, array('HS256'));
@@ -48,9 +51,6 @@ class Users
 
             if ($required) {
                 header('HTTP/1.0 401 Unauthorized');
-                die();
-            } else {
-                $decoded = false;
             }
         }
 
@@ -58,11 +58,7 @@ class Users
             $this->setJWTCookie((int) $decoded->user->userId);
         }
 
-        if ($decoded) {
-            return new User($decoded->user);
-        } else {
-            return false;
-        }
+        return $decoded ? new User($decoded->user) : $decoded;
     }
 
     /**
@@ -72,6 +68,8 @@ class Users
      */
     public function login($email, $password)
     {
+        $email      = trim($email) ? trim($email) : null;
+        $password   = trim($password) ? trim($password) : null;
         $userId     = 0;
         $message    = false;
 
@@ -194,11 +192,42 @@ class Users
      * @param $userId
      * @param $bookId
      * @param $relation
-     * @return bool
+     * @return array
      */
     public function addBookRelation($userId, $bookId, $relation)
     {
-        return $this->db->addBookRelation($userId, $bookId, $relation);
+        $books              = new Books();
+        $typeRelation       = in_array($relation, $this->relations);
+        $alreadyRelation    = $this->hasBookRelation($userId, $bookId, $relation);
+        $message            = !$userId ? 'You must be logged in to complete this action' : ($alreadyRelation ? 'You have already this relation' : (!$typeRelation ? 'Relation is not existed' : false));
+        $success            = $userId > 0 && !$alreadyRelation && $typeRelation;
+
+        if ($userId > 0 && !$alreadyRelation && $typeRelation){
+
+            if ($books->getBookById($bookId, 'local')) {
+                $success = $this->db->addBookRelation($userId, $bookId, $relation);
+
+            } else {
+                $book = $books->getBookById($bookId, 'google');
+
+                if ($book) {
+                    $success = $books->addBook($book);
+
+                    if ($success) {
+                        $success = $this->db->addBookRelation($userId, $bookId, $relation);
+                    }
+                } else {
+                    $success = false;
+                    $message = "Book is not existed";
+                }
+
+            }
+        }
+
+        return array(
+            'success'   => $success,
+            'message'   => $message
+        );
     }
 
     /**
@@ -239,7 +268,7 @@ class Users
      * @param $userId
      * @return string
      */
-    private function getJWT($userId)
+    public function getJWT($userId)
     {
         $user       = $this->getUserById($userId);
         $tokenId    = base64_encode(mcrypt_create_iv(32));

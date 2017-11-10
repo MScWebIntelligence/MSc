@@ -67,7 +67,7 @@ class Books
         $google     = new Google();
         $booksData  = $google->search($search, $offset);
         $books      = array();
-        $total      = $booksData->totalItems;
+        $total      = (int) $booksData->totalItems;
 
         foreach ($booksData->items as $bookData) {
             if ($counter < Google::$limit) {

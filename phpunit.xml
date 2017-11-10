@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Command at root         : vendor\bin\phpunit
+    Test a specific suite   : vendor\bin\phpunit - -testsuite books
+    Test a specific case    : vendor\bin\phpunit - -filter testAddBook
+-->
+<phpunit bootstrap="config.php" colors="true" verbose="true" stopOnFailure="false" beStrictAboutOutputDuringTests="true" beStrictAboutTestSize="true">
+    <testsuites>
+
+        <testsuite name="books">
+            <file>tests/unit/BooksTest.php</file>
+        </testsuite>
+
+        <testsuite name="users">
+            <file>tests/unit/UsersTest.php</file>
+        </testsuite>
+
+    </testsuites>
+</phpunit>
