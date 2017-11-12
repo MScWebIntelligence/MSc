@@ -3,7 +3,7 @@ require_once 'various/functions.php';
 unset($CFG);
 
 // Switch off error at production
-error_reporting(E_ERROR | E_WARNING | E_PARSE);
+error_reporting(E_ERROR | E_PARSE);
 
 $CFG  = (object)array(
     'www_root'      => 'https://www.msc.com/',
