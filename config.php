@@ -3,7 +3,7 @@ require_once 'various/functions.php';
 unset($CFG);
 
 // Switch off error at production
-error_reporting(0);
+//error_reporting(0);
 
 $CFG  = (object)array(
     'www_root'      => 'https://www.msc.com/',
