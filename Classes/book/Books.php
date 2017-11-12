@@ -69,11 +69,13 @@ class Books
         $books      = array();
         $total      = (int) $booksData->totalItems;
 
-        foreach ($booksData->items as $bookData) {
-            if ($counter < Google::$limit) {
-                $books[] = new Book($bookData, 'google');
+        if (!empty($booksData->items)) {
+            foreach ($booksData->items as $bookData) {
+                if ($counter < Google::$limit) {
+                    $books[] = new Book($bookData, 'google');
+                }
+                $counter++;
             }
-            $counter++;
         }
 
         return array(
