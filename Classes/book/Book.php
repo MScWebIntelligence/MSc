@@ -54,16 +54,16 @@ class Book
     {
         $this->id               = $data->id;
         $this->title            = $data->title;
-        $this->description      = $data->description;
-        $this->thumbnail        = $data->thumbnail;
-        $this->author           = $data->author;
-        $this->pages            = (int) $data->pages;
-        $this->language         = $data->language;
-        $this->rate             = round($data->rate, 2);
-        $this->ratesCount       = (int) $data->ratesCount;
-        $this->publisher        = $data->publisher;
-        $this->publishedDate    = $data->publishedDate;
-        $this->case             = $data->case;
+        $this->description      = !empty($data->description) ? $data->description: false;
+        $this->thumbnail        = !empty($data->thumbnail) ? $data->thumbnail: false;
+        $this->author           = !empty($data->author) ? $data->author : false;
+        $this->pages            = !empty($data->pages) ? (int) $data->pages : false;
+        $this->language         = !empty($data->language) ? $data->language : false;
+        $this->rate             = !empty($data->rate) ? round($data->rate, 2) : false;
+        $this->ratesCount       = !empty($data->ratesCount) ? (int) $data->ratesCount : false;
+        $this->publisher        = !empty($data->publisher) ? $data->publisher: false;
+        $this->publishedDate    = !empty($data->publishedDate) ? $data->publishedDate : false;
+        $this->case             = !empty($data->case) ? $data->case : null;
     }
 
     /**
@@ -73,15 +73,15 @@ class Book
     {
         $this->id               = $data->id;
         $this->title            = $data->volumeInfo->title;
-        $this->description      = $data->volumeInfo->description;
-        $this->thumbnail        = $data->volumeInfo->imageLinks->thumbnail;
-        $this->author           = implode(', ', $data->volumeInfo->authors);
-        $this->pages            = (int) $data->volumeInfo->pageCount;
-        $this->language         = $data->volumeInfo->language;
-        $this->rate             = round($data->volumeInfo->averageRating, 2);
-        $this->ratesCount       = (int) $data->volumeInfo->ratingsCount;
-        $this->publisher        = $data->volumeInfo->publisher;
-        $this->publishedDate    = $data->volumeInfo->publishedDate;
+        $this->description      = !empty($data->volumeInfo->description) ? $data->volumeInfo->description : false;
+        $this->thumbnail        = !empty($data->volumeInfo->imageLinks->thumbnail) ? $data->volumeInfo->imageLinks->thumbnail : false;
+        $this->author           = !empty($data->volumeInfo->authors) ? implode(', ', $data->volumeInfo->authors) : false;
+        $this->pages            = !empty($data->volumeInfo->pageCount) ? (int) $data->volumeInfo->pageCount : false;
+        $this->language         = !empty($data->volumeInfo->language) ? $data->volumeInfo->language : false;
+        $this->rate             = !empty($data->volumeInfo->averageRating) ? round($data->volumeInfo->averageRating, 2) : false;
+        $this->ratesCount       = !empty($data->volumeInfo->ratingsCount) ? (int) $data->volumeInfo->ratingsCount : false;
+        $this->publisher        = !empty($data->volumeInfo->publisher) ? $data->volumeInfo->publisher : false;
+        $this->publishedDate    = !empty($data->volumeInfo->publishedDate) ? $data->volumeInfo->publishedDate : false;
         $this->case             = null;
     }
 

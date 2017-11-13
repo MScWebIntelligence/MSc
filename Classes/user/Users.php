@@ -42,7 +42,7 @@ class Users
      */
     public function getLoggedInUser($required = true)
     {
-        $jwt        = $_COOKIE['jwt'];
+        $jwt        = !empty($_COOKIE['jwt']) ? $_COOKIE['jwt'] : null;
         $decoded    = false;
 
         try {

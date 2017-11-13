@@ -32,7 +32,7 @@ class User
         $this->id           = (int) $data->id;
         $this->firstname    = $data->firstname;
         $this->lastname     = $data->lastname;
-        $this->email        = $data->email;
+        $this->email        = !empty($data->email) ? $data->email : null;
     }
 
     /**

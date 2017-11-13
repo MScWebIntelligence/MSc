@@ -67,7 +67,7 @@ class Books
         $google     = new Google();
         $booksData  = $google->search($search, $offset);
         $books      = array();
-        $total      = (int) $booksData->totalItems;
+        $total      = !empty($booksData->totalItems) ? (int) $booksData->totalItems : 0;
 
         if (!empty($booksData->items)) {
             foreach ($booksData->items as $bookData) {
