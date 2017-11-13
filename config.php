@@ -6,13 +6,13 @@ unset($CFG);
 error_reporting(0);
 
 $CFG  = (object)array(
-    'www_root'      => 'https://www.msc.com/',
+    'www_root'      => 'http://www.openlibrary.eu/',
     'real_path'     => '',
     'environment'   => 'production',
     'db_host'       => 'localhost',
-    'db_user'       => 'msc_user',
-    'db_password'   => '',
-    'db_name'       => 'msc'
+    'db_user'       => 'openlibrary_user',
+    'db_password'   => '?Xz3ht17',
+    'db_name'       => 'openlibrary_db'
 );
 
 //Font Awesome cdn
