@@ -3,7 +3,7 @@ require_once 'various/functions.php';
 unset($CFG);
 
 // Switch off error at production
-error_reporting(0);
+error_reporting(E_ERROR | E_PARSE);
 
 $CFG  = (object)array(
     'www_root'      => 'http://www.openlibrary.eu/',
