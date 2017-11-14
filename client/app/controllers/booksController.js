@@ -20,7 +20,7 @@ angular.module('mscApp').controller('booksController',function($scope, $window, 
 
         $http({
             method  : 'POST',
-            url     : '/MSc/api/books.php',
+            url     : '/openlibrary.eu/api/books.php',
             params  : {
                 action : "search" ,
                 search : $scope.search ,
@@ -47,7 +47,7 @@ angular.module('mscApp').controller('booksController',function($scope, $window, 
     $scope.getBook = function() {
         $http({
             method: 'GET',
-            url: '/MSc/api/books.php',
+            url: '/openlibrary.eu/api/books.php',
             params: { "action" : "book" , "bookId" : $routeParams.id }
 
         }).then(function (response) {
@@ -67,7 +67,7 @@ angular.module('mscApp').controller('booksController',function($scope, $window, 
     // $scope.getBooks = function() {
     //     $http({
     //         method: 'GET',
-    //         url: '/MSc/api/books.php',
+    //         url: '/openlibrary.eu/api/books.php',
     //         params: { "action" : "search" , "search" : $scope.search }
     //
     //     }).then(function (response) {
@@ -102,7 +102,7 @@ angular.module('mscApp').controller('booksController',function($scope, $window, 
     //
     //     $http({
     //         method: 'GET',
-    //         url: '/MSc/api/books.php',
+    //         url: '/openlibrary.eu/api/books.php',
     //         params: { "action" : "search" , "search" : $scope.search , "offset" : $scope.offset }
     //
     //     }).then(function (response) {
@@ -135,7 +135,7 @@ angular.module('mscApp').controller('booksController',function($scope, $window, 
             }
         }
 
-        $http.post('/MSc/api/users.php', data, config)
+        $http.post('/openlibrary.eu/api/users.php', data, config)
             .success(function (data, status, headers, config) {
                 $scope.PostDataResponse = data;
             })

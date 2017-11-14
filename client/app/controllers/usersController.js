@@ -18,7 +18,7 @@ angular.module('mscApp').controller('usersController',function($scope, $window, 
             }
         }
 
-        $http.post('/MSc/api/users.php', data, config)
+        $http.post('/openlibrary.eu/api/users.php', data, config)
             .success(function (data, status, headers, config) {
                 $scope.PostDataResponse = data;
                 $window.location.href = data.url;
@@ -45,7 +45,7 @@ angular.module('mscApp').controller('usersController',function($scope, $window, 
             }
         }
 
-        $http.post('/MSc/api/users.php', data, config)
+        $http.post('/openlibrary.eu/api/users.php', data, config)
             .success(function (data, status, headers, config) {
                 $scope.PostDataResponse = data;
                 if (data.success) {
@@ -64,7 +64,7 @@ angular.module('mscApp').controller('usersController',function($scope, $window, 
     $scope.getUser = function() {
         $http({
             method: 'GET',
-            url: '/MSc/api/users.php',
+            url: '/openlibrary.eu/api/users.php',
             params: { "action" : "user" }
 
         }).then(function (response) {
@@ -84,7 +84,7 @@ angular.module('mscApp').controller('usersController',function($scope, $window, 
     $scope.getProfile = function() {
         $http({
             method: 'GET',
-            url: '/MSc/api/users.php',
+            url: '/openlibrary.eu/api/users.php',
             params: { "action" : "profile" , "userId" : $routeParams.id }
 
         }).then(function (response) {
@@ -105,14 +105,14 @@ angular.module('mscApp').controller('usersController',function($scope, $window, 
     $scope.logout = function() {
         $http({
             method: 'GET',
-            url: '/MSc/api/users.php',
+            url: '/openlibrary.eu/api/users.php',
             params: { "action" : "logout" }
 
         }).then(function (response) {
 
             // on success
             $scope.user = response.data;
-            $window.location.href = "/MSc/";
+            $window.location.href = "/openlibrary.eu/";
 
         }, function (response) {
 
