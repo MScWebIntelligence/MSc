@@ -1,4 +1,11 @@
+AddDefaultCharset UTF-8
+
 RewriteEngine On
+
+RewriteCond %{HTTP_HOST} ^(www\.)?openlibrary.eu$
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://www.openlibrary.eu%{REQUEST_URI} [NC,L,R]
+
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_METHOD} !OPTIONS
