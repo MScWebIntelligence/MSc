@@ -55,7 +55,7 @@ class Book
         $this->id               = $data->id;
         $this->title            = $data->title;
         $this->description      = !empty($data->description) ? $data->description: false;
-        $this->thumbnail        = !empty($data->thumbnail) ? $data->thumbnail: false;
+        $this->thumbnail        = !empty($data->thumbnail) ? str_replace("http://", "https://", $data->thumbnail) : false;
         $this->author           = !empty($data->author) ? $data->author : false;
         $this->pages            = !empty($data->pages) ? (int) $data->pages : false;
         $this->language         = !empty($data->language) ? $data->language : false;
@@ -74,7 +74,7 @@ class Book
         $this->id               = $data->id;
         $this->title            = $data->volumeInfo->title;
         $this->description      = !empty($data->volumeInfo->description) ? $data->volumeInfo->description : false;
-        $this->thumbnail        = !empty($data->volumeInfo->imageLinks->thumbnail) ? $data->volumeInfo->imageLinks->thumbnail : false;
+        $this->thumbnail        = !empty($data->volumeInfo->imageLinks->thumbnail) ? str_replace("http://", "https://", $data->volumeInfo->imageLinks->thumbnail) : false;
         $this->author           = !empty($data->volumeInfo->authors) ? implode(', ', $data->volumeInfo->authors) : false;
         $this->pages            = !empty($data->volumeInfo->pageCount) ? (int) $data->volumeInfo->pageCount : false;
         $this->language         = !empty($data->volumeInfo->language) ? $data->volumeInfo->language : false;

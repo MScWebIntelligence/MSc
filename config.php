@@ -6,7 +6,7 @@ unset($CFG);
 error_reporting(E_ERROR | E_PARSE);
 
 $CFG  = (object)array(
-    'www_root'      => 'http://www.openlibrary.eu/',
+    'www_root'      => 'https://www.openlibrary.eu/',
     'real_path'     => '',
     'environment'   => 'production',
     'db_host'       => 'localhost',
