@@ -68,7 +68,10 @@ class BooksHelper
                 'published'     => $book->getPublishedDate(),
                 'publisher'     => $book->getPublisher(),
                 'pages'         => $book->getPages(),
-                'language'      => $book->getLanguage()
+                'language'      => $book->getLanguage(),
+                'buttons'       => array(
+
+                )
             );
         }
 
