@@ -272,9 +272,7 @@ class International
 
     public static function getGreece()
     {
-        return array(
-            'GR' => 'Greece'
-        );
+        return array('GR' => 'Greece');
     }
 
     public static function getStates()

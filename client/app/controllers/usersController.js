@@ -104,6 +104,28 @@ angular.module('mscApp').controller('usersController',function($scope, $window, 
         });
     };
 
+    // Get Locations
+    $scope.getLocations = function() {
+        $http({
+            method: 'GET',
+            url: '/openlibrary.eu/api/users.php',
+            params: {
+                "action" : "getLocations"
+            }
+
+        }).then(function (response) {
+
+            // on success
+            $scope.countries = response.data.data.countries;
+            $scope.states = response.data.data.states;
+
+        }, function (response) {
+            // on error
+            console.log(response.data,response.status);
+
+        });
+    };
+
     // logout user
     $scope.logout = function() {
         $http({

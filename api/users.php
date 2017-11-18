@@ -48,7 +48,7 @@ switch ($action) {
         UsersHelper::getProfile($userId);
         break;
 
-    case 'locations':
+    case 'getLocations':
         UsersHelper::getLocations();
         break;
 }
