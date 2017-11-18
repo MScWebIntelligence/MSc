@@ -8,7 +8,7 @@
 namespace Classes\User;
 
 use Classes\Book\Book;
-use Classes\Book\Books;
+use Classes\Various\International;
 
 class UsersHelper
 {
@@ -46,13 +46,14 @@ class UsersHelper
      * @param $password
      * @param $country
      * @param $city
+     * @param $address
      */
-    public static function signup($firstname, $lastname, $email, $password, $country, $city)
+    public static function signup($firstname, $lastname, $email, $password, $country, $city, $address)
     {
         global $CFG;
 
         $users      = new Users();
-        $response   = $users->signup($firstname, $lastname, $email, $password, $country, $city);
+        $response   = $users->signup($firstname, $lastname, $email, $password, $country, $city, $address);
         $url        = $response['userId'] ? "{$CFG->www_root}#user/{$response['userId']}" : false;
 
         echo json_encode(array(
@@ -176,6 +177,21 @@ class UsersHelper
                 ),
             ),
             'message'   => $user ? false : 'User does not exist.'
+        ));
+    }
+
+    /**
+     *
+     */
+    public static function getLocations()
+    {
+        echo json_encode(array(
+            'success'   => true,
+            'data'      => array(
+                'countries' => International::getGreece(),
+                'states'    => International::getStates()
+            ),
+            'message'   => false
         ));
     }
 }

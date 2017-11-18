@@ -9,6 +9,7 @@ angular.module('mscApp').controller('usersController',function($scope, $window, 
             country: $scope.country,
             city: $scope.city,
             password: $scope.password,
+            address: $scope.address,
             action: "signup"
         });
 
@@ -21,7 +22,9 @@ angular.module('mscApp').controller('usersController',function($scope, $window, 
         $http.post('/openlibrary.eu/api/users.php', data, config)
             .success(function (data, status, headers, config) {
                 $scope.PostDataResponse = data;
-                $window.location.href = data.url;
+                if (data.success) {
+                    $window.location.href = data.url;
+                }
             })
             .error(function (data, status, header, config) {
                 $scope.ResponseDetails = "Data: " + data +
@@ -95,6 +98,28 @@ angular.module('mscApp').controller('usersController',function($scope, $window, 
 
         }, function (response) {
 
+            // on error
+            console.log(response.data,response.status);
+
+        });
+    };
+
+    // Get Locations
+    $scope.getLocations = function() {
+        $http({
+            method: 'GET',
+            url: '/openlibrary.eu/api/users.php',
+            params: {
+                "action" : "getLocations"
+            }
+
+        }).then(function (response) {
+
+            // on success
+            $scope.countries = response.data.data.countries;
+            $scope.states = response.data.data.states;
+
+        }, function (response) {
             // on error
             console.log(response.data,response.status);
 

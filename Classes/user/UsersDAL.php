@@ -57,9 +57,10 @@ class UsersDAL
      * @param $password
      * @param $country
      * @param $city
+     * @param $address
      * @return int
      */
-    public function signup($firstname, $lastname, $email, $password, $country, $city)
+    public function signup($firstname, $lastname, $email, $password, $country, $city, $address)
     {
         global $db;
 
@@ -67,11 +68,12 @@ class UsersDAL
         $lastname   = $db->clearString(trim($lastname));
         $email      = $db->clearString(trim($email));
         $password   = $db->clearString($password);
-        $country    = $db->clearString(trim($email));
-        $city       = $db->clearString(trim($email));
+        $country    = $db->clearString(trim($country));
+        $city       = $db->clearString(trim($city));
+        $address    = $db->clearString(trim($address));
 
-        $sql = "INSERT INTO msc.users (firstname,lastname,email,password)
-                VALUES ('{$firstname}', '{$lastname}', '{$email}', '{$password}')";
+        $sql = "INSERT INTO users (firstname, lastname, email, password, country, city, address)
+                VALUES ('{$firstname}', '{$lastname}', '{$email}', '{$password}', '{$country}', '{$city}', '{$address}')";
 
         return  (int) $db->insertRecord($sql);
     }
@@ -126,7 +128,7 @@ class UsersDAL
         $bookId     = $db->clearString($bookId);
         $relation   = $db->clearString($relation);
 
-        $sql        = " INSERT INTO msc.users_rel_books (user_id, book_id, `case`)
+        $sql        = " INSERT INTO users_rel_books (user_id, book_id, `case`)
                         VALUES ({$userId}, '{$bookId}', '{$relation}')";
 
         return $db->executeRecord($sql);
