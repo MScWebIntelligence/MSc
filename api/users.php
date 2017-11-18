@@ -31,7 +31,7 @@ switch ($action) {
         break;
 
     case 'signup':
-        UsersHelper::signup($firstname, $lastname, $email, $password, $country, $city);
+        UsersHelper::signup($firstname, $lastname, $email, $password, $country, $city, $address);
         break;
 
     case 'logout':
@@ -46,5 +46,9 @@ switch ($action) {
 
     case 'profile':
         UsersHelper::getProfile($userId);
+        break;
+
+    case 'locations':
+        UsersHelper::getLocations();
         break;
 }

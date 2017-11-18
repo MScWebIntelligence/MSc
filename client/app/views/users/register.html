@@ -47,6 +47,11 @@
                                     <label class="sr-only" for="form-address">Address</label>
                                     <input type="text" placeholder="Address..." class="form-control" id="form-address" ng-model="address">
                                 </div>
+
+                                <div class="alert alert-danger" ng-if="PostDataResponse.success == false">
+                                    <strong>Error.</strong> {{PostDataResponse.message}}
+                                </div>
+
                                 <button ng-click="signup()" class="btn">Sign me up!</button>
                                 <a ng-href="/openlibrary.eu/login" id="signin" class="btn-link float-sm-right" style="cursor: pointer;">Go back to Login!</a>
 

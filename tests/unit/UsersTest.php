@@ -11,10 +11,16 @@ use Classes\User\Users;
 class UsersTest extends TestCase
 {
     private $users;
-    const userId    = 1;
-    const bookId    = 'yvYMywAACAAJ';
-    const email     = 'vako88@gmail.com';
-    const password  = '123456';
+    const userId        = 1;
+    const bookId        = 'yvYMywAACAAJ';
+    const email         = 'vako88@gmail.com';
+    const password      = '123456';
+    const signupEmail   = 'tester@dispostable.com';
+    const firstname     = 'Tester';
+    const lastname      = 'Auto';
+    const country       = 'GR';
+    const city          = '1';
+    const address       = 'Παπαφλέσσα 15';
 
     /**
      * UsersTest constructor.
@@ -75,6 +81,27 @@ class UsersTest extends TestCase
         $response = $this->users->login(self::email, '123456789');
         $this->assertEquals($response['userId'], 0);
         $this->assertEquals($response['message'], 'Password\'s length must be between 6 to 8 characters');
+    }
+
+    /**
+     * Test all signup cases
+     */
+    public function testSignup()
+    {
+        $response = $this->users->signup(self::firstname, self::lastname, self::signupEmail, self::password, self::country, self::city, self::address);
+        $this->assertGreaterThan(0, $response['userId']);
+
+        $response = $this->users->signup(self::firstname, self::lastname, self::email, self::password, self::country, self::city, self::address);
+        $this->assertEquals($response['userId'], 0);
+        $this->assertEquals($response['message'], 'Email existed. Choose another email');
+
+        $response = $this->users->signup('', self::lastname, self::email, self::password, self::country, self::city, self::address);
+        $this->assertEquals($response['userId'], 0);
+        $this->assertEquals($response['message'], 'Firstname is required');
+
+        $response = $this->users->signup(self::firstname, '', self::email, self::password, self::country, self::city, self::address);
+        $this->assertEquals($response['userId'], 0);
+        $this->assertEquals($response['message'], 'Lastname is required');
     }
 
     /**
@@ -148,14 +175,20 @@ class UsersTest extends TestCase
         global $db;
 
         $sql = "DELETE urb.*
-                FROM msc.users_rel_books urb
+                FROM users_rel_books urb
                 WHERE user_id = " . self::userId . " AND book_id = '" . self::bookId . "'";
 
         self::assertTrue($db->executeRecord($sql));
 
         $sql = "DELETE b.*
-                FROM msc.books b
+                FROM books b
                 WHERE b.id = '" . self::bookId . "'";
+
+        self::assertTrue($db->executeRecord($sql));
+
+        $sql = "DELETE u.*
+                FROM users u
+                WHERE u.email = '" . self::signupEmail . "'";
 
         self::assertTrue($db->executeRecord($sql));
     }

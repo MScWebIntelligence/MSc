@@ -113,10 +113,18 @@ class Users
      * @param $password
      * @param $country
      * @param $city
+     * @param $address
      * @return array
      */
-    public function signup($firstname, $lastname, $email, $password, $country, $city)
+    public function signup($firstname, $lastname, $email, $password, $country, $city, $address)
     {
+        $firstname  = trim($firstname) ? trim($firstname) : null;
+        $lastname   = trim($lastname) ? trim($lastname) : null;
+        $email      = trim($email) ? trim($email) : null;
+        $password   = trim($password) ? trim($password) : null;
+        $country    = trim($country) ? trim($country) : null;
+        $city       = trim($city) ? trim($city) : null;
+        $address    = trim($address) ? trim($address) : null;
         $userId     = 0;
         $message    = false;
 
@@ -126,7 +134,8 @@ class Users
             'email'     => $email,
             'password'  => $password,
             'country'   => $country,
-            'city'      => $city
+            'city'      => $city,
+            'address'   => $address
         ));
 
         $validator->labels(array(
@@ -135,26 +144,30 @@ class Users
             'email'     => 'Email',
             'password'  => 'Password',
             'country'   => 'Country',
-            'city'      => 'City'
+            'city'      => 'City',
+            'address'   => 'Address'
         ));
 
-        $validator->rule('required', array('firstname', 'lastname', 'email', 'password', 'country', 'city'))->message('{field} is required');
-        $validator->rule('lengthBetween', array('firstname', 'lastname', 'country', 'city'), 1, 20)->message('{field}\'s length must be between 1 to 20 characters');
+        $validator->rule('required', array('firstname', 'lastname', 'email', 'password', 'country', 'city', 'address'))->message('{field} is required');
         $validator->rule('email', 'email')->message('{field} has not the right format');
+        $validator->rule('lengthBetween', array('firstname', 'lastname', 'country', 'city'), 1, 30)->message('{field}\'s length must be between 1 to 30 characters');
+        $validator->rule('lengthBetween', array('address'), 1, 80)->message('{field}\'s length must be between 1 to 80 characters');
         $validator->rule('lengthBetween', 'password', 6, 8)->message('{field}\'s length must be between 6 to 8 characters');
 
         if ($validator->validate()) {
 
             if (!$this->db->checkEmailIfExists($email)) {
-                $userId = $this->db->signup($firstname, $lastname, $email, $this->hashPassword($password), $country, $city);
+
+                $userId = $this->db->signup($firstname, $lastname, $email, $this->hashPassword($password), $country, $city, $address);
+
+                if ($userId > 0) {
+                    $this->setJWTCookie($userId);
+                } else {
+                    $message = 'Sign up failed. Try again';
+                }
+
             } else {
                 $message = 'Email existed. Choose another email';
-            }
-
-            if ($userId > 0) {
-                $this->setJWTCookie($userId);
-            } else {
-                $message = 'Sign up failed. Try again';
             }
 
         } else {
