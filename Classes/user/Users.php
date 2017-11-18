@@ -152,7 +152,7 @@ class Users
         $validator->rule('email', 'email')->message('{field} has not the right format');
         $validator->rule('lengthBetween', array('firstname', 'lastname', 'country', 'city'), 1, 30)->message('{field}\'s length must be between 1 to 30 characters');
         $validator->rule('lengthBetween', array('address'), 1, 80)->message('{field}\'s length must be between 1 to 80 characters');
-        $validator->rule('lengthBetween', 'password', 6, 8)->message('{field}\'s length must be between 6 to 8 characters');
+        $validator->rule('lengthBetween', 'password', 6, 20)->message('{field}\'s length must be between 6 to 20 characters');
 
         if ($validator->validate()) {
 

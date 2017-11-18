@@ -66,7 +66,7 @@ class BooksDAL
         $publisher      = $db->clearString($publisher) ? "'{$db->clearString($publisher)}'" : "NULL";
         $publishedDate  = $db->clearString($publishedDate) ? "'{$db->clearString($publishedDate)}'" : "NULL";
 
-        $sql = "INSERT INTO msc.books (id, title, description, thumbnail, author, pages, language, rate, rates_count, publisher, published_date)
+        $sql = "INSERT INTO books (id, title, description, thumbnail, author, pages, language, rate, rates_count, publisher, published_date)
                 VALUES ('{$id}', '{$title}', {$description}, {$thumbnail}, {$author}, {$pages}, {$language}, {$rate}, {$ratesCount}, {$publisher}, {$publishedDate})";
 
         return $db->executeRecord($sql);
