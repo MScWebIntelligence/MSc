@@ -85,7 +85,7 @@ class Users
 
         $validator->rule('required', array('email', 'password'))->message('{field} is required');
         $validator->rule('email', 'email')->message('{field} has not the right format');
-        $validator->rule('lengthBetween', 'password', 6, 8)->message('{field}\'s length must be between 6 to 8 characters');
+        $validator->rule('lengthBetween', 'password', 6, 20)->message('{field}\'s length must be between 6 to 20 characters');
 
         if ($validator->validate()) {
             $userId = $this->db->login($email, $this->hashPassword($password));
