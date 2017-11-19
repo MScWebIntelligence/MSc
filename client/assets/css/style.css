@@ -7,8 +7,9 @@ body {
     line-height: 30px;
     text-align: center;
 	background-image: url("../img/backgrounds/register.jpg");
-	background-size: cover;
-	background-position: center;
+	background-size:     cover;
+	background-repeat:   no-repeat;
+	background-position: center center;
 }
 
 strong { font-weight: 500; }
