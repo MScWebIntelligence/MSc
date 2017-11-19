@@ -31,7 +31,7 @@ mscApp.config(['$routeProvider','$locationProvider',
                 return 'views/' + routeParams.pages + '.html';
             }
         }).otherwise({
-            redirectTo: '/#home'
+            redirectTo: '/'
         });
 
         $locationProvider.html5Mode(true);
