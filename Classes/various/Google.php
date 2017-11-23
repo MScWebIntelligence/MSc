@@ -84,7 +84,18 @@ class Google
      */
     private function fire($bookId = null, $query = null)
     {
-        $key = "?key={$this->apiKey}";
-        return json_decode(file_get_contents("{$this->apiUrl}{$bookId}{$key}{$query}"));
+        $key        = "?key={$this->apiKey}";
+        //return json_decode(file_get_contents("{$this->apiUrl}{$bookId}{$key}{$query}"));
+
+        $url        = "{$this->apiUrl}{$bookId}{$key}{$query}";
+        $ch         = curl_init();
+        $timeout    = 5;
+
+        curl_setopt($ch,CURLOPT_URL, $url);
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+        curl_setopt($ch,CURLOPT_CONNECTTIMEOUT, $timeout);
+        $data = curl_exec($ch);
+        curl_close($ch);
+        return json_decode($data);
     }
 }
