@@ -1,5 +1,6 @@
+<div style="background-color: white;padding: 0px" class="jumbotron">
 <div id="searchBox" class="row searchbox">
-        <div class="searchfield  center-block">
+        <div class="center-block searchfield">
             <div class="inner-addon right-addon">
                 <i class="glyphicon glyphicon-search"></i>
                 <input type="text" ng-model="search" ng-model-options="{debounce: 800}" ng-change="getData(true)" class="form-control" placeholder="Search your book" />
@@ -39,4 +40,5 @@
     <div class="center-block" ng-show="(more && total > 0) || busy">
         <i class="fa fa-spinner fa-pulse fa-2x"></i>
     </div>
+</div>
 </div>

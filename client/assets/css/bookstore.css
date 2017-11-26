@@ -29,6 +29,7 @@ body {
   background-image: url("../img/backgrounds/searchbox.jpg");
   background-size: cover;
   background-position: center;
+  margin-top: 50px;
   margin-bottom: 20px;
   margin-left: 0px!important;
   margin-right: 0px!important;
@@ -36,7 +37,7 @@ body {
 }
 
 .searchfield {
-  padding-top: 80px;
+  padding-top: 60px!important;
   opacity: 0.90;
   width: 60%;
 }
@@ -44,7 +45,7 @@ body {
 .center-block {
   display: table!important;
   margin: 0 auto!important;
-    padding: 10px;
+  padding: 10px;
 }
 
 h1 {
