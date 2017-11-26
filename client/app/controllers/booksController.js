@@ -20,7 +20,7 @@ angular.module('mscApp').controller('booksController',function($scope, $window, 
 
         $http({
             method  : 'POST',
-            url     : '/openlibrary.eu/api/books.php',
+            url     : './api/books.php',
             params  : {
                 action : "search" ,
                 search : $scope.search ,
@@ -47,7 +47,7 @@ angular.module('mscApp').controller('booksController',function($scope, $window, 
     $scope.getBook = function() {
         $http({
             method: 'GET',
-            url: '/openlibrary.eu/api/books.php',
+            url: './api/books.php',
             params: { "action" : "book" , "bookId" : $routeParams.id }
 
         }).then(function (response) {
@@ -63,65 +63,6 @@ angular.module('mscApp').controller('booksController',function($scope, $window, 
         });
     };
 
-    // get books
-    // $scope.getBooks = function() {
-    //     $http({
-    //         method: 'GET',
-    //         url: '/openlibrary.eu/api/books.php',
-    //         params: { "action" : "search" , "search" : $scope.search }
-    //
-    //     }).then(function (response) {
-    //
-    //         // on success
-    //         $scope.searchResult = response.data;
-    //         $scope.offset = 0;
-    //
-    //     }, function (response) {
-    //
-    //         // on error
-    //         console.log(response.data,response.status);
-    //
-    //     });
-    // };
-
-    // get books next pages
-    // $scope.getBooksPaginated = function() {
-    //
-    //     if ($scope.loadingBooks) return;
-    //
-    //     $scope.loadingBooks = true;
-    //     console.log("Temp " + $scope.offset);
-    //
-    //     // if ($scope.offset == undefined || $scope.offset == 0) {
-    //     //     $scope.offset = 0;
-    //     // } else {
-    //     //     $scope.offset = $scope.offset + 12;
-    //     // }
-    //     console.log("Temp 2" + $scope.offset);
-    //
-    //
-    //     $http({
-    //         method: 'GET',
-    //         url: '/openlibrary.eu/api/books.php',
-    //         params: { "action" : "search" , "search" : $scope.search , "offset" : $scope.offset }
-    //
-    //     }).then(function (response) {
-    //
-    //         if ($scope.searchResult == undefined || $scope.searchResult.books == undefined) return;
-    //         // on success
-    //         $scope.searchResult.books = $scope.searchResult.books.concat(response.data.books);
-    //         $scope.loadingBooks = false;
-    //         $scope.offset = $scope.offset + 12;
-    //         console.log("In: " + $scope.loadingBooks + "Offset: " + $scope.offset);
-    //
-    //     }, function (response) {
-    //
-    //         // on error
-    //         console.log(response.data,response.status);
-    //
-    //     });
-    // };
-
     // Add action for a book
     $scope.action = function (action) {
         var data = $.param({
@@ -135,7 +76,7 @@ angular.module('mscApp').controller('booksController',function($scope, $window, 
             }
         }
 
-        $http.post('/openlibrary.eu/api/users.php', data, config)
+        $http.post('./api/users.php', data, config)
             .success(function (data, status, headers, config) {
                 $scope.PostDataResponse = data;
             })

@@ -8,26 +8,30 @@
     <meta name="description" content="Find a rent a book">
     <meta name="keywords" content="online books">
 
+    <script>
+        if (location.hostname === "localhost" || location.hostname === "127.0.0.1")
+            document.write('<base href= "/openlibrary.eu/">');
+        else
+            document.write('<base href= "/">');
+    </script>
+
     <!-- CSS -->
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
     <link rel="stylesheet" href="client/assets/font-awesome/css/font-awesome.min.css">
-
     <!-- Javascript -->
-    <script src="/openlibrary.eu/client/app/js/jquery-1.11.1.min.js"></script>
-    <script src="/openlibrary.eu/client/app/js/jquery.backstretch.min.js"></script>
-    <script src="/openlibrary.eu/client/app/js/scripts.js"></script>
-    <script src="/openlibrary.eu/client/app/js/angular-1.4.9.min.js"></script>
-    <script type='text/javascript' src='/openlibrary.eu/client/app/js/ng-infinite-scroll.min.js'></script>
-    <script type='text/javascript' src='/openlibrary.eu/client/app/js/ng-infinite-scroll.min.js'></script>
+    <script src= "client/app/js/jquery-1.11.1.min.js"></script>
+    <script src="client/app/js/jquery.backstretch.min.js"></script>
+    <script src="client/app/js/scripts.js"></script>
+    <script src="client/app/js/angular-1.4.9.min.js"></script>
+    <script type='text/javascript' src='client/app/js/ng-infinite-scroll.min.js'></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-sanitize.js"></script>
 
-    <script src="/openlibrary.eu/client/app/app.js"></script>
-    <script src="/openlibrary.eu/client/app/directives/enter-press-directive.js"></script>
-    <script src="/openlibrary.eu/client/app/js/angular-dynamic-css.js"></script>
-    <script src="/openlibrary.eu/client/app/controllers/usersController.js"></script>
-    <script src="/openlibrary.eu/client/app/controllers/booksController.js"></script>
+    <script src="client/app/app.js"></script>
+    <script src="client/app/directives/enter-press-directive.js"></script>
+    <script src="client/app/js/angular-dynamic-css.js"></script>
+    <script src="client/app/controllers/usersController.js"></script>
+    <script src="client/app/controllers/booksController.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
-    <base href="/openlibrary.eu/">
 </head>
 <body ng-cloak>
 <div ng-include="'header.html'" ng-controller="usersController" ng-init="getUser()" class="header"></div>
