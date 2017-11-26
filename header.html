@@ -1,21 +1,42 @@
- <div class="container" style="background-color:gold">
-     <div class="row" ng-hide="user.logged">
-         <div class="col-lg-4">
-             header
-         </div>
-     </div>
-        <div class="row" ng-show="user.logged">
-            <div class="col-lg-4">
-                    {{ user.firstname }} {{ user.lastname }}
-                </div>
-            <div class="col-lg-3">
-                <a href="searchbooks">Find Book</a>
-                </div>
-            <div class="col-lg-3">
-                <a href= "user/{{user.id}}">My Profile</a>
-            </div>
-            <div class="col-lg-2">
-                <a ng-click="logout()" class="btn-link float-sm-right" style="cursor: pointer;">Log Out!</a>
-            </div>
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="/">openlibrary.eu</a>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">How it works</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Related books</a>
+                </li>
+            </ul>
+
+
+            <ul class="nav navbar-nav navbar-right" ng-hide="user.logged">
+                <li>
+                    <a class="nav-link" href="login">Login</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="register">Sign up</a>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right" ng-show="user.logged">
+                <li>
+                    <a class="nav-link" href= "user/{{user.id}}">{{ user.firstname }} {{ user.lastname }}</a>
+                </li>
+                <li>
+                    <a class="nav-link" ng-click="logout()" style="cursor: pointer;">Logout</a>
+                </li>
+            </ul>
+
         </div>
- </div>
+    </nav>
+</header>
+
+
+
