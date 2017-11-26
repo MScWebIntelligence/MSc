@@ -137,7 +137,7 @@ angular.module('mscApp').controller('usersController',function($scope, $window, 
 
             // on success
             $scope.user = response.data;
-            $window.location.href = "/";
+            $window.location.href = "./";
 
         }, function (response) {
 
