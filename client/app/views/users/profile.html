@@ -11,15 +11,21 @@
     </div>
 </div>
 <div class="container" ng-init="getProfile()">
+    <div ng-show="bookCase.rent.length != 0">
     <h1>I have them!</h1>
     <div class="row">
         <div class="col-lg-4" ng-repeat="book in bookCase.rent" ng-include="'client/app/views/books/book.html'">
         </div>
     </div>
-
+    </div>
+<div ng-show="bookCase.read.length != 0">
     <h1>Books I have read!</h1>
     <div class="row">
         <div class="col-lg-4" ng-repeat="book in bookCase.read" ng-include="'client/app/views/books/book.html'">
         </div>
+    </div>
+</div>
+    <div class="row" ng-show="!bookCase.read.length && !bookCase.rent.length">
+        <h1 class="center-block">No Items Here!</h1>
     </div>
 </div>
