@@ -1,12 +1,16 @@
-<div class="container" ng-init="getProfile()">
-    <div class="row">
-        <div class="col-lg-4">
-           FirstName: {{profile.firstname}}
-        </div>
-        <div class="col-lg-4">
-           LastName: {{profile.lastname}}
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                FirstName: {{profile.firstname}}
+            </div>
+            <div class="col-lg-4">
+                LastName: {{profile.lastname}}
+            </div>
         </div>
     </div>
+</div>
+<div class="container" ng-init="getProfile()">
     <h1>I have them!</h1>
     <div class="row">
         <div class="col-lg-4" ng-repeat="book in bookCase.rent" ng-include="'client/app/views/books/book.html'">
