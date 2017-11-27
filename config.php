@@ -37,7 +37,7 @@ define('JWT_ΚΕΥ', 'CBCB55CA8463DDA41F1447B4B644C');
 define('JWT_EXP', 1800);
 
 require_once __DIR__ . '/vendor/autoload.php';
-require_once 'config_local.php';
+include_once 'config_local.php';
 
 use Classes\Various\Db;
 $db = new Db();
