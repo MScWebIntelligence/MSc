@@ -72,4 +72,25 @@ class BooksDAL
         return $db->executeRecord($sql);
     }
 
+    /**
+     * @param $bookId
+     * @return array
+     */
+    public function getUsersWhoRentIt($bookId)
+    {
+        global $db;
+
+        $bookId = $db->clearString($bookId);
+
+        $sql = "SELECT u.id, u.firstname, u.lastname, u.email, u.country, u.city, u.address
+                FROM users_rel_books urb
+                INNER JOIN users u
+                ON u.id = urb.user_id
+                WHERE urb.book_id = '{$bookId}' AND urb.case = 'rent'
+                GROUP BY u.id
+                LIMIT 100";
+
+        return $db->getRecords($sql);
+    }
+
 }

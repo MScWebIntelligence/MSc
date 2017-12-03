@@ -7,6 +7,8 @@
  */
 namespace Classes\Book;
 
+use Classes\User\Users;
+
 class BooksHelper
 {
 
@@ -52,9 +54,17 @@ class BooksHelper
      */
     public static function getBook($bookId)
     {
-        $books  = new Books();
-        $book   = $books->getBookById($bookId, 'google');
-        $data   = array();
+        $data       = array();
+        $buttons    = false;
+        $books      = new Books();
+        $users      = new Users();
+        $tmpUser    = $users->getLoggedInUser(false);
+        $book       = $books->getBookById($bookId, 'google');
+
+        if ($tmpUser) {
+            $buttons    = true;
+            $users      = $books->getUsersWhoRentIt($bookId);
+        }
 
         if ($book) {
             $data = array(
@@ -69,9 +79,8 @@ class BooksHelper
                 'publisher'     => $book->getPublisher(),
                 'pages'         => $book->getPages(),
                 'language'      => $book->getLanguage(),
-                'buttons'       => array(
-
-                )
+                'buttons'       => $buttons,
+                'users'         => $users
             );
         }
 

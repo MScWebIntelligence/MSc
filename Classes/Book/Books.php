@@ -7,7 +7,9 @@
  */
 namespace Classes\Book;
 
+use Classes\User\User;
 use Classes\Various\Google;
+use Classes\Various\International;
 
 class Books
 {
@@ -83,5 +85,31 @@ class Books
             'more'  => $counter > Google::$limit,
             'books' => $books
         );
+    }
+
+    /**
+     * @param $bookId
+     * @return array
+     */
+    public function getUsersWhoRentIt($bookId)
+    {
+        $response   = array();
+        $users      = array();
+        $usersDb    = $this->db->getUsersWhoRentIt($bookId);
+
+        foreach ($usersDb as $userDb) {
+            $users[] = new User($userDb);
+        }
+
+        /** @var User $user */
+        foreach ($users as $user) {
+            $response = array(
+                'name'      => "{$user->getFirstname()} {$user->getLastname()}",
+                'email'     => $user->getEmail(),
+                'address'   => "{$user->getCountry()} {$user->getCity()}, {$user->getAddress()}"
+            );
+        }
+
+        return $response;
     }
 }

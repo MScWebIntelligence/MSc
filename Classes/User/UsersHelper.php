@@ -109,9 +109,8 @@ class UsersHelper
      */
     public static function addBookRelation($bookId, $relation)
     {
-
         $users      = new Users();
-        $user       = $users->getLoggedInUser(false);
+        $user       = $users->getLoggedInUser(true);
         $response   = $users->addBookRelation($user->getId(), $bookId, $relation);
 
         echo json_encode(array(

@@ -25,7 +25,7 @@ class UsersDAL
         global $db;
 
         $id     = (int) $id;
-        $sql    = " SELECT u.id, u.firstname, u.lastname, u.email
+        $sql    = " SELECT u.id, u.firstname, u.lastname, u.email, u.country, u.city, u.address
                     FROM users u
                     WHERE u.id = {$id}";
         return $db->getRecord($sql);
