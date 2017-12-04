@@ -103,7 +103,7 @@ class Books
 
         /** @var User $user */
         foreach ($users as $user) {
-            $response = array(
+            $response[] = array(
                 'name'      => "{$user->getFirstname()} {$user->getLastname()}",
                 'email'     => $user->getEmail(),
                 'address'   => "{$user->getCountry()} {$user->getCity()}, {$user->getAddress()}"
