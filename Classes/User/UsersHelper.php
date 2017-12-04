@@ -137,7 +137,8 @@ class UsersHelper
                 'id'        => $user->getId(),
                 'firstname' => $user->getFirstname(),
                 'lastname'  => $user->getLastname(),
-                'email'     => $user->getEmail()
+                'email'     => $user->getEmail(),
+                'address'   => "{$user->getCountry()} {$user->getCity()}, {$user->getAddress()}"
             );
 
             /** @var Book $book */
