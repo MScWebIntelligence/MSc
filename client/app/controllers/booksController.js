@@ -54,6 +54,7 @@ angular.module('mscApp').controller('booksController',function($scope, $window, 
 
             // on success
             $scope.book = response.data.data;
+            $scope.usersFrom = response.data.data.users;
 
         }, function (response) {
 

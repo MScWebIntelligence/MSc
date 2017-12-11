@@ -58,7 +58,7 @@ h3 {
 
 .book-image {
   width: 150px;
-  height: 200px;
+  min-height: 200px;
   padding-top: 10px;
 }
 
