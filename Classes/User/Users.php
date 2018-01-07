@@ -212,13 +212,14 @@ class Users
         $books              = new Books();
         $typeRelation       = in_array($relation, $this->relations);
         $alreadyRelation    = $this->hasBookRelation($userId, $bookId, $relation);
-        $message            = !$userId ? 'You must be logged in to complete this action' : ($alreadyRelation ? 'You have already this relation' : (!$typeRelation ? 'Relation is not existed' : false));
+        $message            = !$userId ? 'You must be logged in to complete this action' : ($alreadyRelation ? 'You have already this relation with the book!' : (!$typeRelation ? 'Relation is not existed' : false));
         $success            = $userId > 0 && !$alreadyRelation && $typeRelation;
 
         if ($userId > 0 && !$alreadyRelation && $typeRelation){
 
             if ($books->getBookById($bookId, 'local')) {
                 $success = $this->db->addBookRelation($userId, $bookId, $relation);
+                $message = $success ? "Your selection was entered!" : $message;
 
             } else {
                 $book = $books->getBookById($bookId, 'google');
@@ -228,6 +229,7 @@ class Users
 
                     if ($success) {
                         $success = $this->db->addBookRelation($userId, $bookId, $relation);
+                        $message = $success ? "Your selection was entered!" : $message;
                     }
                 } else {
                     $success = false;

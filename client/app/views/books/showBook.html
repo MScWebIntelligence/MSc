@@ -22,6 +22,15 @@
         <div class="col-lg-12" ng-bind-html="book.description">
         </div>
     </div>
+
+    <div class="alert alert-success" ng-show="PostDataResponse.success == true">
+        <strong>Success!</strong> {{ PostDataResponse.message }}
+    </div>
+
+    <div class="alert alert-danger" ng-show="PostDataResponse.success == false">
+        <strong>Warning!</strong> {{ PostDataResponse.message }}
+    </div>
+
     <div class="row" ng-show="book.buttons">
         <div class="col-md-4">
             <button type="button" style="margin-bottom: 15px!important;cursor: pointer!important;" class="btn btn-primary center-block" ng-click="action('read')">I read it!</button>
@@ -36,6 +45,7 @@
     <div class="alert alert-info" ng-show="!book.buttons">
         <strong>Info!</strong> Please login to see the buttons!
     </div>
+
 </div>
 <!-- Modal -->
 <div class="modal fade" id="forRentModal" tabindex="-1" role="dialog" aria-labelledby="forRent" aria-hidden="true">
@@ -52,7 +62,7 @@
                      <div class="col-lg-12" ng-repeat="userFrom in usersFrom">
                         <div class="row">
                             <div class="col-md-3">
-                                <span>{{userFrom.name}}</span>
+                                <a href="{{userFrom.url}}">{{userFrom.name}}</a>
                             </div>
                             <div class="col-md-3">
                               <span>{{userFrom.email}}</span>

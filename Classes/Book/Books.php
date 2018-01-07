@@ -105,6 +105,7 @@ class Books
         foreach ($users as $user) {
             $response[] = array(
                 'name'      => "{$user->getFirstname()} {$user->getLastname()}",
+                'url'       => $user->getUrl(),
                 'email'     => $user->getEmail(),
                 'address'   => "{$user->getCountry()} {$user->getCity()}, {$user->getAddress()}"
             );

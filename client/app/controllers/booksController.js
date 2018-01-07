@@ -1,4 +1,4 @@
-angular.module('mscApp').controller('booksController',function($scope, $window,  $routeParams, $http) {
+angular.module('mscApp').controller('booksController',function($scope, $timeout, $window,  $routeParams, $http) {
 
     $scope.books    = [];
     $scope.busy     = false;
@@ -80,6 +80,8 @@ angular.module('mscApp').controller('booksController',function($scope, $window, 
         $http.post('./api/users.php', data, config)
             .success(function (data, status, headers, config) {
                 $scope.PostDataResponse = data;
+                $timeout(function () { $scope.PostDataResponse.success = null; }, 3000);
+
             })
             .error(function (data, status, header, config) {
                 $scope.ResponseDetails = "Data: " + data +

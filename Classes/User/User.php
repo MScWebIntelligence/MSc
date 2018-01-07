@@ -98,4 +98,10 @@ class User
     {
         return $this->address;
     }
+
+    public function getUrl()
+    {
+        global  $CFG;
+        return "{$CFG->www_root}/user/{$this->getId()}";
+    }
 }
