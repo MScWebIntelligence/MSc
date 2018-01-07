@@ -1,4 +1,4 @@
-angular.module('mscApp').controller('usersController',function($scope, $window,  $routeParams, $http , $location) {
+angular.module('mscApp').controller('usersController',function($scope, $window,  $routeParams, $http , $location, USER_ID) {
 
     // Register
     $scope.signup = function () {
@@ -145,5 +145,33 @@ angular.module('mscApp').controller('usersController',function($scope, $window, 
             console.log(response.data,response.status);
 
         });
+    };
+
+    // Add a button action
+    $scope.addButtonAction = function (action) {
+        var date = new Date();
+        date = date.toISOString()
+        var data = $.param({
+            action: action,
+            datestamp: date,
+            userId: USER_ID
+        });
+
+        var config = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+            }
+        }
+
+        $http.post('./api/metrics.php', data, config)
+            .success(function (data, status, headers, config) {
+                $scope.PostDataResponse = data;
+            })
+            .error(function (data, status, header, config) {
+                $scope.ResponseDetails = "Data: " + data +
+                    "<hr />status: " + status +
+                    "<hr />headers: " + header +
+                    "<hr />config: " + config;
+            })
     };
 });

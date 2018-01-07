@@ -1,4 +1,4 @@
-<div class="container" ng-init="getBook()" style="margin-top: 80px">
+<div class="container" ng-init="getBook();addButtonAction('showBookAction')" style="margin-top: 80px">
     <div class="row">
         <div class="result col-lg-4">
             <div class="card h-100">
@@ -33,10 +33,10 @@
 
     <div class="row" ng-show="book.buttons">
         <div class="col-md-4">
-            <button type="button" style="margin-bottom: 15px!important;cursor: pointer!important;" class="btn btn-primary center-block" ng-click="action('read')">I read it!</button>
+            <button type="button" style="margin-bottom: 15px!important;cursor: pointer!important;" class="btn btn-primary center-block" ng-click="action('read');addButtonAction('readAction')">I read it!</button>
         </div>
         <div class="col-md-4">
-            <button type="button" style="margin-bottom: 15px!important;cursor: pointer!important;" class="btn btn-success center-block" ng-click="action('rent')">I rent it!</button>
+            <button type="button" style="margin-bottom: 15px!important;cursor: pointer!important;" class="btn btn-success center-block" ng-click="action('rent');addButtonAction('rentAction')">I rent it!</button>
         </div>
         <div class="col-md-4">
             <button type="button" data-toggle="modal" data-target="#forRentModal" style="margin-bottom: 15px!important;cursor: pointer!important;" class="btn btn-warning center-block">I want it!</button>
@@ -71,7 +71,7 @@
                                 <span>{{userFrom.address}}</span>
                             </div>
                             <div class="col-md-3">
-                                <button type="button" data-dismiss="modal" style="cursor:pointer" ng-click="action('want')" class="btn btn-primary">Get It!</button>
+                                <button type="button" data-dismiss="modal" style="cursor:pointer" ng-click="action('want');addButtonAction('wantAction')" class="btn btn-primary">Get It!</button>
                             </div>
                        </div>
                     </div>

@@ -1,4 +1,4 @@
-angular.module('mscApp').controller('booksController',function($scope, $timeout, $window,  $routeParams, $http) {
+angular.module('mscApp').controller('booksController',function($scope, $window,  $routeParams, $http, USER_ID, $timeout ) {
 
     $scope.books    = [];
     $scope.busy     = false;
@@ -80,8 +80,35 @@ angular.module('mscApp').controller('booksController',function($scope, $timeout,
         $http.post('./api/users.php', data, config)
             .success(function (data, status, headers, config) {
                 $scope.PostDataResponse = data;
-                $timeout(function () { $scope.PostDataResponse.success = null; }, 3000);
+                $timeout(function () {$scope.PostDataResponse.success = null; }, 3000);
+            })
+            .error(function (data, status, header, config) {
+                $scope.ResponseDetails = "Data: " + data +
+                    "<hr />status: " + status +
+                    "<hr />headers: " + header +
+                    "<hr />config: " + config;
+            })
+    };
 
+    // Add a button action
+    $scope.addButtonAction = function (action) {
+        var date = new Date();
+        date = date.toISOString()
+        var data = $.param({
+            action: action,
+            datestamp: date,
+            userId: USER_ID
+        });
+
+        var config = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+            }
+        }
+
+        $http.post('./api/metrics.php', data, config)
+            .success(function (data, status, headers, config) {
+                $scope.PostDataResponse = data;
             })
             .error(function (data, status, header, config) {
                 $scope.ResponseDetails = "Data: " + data +

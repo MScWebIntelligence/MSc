@@ -21,7 +21,7 @@ mscApp.config(['$routeProvider','$locationProvider',
         }).when('/searchbooks', {
             templateUrl: 'client/app/views/books/searchBooks.html',
             controller: 'booksController',
-            css: ['client/assets/css/bookstore.css', 'client/assets/bootstrap/css/bootstrap.min.css']
+            css: ['client/assets/css/searchfield.css', 'client/assets/css/bookstore.css', 'client/assets/bootstrap/css/bootstrap.min.css']
         }).when('/book/:id', {
             templateUrl: 'client/app/views/books/showBook.html',
             controller: 'booksController',
@@ -36,3 +36,5 @@ mscApp.config(['$routeProvider','$locationProvider',
 
         $locationProvider.html5Mode(true);
     }]);
+
+mscApp.constant('USER_ID', Math.floor((Math.random() * 10000000) + 1));
