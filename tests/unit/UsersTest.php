@@ -140,19 +140,19 @@ class UsersTest extends TestCase
     {
         $response = $this->users->addBookRelation(self::userId, self::bookId, 'read');
         $this->assertTrue($response['success']);
-        $this->assertFalse($response['message']);
+        $this->assertEquals($response['message'], 'Your selection was entered!');
 
         $response = $this->users->addBookRelation(self::userId, self::bookId, 'want');
         $this->assertTrue($response['success']);
-        $this->assertFalse($response['message']);
+        $this->assertEquals($response['message'], 'Your selection was entered!');
 
         $response = $this->users->addBookRelation(self::userId, self::bookId, 'rent');
         $this->assertTrue($response['success']);
-        $this->assertFalse($response['message']);
+        $this->assertEquals($response['message'], 'Your selection was entered!');
 
         $response = $this->users->addBookRelation(self::userId, self::bookId, 'read');
         $this->assertFalse($response['success']);
-        $this->assertEquals($response['message'], 'You have already this relation');
+        $this->assertEquals($response['message'], 'You have already this relation with the book!');
 
         $response = $this->users->addBookRelation(false, self::bookId, 'read');
         $this->assertFalse($response['success']);
