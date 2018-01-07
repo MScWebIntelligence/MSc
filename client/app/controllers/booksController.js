@@ -79,8 +79,8 @@ angular.module('mscApp').controller('booksController',function($scope, $window, 
 
         $http.post('./api/users.php', data, config)
             .success(function (data, status, headers, config) {
-                $scope.PostDataResponse = data;
-                $timeout(function () {$scope.PostDataResponse.success = null; }, 3000);
+                $scope.PostDataResponseBook = data;
+                $timeout(function () {$scope.PostDataResponseBook.success = null; }, 3000);
             })
             .error(function (data, status, header, config) {
                 $scope.ResponseDetails = "Data: " + data +
