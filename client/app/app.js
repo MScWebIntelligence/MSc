@@ -14,6 +14,10 @@ mscApp.config(['$routeProvider','$locationProvider',
             templateUrl: 'client/app/views/home.html',
             controller: 'usersController',
             css: ['client/assets/css/bookstore.css', 'client/assets/bootstrap/css/bootstrap.min.css','client/assets/css/carousel.css']
+        }).when('/howitworks', {
+            templateUrl: 'client/app/views/howitworks.html',
+            controller: 'usersController',
+            css: ['client/assets/css/bookstore.css', 'client/assets/bootstrap/css/bootstrap.min.css','client/assets/css/carousel.css']
         }).when('/user/:id', {
             templateUrl: 'client/app/views/users/profile.html',
             controller: 'usersController',
