@@ -19,9 +19,9 @@
     </div>
 
     <div class="row" infinite-scroll="getData()" infinite-scroll-disabled='busy || !more' infinite-scroll-distance="0">
-        <div class="col-lg-4 result" ng-repeat="book in books" >
+        <div class="col-lg-4" ng-repeat="book in books" style="margin-top: 20px">
 
-            <div class="card h-100">
+            <div class="card h-100 result">
                 <a class="book-image center-block" href="{{book.url}}">
                     <img class="result card-img-top" src="{{book.thumbnail}}" alt="">
                 </a>
