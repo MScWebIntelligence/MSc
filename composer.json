@@ -7,6 +7,7 @@
     "require": {
         "firebase/php-jwt"  : "*",
         "vlucas/valitron"   : "*",
-        "phpunit/phpunit"   : "*"
+        "phpunit/phpunit"   : "*",
+        "phpunit/dbunit"    : "4.0"
     }
 }
