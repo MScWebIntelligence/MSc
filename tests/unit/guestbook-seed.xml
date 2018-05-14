@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<mysqldump xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <database name="myguestbook">
+        <table_structure name="guestbook">
+            <field Field="id" Type="int(11)" Null="NO" Key="" Extra="" Comment="" />
+            <field Field="content" Type="varchar(100)" Null="NO" Key="" Extra="" Comment="" />
+            <field Field="user" Type="varchar(100)" Null="NO" Key="" Extra="" Comment="" />
+            <field Field="created" Type="datetime" Null="NO" Key="" Extra="" Comment="" />
+            <options Name="guestbook" Engine="InnoDB" Version="10" Row_format="Compact" Rows="2" Avg_row_length="8192" Data_length="16384" Max_data_length="0" Index_length="0" Data_free="4194304" Create_time="2016-07-18 06:44:10" Collation="utf8_general_ci" Create_options="" Comment="" />
+        </table_structure>
+        <table_data name="guestbook">
+            <row>
+                <field name="id">1</field>
+                <field name="content">Hello buddy!</field>
+                <field name="user">joe</field>
+                <field name="created">2010-04-24 17:15:23</field>
+            </row>
+            <row>
+                <field name="id">2</field>
+                <field name="content">I like it!</field>
+                <field name="user">joe</field>
+                <field name="created">2010-04-26 12:14:20</field>
+            </row>
+        </table_data>
+    </database>
+</mysqldump>
